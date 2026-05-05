@@ -215,15 +215,7 @@ img { max-width: 100%; display: block; }
 .hero-image {
   width: clamp(180px, 28vw, 280px);
   height: auto;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(232, 104, 48, 0.25);
-  box-shadow: 0 0 60px rgba(232, 104, 48, 0.15), 0 0 120px rgba(232, 104, 48, 0.08);
-  animation: gentlePulse 4s ease-in-out infinite;
-}
-@keyframes gentlePulse {
-  0%, 100% { box-shadow: 0 0 60px rgba(232, 104, 48, 0.15), 0 0 120px rgba(232, 104, 48, 0.08); }
-  50% { box-shadow: 0 0 80px rgba(232, 104, 48, 0.25), 0 0 150px rgba(232, 104, 48, 0.12); }
+  object-fit: contain;
 }
 .hero-title {
   margin-bottom: 1.5rem;
@@ -489,12 +481,22 @@ img { max-width: 100%; display: block; }
 }
 .pillar-card:hover::before { opacity: 1; }
 .pillar-icon {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--color-cream-dim);
-  transition: color 0.3s;
+  transition: color 0.3s, transform 0.4s var(--ease-out);
 }
+.pillar-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s var(--ease-out);
+}
+.pillar-card:hover .pillar-icon img { transform: scale(1.1); }
 .pillar-card:hover .pillar-icon { color: var(--color-ember); }
 .pillar-card h3 {
   font-family: var(--font-display);
