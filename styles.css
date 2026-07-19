@@ -197,6 +197,21 @@ ul { list-style: none; }
   opacity: 1;
   background: var(--color-bg-warm);
 }
+.nav-dropdown-group-label {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  padding: 0.5rem 1.4rem 0.3rem;
+  white-space: nowrap;
+}
+.nav-dropdown-group-label:not(:first-child) {
+  margin-top: 0.4rem;
+  border-top: 1px solid rgba(43, 36, 29, 0.08);
+  padding-top: 0.7rem;
+}
 .nav-cta {
   padding: 0.55rem 1.3rem !important;
   border: 1px solid var(--color-accent);
@@ -696,6 +711,73 @@ ul { list-style: none; }
   font-size: 0.8rem;
   color: var(--color-text-dim);
   margin-top: 0.8rem;
+}
+
+/* ---- Therapy page-hero extras (practitioner byline + tag pills) ---- */
+.hero-practitioner {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: var(--color-accent);
+  margin-top: 0.5rem;
+  margin-bottom: 1.3rem;
+}
+.hero-tags {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 0 1.6rem;
+}
+.tag-pill {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  border: 1px solid rgba(43, 36, 29, 0.18);
+  border-radius: 30px;
+  padding: 0.4rem 1rem;
+}
+
+/* ---- Benefit cards ---- */
+.benefit-card {
+  background: var(--color-bg-card);
+  border: 1px solid rgba(43, 36, 29, 0.08);
+  border-radius: 6px;
+  padding: 2.2rem 1.6rem;
+  text-align: center;
+}
+.benefit-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-bottom: 0.6rem;
+}
+.benefit-card p {
+  font-size: 0.95rem;
+  color: var(--color-text-dim);
+  line-height: 1.65;
+}
+
+/* ---- Who It's For — condition tags ---- */
+.condition-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.condition-tag {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--color-ink);
+  background: var(--color-bg-card);
+  border: 1px solid rgba(43, 36, 29, 0.1);
+  border-radius: 30px;
+  padding: 0.6rem 1.4rem;
 }
 
 /* ---- Retreat Timeline ---- */
