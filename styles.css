@@ -284,11 +284,11 @@ ul { list-style: none; }
 .hero-subhead {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
   font-weight: 400;
   color: var(--color-text-dim);
-  line-height: 1.6;
-  max-width: 560px;
+  line-height: 1.65;
+  max-width: 640px;
   margin: 0 auto 2.8rem;
 }
 .hero-cta-row {
