@@ -476,6 +476,25 @@ ul { list-style: none; }
   transform: translateY(-4px);
   box-shadow: 0 24px 60px rgba(43, 36, 29, 0.1);
 }
+.offering-card--photo {
+  padding: 0 0 2.2rem;
+  overflow: hidden;
+}
+.offering-card--photo .offering-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-bottom: 1.6rem;
+  transition: transform 0.5s var(--ease-out);
+}
+.offering-card--photo:hover .offering-photo { transform: scale(1.04); }
+.offering-card--photo h3,
+.offering-card--photo p,
+.offering-card--photo .offering-link,
+.offering-card--photo .offering-icon {
+  margin-left: 1.8rem;
+  margin-right: 1.8rem;
+}
 .offering-badge {
   position: absolute;
   top: 1.2rem;
@@ -667,6 +686,21 @@ ul { list-style: none; }
 }
 
 /* ---- Bio Photo (practitioner pages) ---- */
+/* ---- Detail hero photo (therapy pages) ---- */
+.detail-photo-section { padding: 3rem 0 0; }
+.detail-photo {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.detail-photo img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
 .bio-photo-section { padding: 5rem 0 1rem; }
 .bio-photo-inner {
   display: flex;
