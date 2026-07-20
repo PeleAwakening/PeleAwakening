@@ -38,7 +38,7 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -120,7 +120,7 @@ ul { list-style: none; }
   border-bottom: 1px solid rgba(43, 36, 29, 0.08);
 }
 .nav-inner {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
@@ -385,6 +385,36 @@ ul { list-style: none; }
   text-transform: uppercase;
   color: var(--color-text-dim);
   opacity: 0.7;
+}
+
+/* ---- Map embed ---- */
+.map-frame {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: 2rem;
+  overflow: hidden;
+  border-top: 1px solid rgba(43, 36, 29, 0.1);
+  border-bottom: 1px solid rgba(43, 36, 29, 0.1);
+}
+.map-frame iframe {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  border: 0;
+  display: block;
+}
+.map-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
 }
 
 /* ---- Philosophy strip (Home) ---- */
