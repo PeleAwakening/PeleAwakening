@@ -389,20 +389,15 @@ ul { list-style: none; }
 
 /* ---- Map embed ---- */
 .map-frame {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  margin-top: 2rem;
+  max-width: 720px;
+  margin: 2rem auto 0;
+  border-radius: 6px;
   overflow: hidden;
-  border-top: 1px solid rgba(43, 36, 29, 0.1);
-  border-bottom: 1px solid rgba(43, 36, 29, 0.1);
+  border: 1px solid rgba(43, 36, 29, 0.1);
 }
 .map-frame iframe {
   width: 100%;
-  aspect-ratio: 21 / 9;
+  aspect-ratio: 16 / 9;
   border: 0;
   display: block;
 }
