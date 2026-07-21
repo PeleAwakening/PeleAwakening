@@ -490,7 +490,7 @@ ul { list-style: none; }
 }
 
 /* ---- Philosophy strip (Home) ---- */
-.philosophy { padding: 9rem 0 8rem; }
+.philosophy { padding: 2rem 0 8rem; }
 .philosophy-intro {
   max-width: var(--measure);
   margin: 0 auto 4rem;
@@ -623,6 +623,7 @@ ul { list-style: none; }
 }
 
 .explore { padding: 0 0 9rem; }
+#explore { padding-top: 5rem; }
 .hub-intro {
   max-width: var(--measure);
   margin: 0 auto 4rem;
