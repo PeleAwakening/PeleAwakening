@@ -68,4 +68,16 @@
       }
     }, { passive: true });
   }
+
+  // ---- Crossfading photo loop ----
+  document.querySelectorAll('.photo-loop').forEach((loop) => {
+    const imgs = loop.querySelectorAll('img');
+    if (imgs.length < 2) return;
+    let idx = 0;
+    setInterval(() => {
+      imgs[idx].classList.remove('active');
+      idx = (idx + 1) % imgs.length;
+      imgs[idx].classList.add('active');
+    }, 4000);
+  });
 })();
