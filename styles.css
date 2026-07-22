@@ -32,6 +32,13 @@ html[lang="zh-Hans"] {
   --font-ui:      'Noto Sans SC', sans-serif;
 }
 
+/* Japanese pages: swap in CJK-appropriate fonts via the same variables */
+html[lang="ja"] {
+  --font-display: 'Noto Serif JP', serif;
+  --font-mark:    'Noto Serif JP', serif;
+  --font-ui:      'Noto Sans JP', sans-serif;
+}
+
 /* Reset & Base */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -246,6 +253,7 @@ ul { list-style: none; }
   border-color: var(--nav-cta);
   color: var(--nav-cta) !important;
 }
+.nav-lang { display: inline-flex; align-items: center; gap: 0.4rem; }
 .nav-lang a {
   border: 1px solid rgba(43, 36, 29, 0.35) !important;
   border-radius: 20px;
@@ -1250,7 +1258,7 @@ ul { list-style: none; }
   .nav-dropdown li a { padding: 0.5rem 0; font-size: 0.78rem; color: rgba(43, 36, 29, 0.75); }
   .nav-dropdown li a:hover { color: var(--nav-hover); background: none; }
   .nav-cta { margin-top: 0.8rem; display: inline-block; }
-  .nav-lang { margin-top: 0.6rem; display: inline-block; }
+  .nav-lang { margin-top: 0.6rem; display: inline-flex; }
 }
 
 @media (max-width: 768px) {
