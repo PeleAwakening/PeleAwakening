@@ -900,6 +900,30 @@ ul { list-style: none; }
 }
 .detail-list strong { color: var(--color-ink); font-weight: 600; }
 
+/* ---- Two-column detail layout (paired sections, e.g. Philosophy + Teaching Style) ---- */
+.two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.detail-list--compact {
+  margin-top: 1.6rem;
+  display: grid;
+  gap: 1.1rem;
+}
+.detail-list--compact li {
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-accent);
+}
+.detail-list--compact li::before { content: none; }
+.detail-list--compact strong {
+  display: block;
+  font-family: var(--font-display);
+  margin-bottom: 0.25rem;
+}
+
 .detail-meta {
   display: flex;
   justify-content: center;
@@ -1023,6 +1047,7 @@ ul { list-style: none; }
 }
 
 .bio-photo-section { padding: 5rem 0 1rem; }
+.bio-photo-section--tight { padding-top: 0; padding-bottom: 3rem; margin-top: -2.5rem; }
 .bio-photo-inner {
   display: flex;
   align-items: center;
@@ -1034,6 +1059,11 @@ ul { list-style: none; }
   flex-shrink: 0;
   width: 260px;
 }
+.bio-photo-inner--even .bio-photo {
+  flex: 1 1 50%;
+  width: auto;
+}
+.bio-photo-inner--even .bio-photo-text { flex: 1 1 50%; }
 .bio-photo img {
   width: 100%;
   aspect-ratio: 3 / 4;
@@ -1606,6 +1636,7 @@ ul { list-style: none; }
   .detail-photo-row { flex-direction: column; gap: 2rem; }
   .detail-photo-row .detail-photo-text { text-align: center; }
   .pricing-grid { grid-template-columns: 1fr; }
+  .two-col-grid { grid-template-columns: 1fr; gap: 2.5rem; }
 
   .card-grid, .card-grid--4, .card-grid--5 { grid-template-columns: 1fr; }
   .philosophy-list { grid-template-columns: 1fr; }
