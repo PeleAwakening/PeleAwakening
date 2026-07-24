@@ -1085,6 +1085,29 @@ ul { list-style: none; }
   max-width: 780px;
   margin: 2.5rem auto 0;
 }
+.pricing-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1000px;
+}
+.pricing-grid--3 .pricing-card { min-width: 0; }
+.pricing-grid--3 .btn { white-space: nowrap; padding: 0.7rem 1.3rem; }
+.highlight-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: 1.5rem 0 0;
+}
+.highlight-chip {
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(43, 36, 29, 0.15);
+  background: var(--color-bg-card);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
 .pricing-card {
   background: var(--color-bg-card);
   border: 1px solid rgba(43, 36, 29, 0.08);
@@ -1512,6 +1535,45 @@ ul { list-style: none; }
   opacity: 0.75;
 }
 
+/* ---- FAQ (native details/summary, no JS) ---- */
+.faq-list {
+  max-width: 720px;
+  margin: 2.5rem auto 0;
+  text-align: left;
+}
+.faq-item {
+  border-bottom: 1px solid rgba(43, 36, 29, 0.12);
+  padding: 1.3rem 0;
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  flex-shrink: 0;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--color-accent);
+  transition: transform 0.3s var(--ease-out);
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p {
+  margin-top: 0.9rem;
+  font-size: 1rem;
+  color: var(--color-text-dim);
+  line-height: 1.75;
+}
+
 /* ---- Footer ---- */
 .footer {
   padding: 5rem 0 2.5rem;
@@ -1644,3 +1706,90 @@ ul { list-style: none; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .detail-meta { gap: 1.5rem; }
 }
+
+/* =========================================================
+   Rounded / shadow-forward styling system (site-wide)
+   Softer pill buttons + card radius/shadow + hover lift.
+   Uses the site's own accent color, not a new palette.
+   ========================================================= */
+.btn {
+  border-radius: 40px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-primary {
+  box-shadow: 0 4px 12px rgba(168, 98, 47, 0.2);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(168, 98, 47, 0.3);
+}
+.btn-ghost:hover {
+  transform: translateY(-2px);
+}
+.nav-cta { border-radius: 40px; }
+.nav-dropdown { border-radius: 12px; }
+
+.offering-card,
+.benefit-card,
+.category-card,
+.quote-card,
+.faq-item,
+.featured-event-card {
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.offering-card:hover,
+.benefit-card:hover,
+.category-card:hover,
+.featured-event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Pricing cards — floating pill badge, taller price, even card heights */
+.pricing-grid { align-items: stretch; }
+.pricing-card {
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+.pricing-price { font-size: 3rem; }
+.pricing-note { flex-grow: 1; }
+.pricing-card--featured {
+  border: 2px solid var(--color-accent);
+  overflow: visible;
+  transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(168, 98, 47, 0.15);
+}
+.pricing-card--featured:hover {
+  transform: scale(1.03) translateY(-6px);
+  box-shadow: 0 16px 36px rgba(168, 98, 47, 0.2);
+}
+.pricing-card--featured::before {
+  top: -14px;
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 40px;
+  padding: 6px 18px;
+}
+.schedule-card,
+.highlight-chip {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.schedule-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+.highlight-chip { border-radius: 40px; }
+.faq-item { padding: 0.4rem 1.5rem; margin-bottom: 0.8rem; border-bottom: none; }
