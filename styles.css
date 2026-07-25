@@ -1793,3 +1793,8 @@ ul { list-style: none; }
 }
 .highlight-chip { border-radius: 40px; }
 .faq-item { padding: 0.4rem 1.5rem; margin-bottom: 0.8rem; border-bottom: none; }
+
+/* ---- Compact card-grid variant (smaller offering-cards, e.g. "Is This For You?") ---- */
+.card-grid--compact .offering-card { padding: 1.7rem 1.4rem; }
+.card-grid--compact .offering-icon { margin-bottom: 0.9rem; }
+.card-grid--compact .offering-card h3 { font-size: 1.05rem; margin-bottom: 0; }
