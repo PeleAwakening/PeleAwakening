@@ -40,6 +40,16 @@
       navToggle.classList.remove('active');
     });
   });
+  document.addEventListener('click', (e) => {
+    if (
+      navLinks.classList.contains('open') &&
+      !navLinks.contains(e.target) &&
+      !navToggle.contains(e.target)
+    ) {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('active');
+    }
+  });
 
   // ---- Smooth scroll for in-page anchor links ----
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
