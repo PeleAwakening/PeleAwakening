@@ -303,8 +303,6 @@ ul { list-style: none; }
   z-index: 2;
   padding: 2rem;
   max-width: 760px;
-  width: 100%;
-  min-width: 0;
 }
 .hero-eyebrow {
   font-family: var(--font-mark);
@@ -314,7 +312,6 @@ ul { list-style: none; }
   text-transform: uppercase;
   color: var(--color-gold);
   margin-bottom: 1.6rem;
-  overflow-wrap: break-word;
 }
 .hero-title {
   font-family: var(--font-display);
@@ -324,7 +321,6 @@ ul { list-style: none; }
   color: #fff;
   margin-bottom: 1.4rem;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.25);
-  overflow-wrap: break-word;
 }
 .hero-subhead {
   font-family: var(--font-display);
@@ -335,7 +331,6 @@ ul { list-style: none; }
   line-height: 1.65;
   max-width: 640px;
   margin: 0 auto 2.8rem;
-  overflow-wrap: break-word;
 }
 .hero-cta-row {
   display: flex;
@@ -378,7 +373,6 @@ ul { list-style: none; }
   text-transform: uppercase;
   color: var(--color-accent);
   margin-bottom: 1.2rem;
-  overflow-wrap: break-word;
 }
 .page-hero-title {
   font-family: var(--font-display);
@@ -387,7 +381,6 @@ ul { list-style: none; }
   color: var(--color-ink);
   margin-bottom: 1rem;
   line-height: 1.15;
-  overflow-wrap: break-word;
 }
 .page-hero-dek {
   font-size: clamp(1.05rem, 1.8vw, 1.25rem);
@@ -396,7 +389,6 @@ ul { list-style: none; }
   max-width: var(--measure);
   margin: 0 auto;
   line-height: 1.7;
-  overflow-wrap: break-word;
 }
 .page-hero-badge {
   display: inline-flex;
@@ -1713,18 +1705,6 @@ ul { list-style: none; }
   .footer-columns { grid-template-columns: repeat(2, 1fr); }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .detail-meta { gap: 1.5rem; }
-}
-
-/* ---- Narrow phones: clamp() minimums + wide letter-spacing can exceed
-   viewport width on small screens; tighten both so hero text never
-   overflows horizontally. ---- */
-@media (max-width: 480px) {
-  .hero-eyebrow { letter-spacing: 0.2em; }
-  .hero-title { font-size: clamp(2.2rem, 11vw, 5.5rem); }
-  .hero-subhead { font-size: clamp(1rem, 4.5vw, 1.4rem); }
-  .page-hero-eyebrow { letter-spacing: 0.16em; }
-  .page-hero-title { font-size: clamp(1.8rem, 9vw, 3.6rem); }
-  .page-hero-dek { font-size: clamp(0.95rem, 4vw, 1.25rem); }
 }
 
 /* =========================================================
