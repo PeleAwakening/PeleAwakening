@@ -863,6 +863,7 @@ ul { list-style: none; }
 /* ---- Detail sections (generic content pages) ---- */
 .detail-section { padding: 6rem 0; }
 .detail-section--alt { background: var(--color-bg-warm); }
+#who-is-this-for { padding-top: 1.5rem; }
 .detail-section-inner {
   max-width: var(--measure);
   margin: 0 auto;
@@ -1707,8 +1708,9 @@ ul { list-style: none; }
   .detail-meta { gap: 1.5rem; }
 
   /* Halve the space between sections on mobile */
-  .detail-section { padding: 3rem 0; }
+  .detail-section { padding: 2rem 0; }
   .bio-photo-section { padding: 2.5rem 0 0.5rem; }
+  #who-is-this-for { padding-top: 0.5rem; }
 }
 
 /* =========================================================
