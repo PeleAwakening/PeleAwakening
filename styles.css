@@ -1802,7 +1802,7 @@ ul { list-style: none; }
 
 .intro-cta-section { padding: 3rem 0 2rem; }
 @media (max-width: 768px) {
-  .intro-cta-section { padding: 1.5rem 0 1rem; }
+  .intro-cta-section { padding: 2.25rem 0 1.75rem; }
 }
 
 /* ---- Compact card-grid variant (smaller offering-cards, e.g. "Is This For You?") ---- */
