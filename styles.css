@@ -1705,6 +1705,10 @@ ul { list-style: none; }
   .footer-columns { grid-template-columns: repeat(2, 1fr); }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .detail-meta { gap: 1.5rem; }
+
+  /* Halve the space between sections on mobile */
+  .detail-section { padding: 3rem 0; }
+  .bio-photo-section { padding: 2.5rem 0 0.5rem; }
 }
 
 /* =========================================================
@@ -1793,6 +1797,11 @@ ul { list-style: none; }
 }
 .highlight-chip { border-radius: 40px; }
 .faq-item { padding: 0.4rem 1.5rem; margin-bottom: 0.8rem; border-bottom: none; }
+
+.intro-cta-section { padding: 3rem 0 2rem; }
+@media (max-width: 768px) {
+  .intro-cta-section { padding: 1.5rem 0 1rem; }
+}
 
 /* ---- Compact card-grid variant (smaller offering-cards, e.g. "Is This For You?") ---- */
 .card-grid--compact .offering-card { padding: 1.7rem 1.4rem; }
