@@ -1711,6 +1711,7 @@ ul { list-style: none; }
   .detail-section { padding: 2rem 0; }
   .bio-photo-section { padding: 2.5rem 0 0.5rem; }
   #who-is-this-for { padding-top: 0.5rem; }
+  .page-hero { padding: 7rem 0 3rem; }
 }
 
 /* =========================================================
