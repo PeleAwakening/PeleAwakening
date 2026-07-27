@@ -477,6 +477,16 @@ ul { list-style: none; }
   padding: 0.5rem 1.2rem;
   border-radius: 20px;
 }
+.photo-banner-caption--corner {
+  bottom: auto;
+  left: auto;
+  top: 1rem;
+  right: 1rem;
+  transform: none;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  padding: 0.35rem 0.8rem;
+}
 
 /* ---- Section shared ---- */
 .section-label {
@@ -598,6 +608,7 @@ ul { list-style: none; }
 
 /* ---- Map embed ---- */
 .map-frame {
+  display: block;
   max-width: 720px;
   margin: 2rem auto 0;
   border-radius: 6px;
