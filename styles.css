@@ -452,6 +452,10 @@ ul { list-style: none; }
   max-height: 560px;
   overflow: hidden;
 }
+.photo-loop--tall {
+  aspect-ratio: 16 / 10;
+  max-height: 720px;
+}
 .photo-loop img {
   position: absolute;
   inset: 0;
