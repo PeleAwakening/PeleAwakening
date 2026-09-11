@@ -432,6 +432,7 @@ ul { list-style: none; }
 .page-hero--photo .hero-practitioner { color: var(--color-gold); }
 .page-hero--photo .section-divider { background: rgba(255,255,255,0.55); }
 .page-hero--photo .page-hero-dek { color: rgba(255,255,255,0.9); }
+.page-hero--photo .tag-pill { color: #fff; border-color: rgba(255,255,255,0.55); }
 
 /* ---- Photo banner (real photography, full-width) ---- */
 .photo-banner {
