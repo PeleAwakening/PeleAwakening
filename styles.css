@@ -800,6 +800,9 @@ ul { list-style: none; }
   margin-bottom: 0.7rem;
 }
 .pillars-grid .offering-card h3 { color: var(--color-ocean); }
+#weekly-classes .offering-card--photo .offering-photo { aspect-ratio: 4 / 2.7; }
+#past-programs .offering-card--split .offering-photo { max-height: 400px; }
+.pillars-grid .offering-photo { aspect-ratio: 4 / 2.7; }
 .offering-card p {
   font-size: 1rem;
   color: var(--color-text-dim);
