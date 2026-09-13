@@ -11,7 +11,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact — Pele Awakening</title>
-  <meta name="description" content="Get in touch with Pele Awakening to plan an experience, therapy session, or retreat on O'ahu, Hawaii.">
+  <meta name="description" content="Send an inquiry to Pele Awakening to plan a therapy session, weekly class, experience, or custom retreat on O'ahu, Hawaii.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -87,25 +87,118 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </nav>
 
-  <section class="page-hero">
+  <section class="page-hero" style="padding-bottom: 2rem;">
     <div class="container">
       <div class="page-hero-eyebrow" data-animate="fade-up">Get In Touch</div>
-      <h1 class="page-hero-title" data-animate="fade-up" data-delay="100">Begin the Conversation</h1>
-      <p class="page-hero-dek" data-animate="fade-up" data-delay="200">Whether you&rsquo;re curious about a single session or planning a full retreat, we&rsquo;re here to help you find the right path.</p>
+      <h1 class="page-hero-title" data-animate="fade-up" data-delay="100">Let&rsquo;s Connect</h1>
+      <p class="page-hero-dek" data-animate="fade-up" data-delay="200">Tell us what you&rsquo;re looking for, and we&rsquo;ll help you find the right experience or care.</p>
     </div>
   </section>
 
-  <section class="contact-block">
+  <section class="inquiry-form-section">
     <div class="container">
-      <p data-animate="fade-up">
-        Reach out and tell us what you&rsquo;re looking for &mdash; an experience, a therapy session, a retreat, or simply a question &mdash; and our team will help you plan it.
-      </p>
-      <a href="tel:+18085207920" class="btn btn-primary" data-animate="fade-up" data-delay="100">Call or Text 808-520-7920</a>
-      <p class="contact-note" data-animate="fade-up" data-delay="200">
-        WeChat: peleawakening &middot; Instagram: <a href="https://instagram.com/peleawakening">@peleawakening</a> &middot; O&#699;ahu, Hawai&#699;i
-      </p>
+      <form id="inquiryForm" class="inquiry-form" data-animate="fade-up">
+        <div class="form-row">
+          <label class="form-label" for="f-name">Name <span class="req">*</span></label>
+          <input class="form-input" type="text" id="f-name" name="name" autocomplete="name" required>
+        </div>
+        <div class="form-row form-row--split">
+          <div>
+            <label class="form-label" for="f-email">Email <span class="req">*</span></label>
+            <input class="form-input" type="email" id="f-email" name="email" autocomplete="email" required>
+          </div>
+          <div>
+            <label class="form-label" for="f-phone">Phone / Text Number</label>
+            <input class="form-input" type="tel" id="f-phone" name="phone" autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="f-interest">What are you interested in? <span class="req">*</span></label>
+          <select class="form-select" id="f-interest" name="interest" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="Therapy &amp; Pain Relief">Therapy &amp; Pain Relief</option>
+            <option value="Tai Chi &amp; Weekly Classes">Tai Chi &amp; Weekly Classes</option>
+            <option value="Signature Experiences">Signature Experiences</option>
+            <option value="Custom Retreat">Custom Retreat</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="f-message">How can we help? <span class="req">*</span></label>
+          <textarea class="form-textarea" id="f-message" name="message" required placeholder="Briefly tell us what you&rsquo;re looking for&hellip;"></textarea>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Preferred Contact Method</label>
+          <div class="form-radio-group" id="contactMethodGroup">
+            <label class="form-radio-pill"><input type="radio" name="contact_method" value="Email" checked>Email</label>
+            <label class="form-radio-pill"><input type="radio" name="contact_method" value="Text">Text</label>
+            <label class="form-radio-pill"><input type="radio" name="contact_method" value="Phone">Phone</label>
+          </div>
+        </div>
+
+        <input type="hidden" name="_subject" value="New Inquiry &mdash; Pele Awakening Website">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn btn-primary">Send Inquiry</button>
+        </div>
+        <p class="form-error" id="formError">Something went wrong &mdash; please try again, or text us directly at 808-520-7920.</p>
+      </form>
+
+      <div class="form-success" id="formSuccess" style="display:none;">
+        <h3>Mahalo! We&rsquo;ve received your inquiry.</h3>
+        <p>Our team will get back to you within 24 hours.</p>
+      </div>
+
+      <div class="contact-secondary" data-animate="fade-up" data-delay="100">
+        <p class="contact-note">Prefer to reach us directly? Email <a href="mailto:aloha@peleawakening.com">aloha@peleawakening.com</a> or <a href="sms:+18085207920">Text 808-520-7920 &rarr;</a></p>
+        <p class="contact-note">WeChat: peleawakening &middot; Instagram: <a href="https://instagram.com/peleawakening">@peleawakening</a> &middot; O&#699;ahu, Hawai&#699;i</p>
+      </div>
     </div>
   </section>
+
+  <script>
+    (function () {
+      var form = document.getElementById('inquiryForm');
+      var successEl = document.getElementById('formSuccess');
+      var errorEl = document.getElementById('formError');
+      var radios = form.querySelectorAll('input[name="contact_method"]');
+
+      function syncRadioPills() {
+        radios.forEach(function (r) {
+          r.closest('.form-radio-pill').classList.toggle('is-checked', r.checked);
+        });
+      }
+      radios.forEach(function (r) { r.addEventListener('change', syncRadioPills); });
+      syncRadioPills();
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorEl.style.display = 'none';
+        var submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        fetch('https://formsubmit.co/ajax/aloha@peleawakening.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form)))
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error('Request failed');
+            form.style.display = 'none';
+            successEl.style.display = 'block';
+          })
+          .catch(function () {
+            errorEl.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Inquiry';
+          });
+      });
+    })();
+  </script>
 
   <footer class="footer">
     <div class="container">

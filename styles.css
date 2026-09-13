@@ -1556,6 +1556,101 @@ ul { list-style: none; }
   opacity: 0.75;
 }
 
+/* ---- Inquiry form (contact page) ---- */
+.inquiry-form-section { padding: 1rem 0 6rem; }
+.inquiry-form {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--color-bg-card);
+  border: 1px solid rgba(43, 36, 29, 0.08);
+  border-radius: 10px;
+  padding: 3rem;
+  box-shadow: 0 4px 24px rgba(43, 36, 29, 0.05);
+}
+.form-row { margin-bottom: 1.6rem; }
+.form-row--split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+.form-label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  margin-bottom: 0.5rem;
+}
+.form-label .req { color: var(--color-accent); }
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(43, 36, 29, 0.15);
+  border-radius: 6px;
+  background: var(--color-bg);
+  font-family: var(--font-ui);
+  font-size: 0.98rem;
+  color: var(--color-ink);
+  transition: border-color 0.3s var(--ease-out);
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+.form-textarea { resize: vertical; min-height: 120px; font-family: var(--font-ui); }
+.form-radio-group { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.form-radio-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid rgba(43, 36, 29, 0.15);
+  border-radius: 40px;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+}
+.form-radio-pill input { accent-color: var(--color-accent); margin: 0; }
+.form-radio-pill.is-checked {
+  border-color: var(--color-accent);
+  color: var(--color-ink);
+  background: rgba(168, 98, 47, 0.06);
+}
+.form-submit-row { text-align: center; margin-top: 2.2rem; }
+.form-error {
+  display: none;
+  color: #a33;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+.honeypot-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.form-success {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 3rem;
+}
+.form-success h3 {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-bottom: 0.6rem;
+}
+.form-success p { color: var(--color-text-dim); font-size: 1.05rem; }
+.contact-secondary { text-align: center; margin-top: 2.5rem; }
+@media (max-width: 640px) {
+  .inquiry-form { padding: 2rem 1.5rem; }
+  .form-row--split { grid-template-columns: 1fr; }
+}
+
 /* ---- FAQ (native details/summary, no JS) ---- */
 .faq-list {
   max-width: 720px;
