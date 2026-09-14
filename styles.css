@@ -816,8 +816,8 @@ ul { list-style: none; }
   border-color: rgba(43, 36, 29, 0.08);
 }
 .offering-card--inactive .offering-photo {
-  filter: grayscale(45%) saturate(70%);
-  opacity: 0.82;
+  filter: saturate(0.92);
+  box-shadow: inset 0 0 0 2000px rgba(168, 98, 47, 0.15);
 }
 .offering-card--inactive:hover .offering-photo { transform: none; }
 .offering-card--inactive h3 { color: var(--color-text-dim); opacity: 0.85; }
