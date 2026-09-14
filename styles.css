@@ -760,6 +760,7 @@ ul { list-style: none; }
   top: 1.2rem;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 2;
   font-family: var(--font-ui);
   font-size: 0.62rem;
   letter-spacing: 0.16em;
@@ -803,6 +804,29 @@ ul { list-style: none; }
 #weekly-classes .offering-card--photo .offering-photo { aspect-ratio: 4 / 2.7; }
 #past-programs .offering-card--split .offering-photo { max-height: 400px; }
 .pillars-grid .offering-photo { aspect-ratio: 4 / 2.7; }
+
+/* ---- Inactive "Coming Soon" pillar card: same size, visibly dimmed, not clickable ---- */
+.offering-card--inactive {
+  cursor: default;
+  pointer-events: none;
+}
+.offering-card--inactive:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: rgba(43, 36, 29, 0.08);
+}
+.offering-card--inactive .offering-photo {
+  filter: grayscale(45%) saturate(70%);
+  opacity: 0.82;
+}
+.offering-card--inactive:hover .offering-photo { transform: none; }
+.offering-card--inactive h3 { color: var(--color-text-dim); opacity: 0.85; }
+.offering-card--inactive p { opacity: 0.75; }
+.offering-link--disabled {
+  color: var(--color-text-dim);
+  opacity: 0.7;
+  letter-spacing: 0.12em;
+}
 .offering-card p {
   font-size: 1rem;
   color: var(--color-text-dim);
@@ -1240,6 +1264,21 @@ ul { list-style: none; }
   border: 1px solid rgba(43, 36, 29, 0.18);
   border-radius: 30px;
   padding: 0.4rem 1rem;
+}
+.coming-soon-tag {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: rgba(168, 98, 47, 0.08);
+  border: 1px solid rgba(168, 98, 47, 0.25);
+  border-radius: 20px;
+  padding: 0.12rem 0.5rem;
+  margin-left: 0.4rem;
+  vertical-align: middle;
 }
 
 /* ---- Benefit cards ---- */

@@ -11,7 +11,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>联系我们 — Pele Awakening</title>
-  <meta name="description" content="联系 Pele Awakening，规划你在欧胡岛的体验、理疗预约或静修行程。">
+  <meta name="description" content="通过咨询表单联系 Pele Awakening，规划理疗、每周课程、特色体验或定制静修，欧胡岛，夏威夷。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
@@ -87,25 +87,118 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </nav>
 
-  <section class="page-hero">
+  <section class="page-hero" style="padding-bottom: 2rem;">
     <div class="container">
       <div class="page-hero-eyebrow" data-animate="fade-up">联系我们</div>
-      <h1 class="page-hero-title" data-animate="fade-up" data-delay="100">开启对话</h1>
-      <p class="page-hero-dek" data-animate="fade-up" data-delay="200">无论你只是想了解一次体验，还是计划一场完整的静修之旅，我们都在这里，帮你找到最适合的方式。</p>
+      <h1 class="page-hero-title" data-animate="fade-up" data-delay="100">让我们联系</h1>
+      <p class="page-hero-dek" data-animate="fade-up" data-delay="200">告诉我们你在寻找什么，我们会帮你找到合适的体验或疗愈方式。</p>
     </div>
   </section>
 
-  <section class="contact-block">
+  <section class="inquiry-form-section">
     <div class="container">
-      <p data-animate="fade-up">
-        请告诉我们你在寻找什么 &mdash; 一次体验、一场理疗、一段静修，或只是一个问题 &mdash; 我们的团队会帮你一起规划。
-      </p>
-      <a href="tel:+18085207920" class="btn btn-primary" data-animate="fade-up" data-delay="100">致电或短信 808-520-7920</a>
-      <p class="contact-note" data-animate="fade-up" data-delay="200">
-        微信：peleawakening &middot; Instagram：<a href="https://instagram.com/peleawakening">@peleawakening</a> &middot; 欧胡岛，夏威夷
-      </p>
+      <form id="inquiryForm" class="inquiry-form" data-animate="fade-up">
+        <div class="form-row">
+          <label class="form-label" for="f-name">姓名 <span class="req">*</span></label>
+          <input class="form-input" type="text" id="f-name" name="name" autocomplete="name" required>
+        </div>
+        <div class="form-row form-row--split">
+          <div>
+            <label class="form-label" for="f-email">邮箱 <span class="req">*</span></label>
+            <input class="form-input" type="email" id="f-email" name="email" autocomplete="email" required>
+          </div>
+          <div>
+            <label class="form-label" for="f-phone">电话 / 短信号码</label>
+            <input class="form-input" type="tel" id="f-phone" name="phone" autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="f-interest">你对什么感兴趣？ <span class="req">*</span></label>
+          <select class="form-select" id="f-interest" name="interest" required>
+            <option value="" disabled selected>请选择</option>
+            <option value="理疗与疼痛缓解">理疗与疼痛缓解</option>
+            <option value="太极与每周课程">太极与每周课程</option>
+            <option value="特色体验">特色体验</option>
+            <option value="定制静修">定制静修</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="f-message">我们可以如何帮助你？ <span class="req">*</span></label>
+          <textarea class="form-textarea" id="f-message" name="message" required placeholder="简单描述一下你在寻找什么&hellip;"></textarea>
+        </div>
+        <div class="form-row">
+          <label class="form-label">首选联系方式</label>
+          <div class="form-radio-group" id="contactMethodGroup">
+            <label class="form-radio-pill"><input type="radio" name="contact_method" value="邮箱" checked>邮箱</label>
+            <label class="form-radio-pill"><input type="radio" name="contact_method" value="短信">短信</label>
+            <label class="form-radio-pill"><input type="radio" name="contact_method" value="电话">电话</label>
+          </div>
+        </div>
+
+        <input type="hidden" name="_subject" value="New Inquiry &mdash; Pele Awakening Website (ZH)">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn btn-primary">提交咨询</button>
+        </div>
+        <p class="form-error" id="formError">出现问题，请重试，或直接发短信至 808-520-7920。</p>
+      </form>
+
+      <div class="form-success" id="formSuccess" style="display:none;">
+        <h3>Mahalo！我们已收到你的咨询。</h3>
+        <p>我们的团队会在24小时内与你联系。</p>
+      </div>
+
+      <div class="contact-secondary" data-animate="fade-up" data-delay="100">
+        <p class="contact-note">更想直接联系我们？发邮件至 <a href="mailto:aloha@peleawakening.com">aloha@peleawakening.com</a> 或<a href="sms:+18085207920">发短信至 808-520-7920 &rarr;</a></p>
+        <p class="contact-note">微信：peleawakening &middot; Instagram：<a href="https://instagram.com/peleawakening">@peleawakening</a> &middot; 欧胡岛，夏威夷</p>
+      </div>
     </div>
   </section>
+
+  <script>
+    (function () {
+      var form = document.getElementById('inquiryForm');
+      var successEl = document.getElementById('formSuccess');
+      var errorEl = document.getElementById('formError');
+      var radios = form.querySelectorAll('input[name="contact_method"]');
+
+      function syncRadioPills() {
+        radios.forEach(function (r) {
+          r.closest('.form-radio-pill').classList.toggle('is-checked', r.checked);
+        });
+      }
+      radios.forEach(function (r) { r.addEventListener('change', syncRadioPills); });
+      syncRadioPills();
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorEl.style.display = 'none';
+        var submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = '发送中…';
+
+        fetch('https://formsubmit.co/ajax/aloha@peleawakening.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form)))
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error('Request failed');
+            form.style.display = 'none';
+            successEl.style.display = 'block';
+          })
+          .catch(function () {
+            errorEl.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.textContent = '提交咨询';
+          });
+      });
+    })();
+  </script>
 
   <footer class="footer">
     <div class="container">
