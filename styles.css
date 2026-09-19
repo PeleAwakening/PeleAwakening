@@ -2150,6 +2150,104 @@ ul { list-style: none; }
   .letter-feature { grid-template-columns: 1fr; }
 }
 
+/* ---- Client story tags & attribution (Client Stories library) ---- */
+.client-story-tag,
+.client-story-subtag {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: rgba(168, 98, 47, 0.08);
+  border: 1px solid rgba(168, 98, 47, 0.22);
+  border-radius: 20px;
+  margin-bottom: 1.1rem;
+}
+.client-story-tag { font-size: 0.65rem; padding: 0.3rem 0.9rem; }
+.client-story-subtag { font-size: 0.6rem; padding: 0.22rem 0.7rem; }
+.client-story-attribution {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  margin-bottom: 0.9rem;
+}
+
+/* ---- Client Stories library (/therapy/stories/) ---- */
+.client-stories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  max-width: 740px;
+  margin: 3rem auto 0;
+}
+.client-story-card {
+  background: var(--color-bg-card);
+  border: 1px solid rgba(43, 36, 29, 0.08);
+  border-radius: 6px;
+  padding: 2.4rem 2.6rem;
+}
+.client-story-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-bottom: 1rem;
+}
+.client-story-card > p {
+  color: var(--color-text-dim);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.client-story-fact {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+  line-height: 1.65;
+  border-left: 2px solid rgba(43, 36, 29, 0.15);
+  padding-left: 1.1rem;
+  margin: 1.3rem 0;
+}
+.client-story-fact strong { color: var(--color-ink); font-weight: 600; }
+.client-story-quote {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--color-ink);
+  line-height: 1.6;
+  margin: 1.3rem 0 0.7rem;
+  padding-left: 1.2rem;
+  border-left: 3px solid var(--color-accent);
+}
+.client-story-subcards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-top: 1.8rem;
+}
+.client-story-subcard {
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(43, 36, 29, 0.1);
+}
+.client-story-subcard:first-child { padding-top: 0; border-top: none; }
+.client-story-subcard h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-bottom: 0.7rem;
+}
+.client-story-subcard p {
+  color: var(--color-text-dim);
+  line-height: 1.75;
+  margin-bottom: 0.9rem;
+}
+@media (max-width: 640px) {
+  .client-story-card { padding: 1.8rem; }
+}
+
 /* ---- How Treatment Works: spacious 3-step process ---- */
 .process-steps {
   display: grid;
