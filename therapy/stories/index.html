@@ -228,6 +228,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .family-members { display: flex; flex-direction: column; }
     .member-story { padding-top: 56px; padding-bottom: 56px; border-top: 1px solid var(--border-soft); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); gap: 56px; align-items: start; }
     .member-story:first-child { border-top: 1px solid var(--border-hairline); padding-top: 64px; }
+    .member-story:last-child { padding-bottom: 40px; }
     .member-aside { position: sticky; top: 96px; }
     .member-header { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 24px; }
     .member-number { font-family: 'Fraunces', serif; font-weight: 300; font-size: 28px; color: var(--ink-faint); line-height: 1; }
@@ -241,39 +242,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .member-quote::before { content: '\201C'; position: absolute; top: -6px; left: 20px; font-family: 'Fraunces', serif; font-size: 64px; line-height: 1; color: var(--terracotta); opacity: 0.1; }
     .member-quote p { font-family: 'Fraunces', serif; font-weight: 300; font-style: italic; font-size: clamp(18px, 2vw, 22px); line-height: 1.45; color: var(--ink); margin-bottom: 14px; }
     .member-quote footer { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; color: var(--ink-muted); }
-    /* ---------- Case 02: family/teacher photo loop ---------- */
-    .story-image { margin: 0 0 48px; }
-    .story-image .img-frame {
-      border-radius: 2px;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-    .story-image .img-frame.photo-loop {
+    /* ---------- Case 02: practitioner–client photo band ---------- */
+    .photo-band { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0 0 48px; }
+    .photo-band figure { margin: 0; }
+    .photo-band img {
+      width: 100%;
       aspect-ratio: 4 / 3;
-      max-height: none;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+      border-radius: 2px;
+      filter: saturate(0.94) contrast(0.98);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
     }
-    .story-image .img-frame img { filter: saturate(0.94) contrast(0.98); }
-    .story-image figcaption {
-      margin-top: 16px;
-      font-size: 12px;
-      line-height: 1.6;
-      color: var(--ink-muted);
-      max-width: 64ch;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .story-image figcaption::before {
-      content: '';
-      display: inline-block;
-      width: 18px;
-      height: 1px;
-      background: var(--border-hairline);
-      margin-top: 8px;
-      flex-shrink: 0;
-    }
+    .photo-band figure:hover img { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(31, 27, 22, 0.14); }
+    .photo-band figcaption { margin-top: 12px; font-size: 11.5px; line-height: 1.55; color: var(--ink-muted); font-style: italic; }
     /* ---------- Case 02: source documents (letter gallery) ---------- */
-    .source-documents { margin-top: 80px; padding-top: 64px; border-top: 1px solid var(--border-hairline); }
+    .source-documents { margin-top: 64px; padding-top: 56px; border-top: 1px solid var(--border-hairline); }
     .source-docs-header { margin-bottom: 40px; }
     .source-docs-title {
       font-family: 'Fraunces', serif;
@@ -434,6 +419,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .stories-main .closing-cta-row { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
     .stories-main .btn { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.95rem 2.2rem; }
+    /* ---------- On-this-page index ---------- */
+    .stories-index { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 48px; }
+    .stories-index a {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: var(--bg-card-soft);
+      transition: color 0.35s ease, border-color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .stories-index a:hover { color: var(--ink); border-color: var(--ink-muted); transform: translateY(-2px); }
+    .stories-index .index-num { font-family: 'Fraunces', serif; font-weight: 300; font-size: 15px; color: var(--ink-faint); }
     /* ---------- Reveal animation ---------- */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
@@ -464,6 +468,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .lightbox-prev { left: 12px; }
       .lightbox-next { right: 12px; }
       .lightbox-btn { width: 42px; height: 42px; font-size: 18px; }
+      .stories-index { margin-top: 36px; }
+      .photo-band { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+      .photo-band img { aspect-ratio: 3 / 2; }
     }
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
@@ -553,6 +560,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="meta-value">First-person and family-reported accounts</span>
           </div>
         </div>
+        <nav class="stories-index reveal delay-3" aria-label="On this page">
+          <a href="#patricia"><span class="index-num">01</span>Patricia &mdash; Chronic Pain</a>
+          <a href="#family"><span class="index-num">02</span>A Family&rsquo;s Experience</a>
+          <a href="#upcoming"><span class="index-num">03&ndash;04</span>Cases in Preparation</a>
+        </nav>
       </div>
 
       <!-- Story 01 — Patricia -->
@@ -648,14 +660,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </header>
         <h2 class="story-title">A Family&rsquo;s Experience</h2>
-        <figure class="story-image">
-          <div class="img-frame photo-loop">
-            <img class="active" src="/images/nick-with-guolong-wang.jpg" alt="Nick Nishikawa with Guolong Wang" style="object-position: center 20%;" loading="lazy">
+        <div class="photo-band">
+          <figure>
+            <img src="/images/nick-with-guolong-wang.jpg" alt="Nick Nishikawa with Guolong Wang" style="object-position: center 20%;" loading="lazy">
+            <figcaption>Nick Nishikawa with Guolong Wang.</figcaption>
+          </figure>
+          <figure>
             <img src="/images/pamela-with-guolong-wang.jpg" alt="Pamela with Guolong Wang" loading="lazy">
-            <img src="/images/family-group-gathering.jpg" alt="Family and friends gathered together" loading="lazy">
-          </div>
-          <figcaption>Moments from the family&rsquo;s time with Guolong Wang.</figcaption>
-        </figure>
+            <figcaption>Pamela with Guolong Wang.</figcaption>
+          </figure>
+          <figure>
+            <img src="/images/family-group-gathering.jpg" alt="A gathering with friends and family" loading="lazy">
+            <figcaption>A gathering with friends and family.</figcaption>
+          </figure>
+        </div>
         <div class="story-meta">
           <div class="meta-cell">
             <span class="meta-label">Source</span>
@@ -812,7 +830,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </article>
 
       <!-- Upcoming -->
-      <section class="upcoming stories-container reveal" aria-label="Cases in preparation">
+      <section class="upcoming stories-container reveal" id="upcoming" aria-label="Cases in preparation">
         <div class="upcoming-header">
           <div>
             <span class="eyebrow">In Preparation</span>
