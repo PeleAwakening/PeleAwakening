@@ -692,6 +692,7 @@ ul { list-style: none; }
 }
 .card-grid--4 { grid-template-columns: repeat(2, 1fr); }
 .card-grid--5 { grid-template-columns: repeat(3, 1fr); }
+.card-grid--specialty { grid-template-columns: repeat(4, 1fr); }
 .offering-card {
   display: flex;
   flex-direction: column;
@@ -842,6 +843,35 @@ ul { list-style: none; }
   text-transform: uppercase;
   color: var(--color-accent);
 }
+
+/* ---- Story teaser card: left-aligned offering-card with a lead-in number ---- */
+.offering-card--teaser {
+  text-align: left;
+  align-items: flex-start;
+}
+.offering-teaser-num {
+  font-family: var(--font-mark);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: rgba(43, 36, 29, 0.22);
+  line-height: 1;
+  margin-bottom: 0.9rem;
+}
+.offering-card--teaser .tag-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  justify-content: flex-start;
+}
+.offering-card--teaser .tag-pill { font-size: 0.6rem; padding: 0.28rem 0.7rem; }
+.offering-card--teaser .offering-link { margin-top: auto; }
+.offering-card--photo.offering-card--teaser .offering-teaser-num,
+.offering-card--photo.offering-card--teaser .tag-pill-row {
+  margin-left: 1.8rem;
+  margin-right: 1.8rem;
+}
+.offering-card--photo.offering-card--teaser .offering-teaser-num { margin-top: 1.8rem; }
 
 .explore { padding: 0 0 9rem; }
 #explore { padding-top: 5rem; }
@@ -1799,7 +1829,7 @@ ul { list-style: none; }
 
 /* ---- Responsive ---- */
 @media (max-width: 1000px) {
-  .card-grid, .card-grid--4, .card-grid--5 { grid-template-columns: repeat(2, 1fr); }
+  .card-grid, .card-grid--4, .card-grid--5, .card-grid--specialty { grid-template-columns: repeat(2, 1fr); }
   .philosophy-list { grid-template-columns: repeat(2, 1fr); }
   .footer-columns { grid-template-columns: repeat(3, 1fr); }
 }
@@ -1856,7 +1886,7 @@ ul { list-style: none; }
   .pricing-grid { grid-template-columns: 1fr; }
   .two-col-grid { grid-template-columns: 1fr; gap: 2.5rem; }
 
-  .card-grid, .card-grid--4, .card-grid--5 { grid-template-columns: 1fr; }
+  .card-grid, .card-grid--4, .card-grid--5, .card-grid--specialty { grid-template-columns: 1fr; }
   .philosophy-list { grid-template-columns: 1fr; }
   .footer-columns { grid-template-columns: repeat(2, 1fr); }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
@@ -1995,6 +2025,13 @@ ul { list-style: none; }
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   justify-content: center;
 }
+.therapy-home .focus-group .card-grid--specialty { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1000px) {
+  .therapy-home .focus-group .card-grid--specialty { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .therapy-home .focus-group .card-grid--specialty { grid-template-columns: 1fr; }
+}
 .therapy-home .focus-group .offering-card {
   text-align: left;
   align-items: flex-start;
@@ -2010,19 +2047,6 @@ ul { list-style: none; }
 }
 .therapy-home .focus-group .offering-card p { flex-grow: 0; margin-bottom: 0; }
 
-/* ---- Client story photo placeholders & meta line (per reference screenshot) ---- */
-.therapy-home .story-photo-placeholder {
-  aspect-ratio: 4 / 3;
-  border: none;
-  background: rgba(43, 36, 29, 0.06);
-  font-style: normal;
-}
-.therapy-home .case-study-meta {
-  font-family: var(--font-ui);
-  font-size: 0.95rem;
-  color: var(--color-text-dim);
-  font-style: normal;
-}
 .therapy-home .letter-frame {
   aspect-ratio: 4 / 5;
   border: none;
@@ -2054,55 +2078,6 @@ ul { list-style: none; }
   opacity: 0.4;
 }
 
-/* ---- Client story / case-study card (Challenge / Journey / Experience) ---- */
-.story-card {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 2.5rem;
-  align-items: start;
-  background: var(--color-bg-card);
-  border: 1px solid rgba(43, 36, 29, 0.08);
-  border-radius: 6px;
-  padding: 2.8rem;
-}
-.story-card + .story-card { margin-top: 2rem; }
-.case-study-media { display: flex; flex-direction: column; gap: 1.2rem; }
-.story-photo-placeholder {
-  aspect-ratio: 4 / 5;
-  border: 1px dashed rgba(43, 36, 29, 0.3);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 1.5rem;
-  color: var(--color-text-dim);
-  font-size: 0.85rem;
-  font-style: italic;
-  background: rgba(43, 36, 29, 0.03);
-}
-.story-steps { display: flex; flex-direction: column; gap: 1.5rem; }
-.story-step-label {
-  font-family: var(--font-ui);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: 0.35rem;
-}
-.story-step p { color: var(--color-text-dim); line-height: 1.7; font-style: italic; }
-.case-study-quote { margin: 0.5rem 0 0; }
-.case-study-meta {
-  font-family: var(--font-ui);
-  font-size: 0.78rem;
-  color: var(--color-text-dim);
-  font-style: italic;
-}
-@media (max-width: 768px) {
-  .story-card { grid-template-columns: 1fr; padding: 1.8rem; }
-}
-
 /* ---- Thank-you letter feature (single authentic letter presentation) ---- */
 .letter-feature {
   display: grid;
@@ -2127,7 +2102,6 @@ ul { list-style: none; }
   font-style: italic;
   color: var(--color-text-dim);
 }
-.letter-feature-text .story-step { margin-bottom: 1.4rem; }
 .letter-quote {
   border-left: 3px solid rgba(43, 36, 29, 0.15);
   padding-left: 1.5rem;
