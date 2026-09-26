@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KTLXMW9C');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>预约 — Pele Awakening</title>
+  <meta name="description" content="预约您的 Pele Awakening 夏威夷体验。填写联系方式、选择心仪日期，并通过 Stripe 或 PayPal 支付定金以锁定名额。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css"
+        integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="alternate" hreflang="en" href="https://peleawakening.com/reservation/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://peleawakening.com/zh/reservation/">
+  <link rel="alternate" hreflang="ja" href="https://peleawakening.com/ja/reservation/">
+  <link rel="alternate" hreflang="x-default" href="https://peleawakening.com/reservation/">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KTLXMW9C"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/zh/" class="nav-logo">
+        <img src="/images/pele-logo.png" alt="" class="nav-logo-icon">
+        <span>Pele Awakening</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li class="nav-item has-dropdown">
+          <a href="/zh/weekly-classes/">每周课程</a>
+          <ul class="nav-dropdown">
+            <li><a href="/zh/experiences/tai-chi.html">杨氏太极练习</a></li>
+            <li><a href="/zh/experiences/tai-chi-chen.html">陈氏太极练习</a></li>
+            <li><a href="/zh/experiences/kung-fu.html">太极与功夫基础课程</a></li>
+            <li><a href="/zh/experiences/master-jiang.html">姜师父强化课程</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/zh/therapy/">理疗</a>
+          <ul class="nav-dropdown">
+            <li><a href="/zh/therapy/acupuncture.html">针灸</a></li>
+            <li><a href="/zh/therapy/cupping.html">拔罐</a></li>
+            <li><a href="/zh/therapy/moxibustion.html">艾灸</a></li>
+            <li><a href="/zh/therapy/taichi-massage.html">太极推拿</a></li>
+            <li><a href="/zh/therapy/tcm.html">中医问诊</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/zh/experiences/">特色体验</a>
+          <ul class="nav-dropdown">
+            <li><a href="/zh/experiences/volcano-journey.html">火山能量之旅</a></li>
+            <li><a href="/zh/experiences/surf-balance.html">冲浪与平衡</a></li>
+            <li><a href="/zh/experiences/ocean-healing.html">海洋探索</a></li>
+            <li><a href="/zh/experiences/local-farm.html">夏威夷本地农场体验</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/zh/retreats/">定制静修</a>
+          <ul class="nav-dropdown">
+            <li><a href="/zh/retreats/wellness.html">养生静修</a></li>
+            <li><a href="/zh/retreats/family.html">家庭静修</a></li>
+            <li><a href="/zh/retreats/adventure.html">探险静修</a></li>
+            <li><a href="/zh/retreats/corporate.html">企业静修</a></li>
+            <li><a href="/zh/retreats/volcano-healing-journey.html">火山疗愈之旅</a></li>
+          </ul>
+        </li>
+        <li><a href="/zh/reservation/">预约</a></li>
+        <li><a href="/zh/about.html">关于我们</a></li>
+        <li><a href="/zh/contact.html" class="nav-cta">联系我们</a></li>
+        <li class="nav-item has-dropdown nav-lang">
+          <a href="/zh/" class="nav-lang-trigger" aria-label="Language"><svg class="nav-lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"></path></svg></a>
+          <ul class="nav-dropdown">
+            <li><a href="/reservation/">EN</a></li>
+            <li><a href="/ja/reservation/">日本語</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-eyebrow" data-animate="fade-up">预约</div>
+      <h1 class="page-hero-title" data-animate="fade-up" data-delay="100">预约您的体验</h1>
+      <p class="page-hero-dek" data-animate="fade-up" data-delay="200">留下您的联系方式并选择心仪日期。支付定金即可锁定名额，余款到店时结清。</p>
+    </div>
+  </section>
+
+  <section class="reservation-section">
+    <div class="container">
+
+      <div class="reservation-steps" data-animate="fade-up">
+        <div class="reservation-step is-active" id="stepIndicator1">
+          <span class="reservation-step-num">1</span><span>填写信息</span>
+        </div>
+        <div class="reservation-step-line"></div>
+        <div class="reservation-step" id="stepIndicator2">
+          <span class="reservation-step-num">2</span><span>支付定金</span>
+        </div>
+      </div>
+
+      <!-- ============ 第一步 — 预约信息 ============ -->
+      <form id="reservationForm" class="inquiry-form" data-animate="fade-up">
+        <div class="form-row">
+          <label class="form-label" for="r-name">姓名 <span class="req">*</span></label>
+          <input class="form-input" type="text" id="r-name" name="name" autocomplete="name" required>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div>
+            <label class="form-label" for="r-email">邮箱 <span class="req">*</span></label>
+            <input class="form-input" type="email" id="r-email" name="email" autocomplete="email" required>
+          </div>
+          <div>
+            <label class="form-label" for="r-phone">电话 / 短信号码 <span class="req">*</span></label>
+            <input class="form-input" type="tel" id="r-phone" name="phone" autocomplete="tel" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="r-experience">预约哪个项目？ <span class="req">*</span></label>
+          <select class="form-select" id="r-experience" name="experience" required>
+            <option value="" disabled selected>请选择项目</option>
+            <option value="杨氏太极练习">杨氏太极练习</option>
+            <option value="陈氏太极练习">陈氏太极练习</option>
+            <option value="太极与功夫基础课程">太极与功夫基础课程</option>
+            <option value="姜师父强化课程">姜师父强化课程</option>
+            <option value="理疗与疼痛缓解">理疗与疼痛缓解</option>
+            <option value="火山能量之旅">火山能量之旅</option>
+            <option value="海洋探索">海洋探索</option>
+            <option value="冲浪与平衡">冲浪与平衡</option>
+            <option value="夏威夷本地农场体验">夏威夷本地农场体验</option>
+            <option value="定制 / 尚未确定">定制 / 尚未确定</option>
+          </select>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div>
+            <label class="form-label" for="r-date">期望日期 <span class="req">*</span></label>
+            <input class="form-input" type="text" id="r-date" name="preferred_date" placeholder="请选择日期" required readonly>
+          </div>
+          <div>
+            <label class="form-label" for="r-date-alt">备选日期</label>
+            <input class="form-input" type="text" id="r-date-alt" name="alternate_date" placeholder="选填" readonly>
+            <span class="form-hint">若首选日期已满，备选日期可帮助我们更快为您确认。</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="r-guests">参加人数 <span class="req">*</span></label>
+          <select class="form-select" id="r-guests" name="guests" required>
+            <option value="1" selected>1 人</option>
+            <option value="2">2 人</option>
+            <option value="3">3 人</option>
+            <option value="4">4 人</option>
+            <option value="5">5 人</option>
+            <option value="6+">6 人及以上</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="r-notes">还有什么需要我们了解的吗？</label>
+          <textarea class="form-textarea" id="r-notes" name="notes" placeholder="伤病情况、练习基础、饮食需求、无障碍需求、特殊纪念日&hellip;"></textarea>
+        </div>
+
+        <input type="hidden" name="_subject" value="New Reservation &mdash; Pele Awakening Website (ZH)">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="booking_reference" id="r-booking-ref">
+        <input type="text" name="_honey" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn btn-primary">下一步：支付定金 &rarr;</button>
+        </div>
+        <p class="form-error" id="reservationError">提交失败 &mdash; 请重试，或直接发短信至 808-520-7920 联系我们。</p>
+      </form>
+
+      <!-- ============ 第二步 — 支付定金 ============ -->
+      <div id="paymentStep" style="display:none;">
+
+        <div class="booking-ref">
+          <div class="booking-ref-label">您的预约编号</div>
+          <div class="booking-ref-code" id="bookingRefDisplay">&mdash;</div>
+        </div>
+
+        <div class="payment-config-warning" id="paymentConfigWarning" style="display:none;">
+          <strong>尚未配置收款链接。</strong>请打开 <code>/zh/reservation/index.html</code>，
+          将 <code>RESERVATION_CONFIG</code> 中的 <code>stripePaymentLink</code> 与
+          <code>paypalPaymentLink</code> 替换为 Stripe 和 PayPal 后台生成的真实链接。
+        </div>
+
+        <div class="deposit-card">
+          <dl style="margin:0;">
+            <div class="deposit-row">
+              <dt>预约项目</dt>
+              <dd id="summaryExperience">&mdash;</dd>
+            </div>
+            <div class="deposit-row">
+              <dt>期望日期</dt>
+              <dd id="summaryDate">&mdash;</dd>
+            </div>
+            <div class="deposit-row">
+              <dt>参加人数</dt>
+              <dd id="summaryGuests">&mdash;</dd>
+            </div>
+            <div class="deposit-row deposit-row--total">
+              <dt>应付定金</dt>
+              <dd id="summaryDeposit">&mdash;</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="payment-methods">
+          <a href="#" class="payment-btn payment-btn--stripe" id="stripeBtn" rel="noopener noreferrer" target="_blank">
+            信用卡 &middot; Apple Pay &middot; Google Pay 支付定金
+          </a>
+          <div class="payment-divider">或</div>
+          <a href="#" class="payment-btn payment-btn--paypal" id="paypalBtn" rel="noopener noreferrer" target="_blank">
+            使用 PayPal 支付定金
+          </a>
+        </div>
+
+        <p class="payment-secure-note">
+          <strong>支付全程由 Stripe 和 PayPal 处理。</strong><br>
+          卡号信息仅在其通过 PCI 认证的安全收银页面填写，<strong>绝不会</strong>发送至本网站，也不会被本站存储。
+          如需联系我们，请提供上方的预约编号。
+        </p>
+
+        <div style="text-align:center;">
+          <button type="button" class="reservation-back" id="backToForm">&larr; 返回修改信息</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-columns">
+        <div class="footer-about">
+          <div class="footer-brand"><img src="/images/pele-logo.png" alt="" class="footer-brand-icon"><span>Pele Awakening</span></div>
+          <p class="footer-brand-tagline">疗愈 &middot; 律动 &middot; 新生</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">体验</div>
+          <a href="/zh/experiences/tai-chi.html">杨氏太极练习</a>
+          <a href="/zh/experiences/tai-chi-chen.html">陈氏太极练习</a>
+          <a href="/zh/experiences/kung-fu.html">太极与功夫基础课程</a>
+          <a href="/zh/experiences/master-jiang.html">姜师父强化课程</a>
+          <a href="/zh/experiences/volcano-journey.html">火山能量之旅</a>
+          <a href="/zh/experiences/ocean-healing.html">海洋探索</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">理疗</div>
+          <a href="/zh/therapy/">全部理疗</a>
+          <a href="/zh/therapy/acupuncture.html">针灸</a>
+          <a href="/zh/therapy/tcm.html">中医问诊</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">静修</div>
+          <a href="/zh/retreats/">定制静修</a>
+          <a href="/zh/retreats/wellness.html">养生静修</a>
+          <a href="/zh/retreats/volcano-healing-journey.html">火山疗愈之旅</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">公司</div>
+          <a href="/zh/reservation/">预约</a>
+          <a href="/zh/about.html">关于我们</a>
+          <a href="/zh/contact.html">联系我们</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pele Awakening. 版权所有。</p>
+        <p>美国夏威夷欧胡岛</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"
+          integrity="sha512-K/oyQtMXpxI4+K0W7H25UopjM8pzq0yrVdFdG21Fh5dBe91I40pDd9A4lzNlHPHBIP2cwZuoxaUSX0GJSObvGA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/zh.js"
+          integrity="sha512-3vCbzYhnTEsplp1d1geTppJBAf9TPepLIhhfMj5UKsBSnPmh+7A/j3MxcZ+5d5QOak/MLGDbjIj/W66PfL9HDQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/script.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    /* ====================================================================
+       RESERVATION CONFIG — edit the four values below only.
+
+       SECURITY: this repository is PUBLIC. Never place a Stripe secret key
+       (sk_...), a PayPal client secret, or any API credential in this file.
+       The two values below are PUBLIC hosted-checkout links — the charge
+       amount is locked on Stripe's / PayPal's servers and cannot be
+       tampered with from the browser.
+
+       Where to get them:
+         Stripe  Dashboard -> Payment Links -> create link -> copy URL
+                 https://buy.stripe.com/XXXXXXXXXXXX
+         PayPal  Dashboard -> Pay & Get Paid -> PayPal Buttons / Payment Links
+                 https://www.paypal.com/ncp/payment/XXXXXXXXXXXX
+
+       NOTE: depositAmount below is for DISPLAY only. It must match the
+       amount configured inside the Stripe / PayPal links.
+       ==================================================================== */
+    var RESERVATION_CONFIG = {
+      depositAmount:     100,
+      currency:          'USD',
+      stripePaymentLink: 'REPLACE_WITH_STRIPE_PAYMENT_LINK',
+      paypalPaymentLink: 'REPLACE_WITH_PAYPAL_PAYMENT_LINK'
+    };
+
+    var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/aloha@peleawakening.com';
+
+    var form        = document.getElementById('reservationForm');
+    var errorEl     = document.getElementById('reservationError');
+    var paymentStep = document.getElementById('paymentStep');
+    var stepsEl     = document.querySelector('.reservation-steps');
+    var step1       = document.getElementById('stepIndicator1');
+    var step2       = document.getElementById('stepIndicator2');
+    var refInput    = document.getElementById('r-booking-ref');
+    var refDisplay  = document.getElementById('bookingRefDisplay');
+    var stripeBtn   = document.getElementById('stripeBtn');
+    var paypalBtn   = document.getElementById('paypalBtn');
+
+    // flatpickr turns the real date input into type="hidden" and marks its
+    // visible altInput readonly. Both states are barred from HTML constraint
+    // validation, so the `required` attribute on the date field never fires.
+    // The date is validated explicitly in the submit handler instead.
+    var SUBMIT_ERROR_TEXT  = errorEl.textContent;
+    var DATE_REQUIRED_TEXT = '请先选择期望日期。';
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+    }
+
+    if (window.flatpickr && flatpickr.l10ns && flatpickr.l10ns.zh) {
+      flatpickr.localize(flatpickr.l10ns.zh);
+    }
+
+    var dateOpts = {
+      minDate: new Date(),
+      dateFormat: 'Y-m-d',
+      altInput: true,
+      altFormat: 'Y年n月j日',
+      disableMobile: true,
+      // To block dates that are already fully booked, list them here, e.g.
+      // disable: ['2026-12-24', '2026-12-25']
+      disable: []
+    };
+    flatpickr('#r-date', dateOpts);
+    flatpickr('#r-date-alt', dateOpts);
+
+    function generateBookingRef() {
+      var d = new Date();
+      var ymd = d.getFullYear() +
+                String(d.getMonth() + 1).padStart(2, '0') +
+                String(d.getDate()).padStart(2, '0');
+      var alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      var bytes = new Uint32Array(4);
+      window.crypto.getRandomValues(bytes);
+      var suffix = '';
+      for (var i = 0; i < 4; i++) suffix += alphabet[bytes[i] % alphabet.length];
+      return 'PA-' + ymd + '-' + suffix;
+    }
+
+    function formatMoney(amount, currency) {
+      try {
+        return new Intl.NumberFormat('zh-Hans-CN', {
+          style: 'currency', currency: currency, minimumFractionDigits: 0
+        }).format(amount);
+      } catch (e) {
+        return '$' + amount;
+      }
+    }
+
+    function isConfigured(url) {
+      return typeof url === 'string' && /^https:\/\//.test(url);
+    }
+
+    function buildPaymentUrl(baseUrl, bookingRef, email) {
+      var url = new URL(baseUrl);
+      url.searchParams.set('client_reference_id', bookingRef);
+      if (email) url.searchParams.set('prefilled_email', email);
+      return url.toString();
+    }
+
+    function showPaymentStep(data, bookingRef) {
+      document.getElementById('summaryExperience').textContent = data.experience || '—';
+      document.getElementById('summaryDate').textContent =
+        document.getElementById('r-date').value || '—';
+      document.getElementById('summaryGuests').textContent = data.guests || '—';
+      document.getElementById('summaryDeposit').textContent =
+        formatMoney(RESERVATION_CONFIG.depositAmount, RESERVATION_CONFIG.currency);
+
+      refDisplay.textContent = bookingRef;
+
+      var stripeOk = isConfigured(RESERVATION_CONFIG.stripePaymentLink);
+      var paypalOk = isConfigured(RESERVATION_CONFIG.paypalPaymentLink);
+
+      if (stripeOk) {
+        stripeBtn.href = buildPaymentUrl(RESERVATION_CONFIG.stripePaymentLink, bookingRef, data.email);
+        stripeBtn.removeAttribute('aria-disabled');
+      } else {
+        stripeBtn.removeAttribute('href');
+        stripeBtn.setAttribute('aria-disabled', 'true');
+      }
+
+      if (paypalOk) {
+        paypalBtn.href = buildPaymentUrl(RESERVATION_CONFIG.paypalPaymentLink, bookingRef, data.email);
+        paypalBtn.removeAttribute('aria-disabled');
+      } else {
+        paypalBtn.removeAttribute('href');
+        paypalBtn.setAttribute('aria-disabled', 'true');
+      }
+
+      document.getElementById('paymentConfigWarning').style.display =
+        (stripeOk && paypalOk) ? 'none' : 'block';
+
+      form.style.display = 'none';
+      paymentStep.style.display = 'block';
+      step1.classList.remove('is-active');
+      step1.classList.add('is-done');
+      step2.classList.add('is-active');
+      stepsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errorEl.style.display = 'none';
+
+      var dateEl = document.getElementById('r-date');
+      if (!dateEl.value) {
+        showError(DATE_REQUIRED_TEXT);
+        var visibleDateEl = dateEl.nextElementSibling;
+        if (visibleDateEl && typeof visibleDateEl.focus === 'function') visibleDateEl.focus();
+        return;
+      }
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = '提交中...';
+
+      var bookingRef = generateBookingRef();
+      refInput.value = bookingRef;
+
+      var data = Object.fromEntries(new FormData(form));
+
+      fetch(FORMSUBMIT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed');
+          showPaymentStep(data, bookingRef);
+        })
+        .catch(function () {
+          showError(SUBMIT_ERROR_TEXT);
+          submitBtn.disabled = false;
+          submitBtn.textContent = '下一步：支付定金 →';
+        });
+    });
+
+    document.getElementById('backToForm').addEventListener('click', function () {
+      paymentStep.style.display = 'none';
+      form.style.display = 'block';
+      step2.classList.remove('is-active');
+      step1.classList.remove('is-done');
+      step1.classList.add('is-active');
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = false;
+      submitBtn.textContent = '下一步：支付定金 →';
+      stepsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  })();
+  </script>
+</body>
+</html>
