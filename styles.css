@@ -1681,6 +1681,7 @@ body:not(.nav-suppress-hover) .nav-item.has-dropdown:hover .nav-dropdown,
   padding: 2.5rem;
   box-shadow: 0 4px 15px rgba(43, 36, 29, 0.06);
 }
+.inquiry-form--wide { max-width: clamp(640px, 70vw, 960px); }
 .form-row { margin-bottom: 1.6rem; }
 .form-row--split {
   display: grid;
