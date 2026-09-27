@@ -875,12 +875,6 @@ ul { list-style: none; }
   margin-top: 1.8rem;
 }
 .offering-card--teaser-sm .offering-photo { aspect-ratio: 4 / 3; margin-bottom: 1.2rem; }
-.offering-photo-placeholder {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  margin-bottom: 1.2rem;
-  background: linear-gradient(135deg, rgba(168, 98, 47, 0.08), rgba(168, 98, 47, 0.02));
-}
 
 .explore { padding: 0 0 9rem; }
 #explore { padding-top: 5rem; }

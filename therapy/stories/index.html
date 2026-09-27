@@ -150,6 +150,78 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       max-width: 22ch;
       margin-bottom: 40px;
     }
+    .story-title:has(+ .story-subtitle) { margin-bottom: 12px; }
+    .story-subtitle {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.4;
+      color: var(--ink-soft);
+      margin-bottom: 32px;
+    }
+    /* ---------- Case 03: chronological sub-sections ---------- */
+    .chron-section { padding-top: 48px; padding-bottom: 48px; border-top: 1px solid var(--border-soft); }
+    .chron-section:first-of-type { border-top: 1px solid var(--border-hairline); padding-top: 56px; }
+    .chron-header { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+    .chron-date { font-family: 'Fraunces', serif; font-weight: 400; font-style: italic; font-size: clamp(15px, 1.8vw, 18px); color: var(--ink-soft); }
+    .chron-title { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(22px, 2.8vw, 28px); line-height: 1.2; color: var(--ink); margin-bottom: 18px; letter-spacing: -0.01em; }
+    .chron-body p { font-size: 16.5px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 16px; }
+    .chron-body p:last-child { margin-bottom: 0; }
+    .source-tag.practitioner-recollection { color: var(--ink-muted); background: var(--bg-warm); border-color: var(--border-hairline); }
+    /* ---------- Case 03: chronological photo + pending placeholder ---------- */
+    .chron-image { margin-top: 32px; }
+    .chron-image .img-frame { max-width: 480px; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 2px; }
+    .chron-image--letter .img-frame { max-width: 320px; aspect-ratio: 3 / 4; }
+    .chron-image .img-frame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.94) contrast(0.98); }
+    .chron-image figcaption { margin-top: 10px; font-size: 11.5px; line-height: 1.55; color: var(--ink-muted); font-style: italic; max-width: 480px; }
+    .img-frame--pending {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed var(--border-hairline);
+      background: var(--bg-card-soft);
+      color: var(--ink-faint);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 16px;
+    }
+    /* ---------- Case 03: practitioner philosophy block ---------- */
+    .philosophy-block {
+      margin-top: 56px;
+      padding: 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 3px;
+      position: relative;
+    }
+    .philosophy-block::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 40px;
+      bottom: 40px;
+      width: 2px;
+      background: var(--bronze-soft);
+      border-radius: 1px;
+    }
+    .philosophy-statement {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(22px, 2.8vw, 28px);
+      line-height: 1.3;
+      color: var(--ink);
+      margin-top: 16px;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+    }
+    .philosophy-text { font-size: 15px; line-height: 1.75; color: var(--ink-soft); max-width: 62ch; }
     .story-meta {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -224,7 +296,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .story-quote p { font-family: 'Fraunces', serif; font-weight: 300; font-style: italic; font-size: clamp(22px, 2.6vw, 28px); line-height: 1.4; color: var(--ink); margin-bottom: 20px; letter-spacing: -0.005em; }
     .story-quote footer { font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--ink-muted); }
     /* ---------- Family story ---------- */
-    .family-story .story-intro-text { font-size: 17px; line-height: 1.75; color: var(--ink-soft); max-width: 70ch; margin-bottom: 64px; }
+    .story-intro-text { font-size: 17px; line-height: 1.75; color: var(--ink-soft); max-width: 70ch; margin-bottom: 64px; }
     .family-members { display: flex; flex-direction: column; }
     .member-story { padding-top: 56px; padding-bottom: 56px; border-top: 1px solid var(--border-soft); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); gap: 56px; align-items: start; }
     .member-story:first-child { border-top: 1px solid var(--border-hairline); padding-top: 64px; }
@@ -463,6 +535,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .member-story { padding-top: 40px; padding-bottom: 40px; }
       .story-quote { padding-left: 24px; }
       .member-quote { padding-left: 22px; }
+      .chron-section { padding-top: 36px; padding-bottom: 36px; }
+      .philosophy-block { padding: 28px 24px; }
       .letter-pages { flex-direction: column; }
       .lightbox-close { top: 16px; right: 16px; }
       .lightbox-prev { left: 12px; }
@@ -563,7 +637,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <nav class="stories-index reveal delay-3" aria-label="On this page">
           <a href="#patricia"><span class="index-num">01</span>Patricia &mdash; Chronic Pain</a>
           <a href="#family"><span class="index-num">02</span>A Family&rsquo;s Experience</a>
-          <a href="#upcoming"><span class="index-num">03&ndash;04</span>Cases in Preparation</a>
+          <a href="#sciatica"><span class="index-num">03</span>Sciatica</a>
+          <a href="#upcoming"><span class="index-num">04</span>Cases in Preparation</a>
         </nav>
       </div>
 
@@ -829,6 +904,112 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </section>
       </article>
 
+      <!-- Story 03 — Sciatica -->
+      <article class="story stories-container reveal" id="sciatica">
+        <header class="story-header">
+          <div class="story-number">03</div>
+          <div class="story-categories">
+            <span>Sciatica</span>
+            <span>Chronic Pain</span>
+            <span>Historical Cases</span>
+          </div>
+        </header>
+        <h2 class="story-title">More Than 20 Years of Treating Sciatic Pain</h2>
+        <p class="story-subtitle">Stories from Guolong Wang&rsquo;s years of practice in Saipan</p>
+        <div class="story-meta">
+          <div class="meta-cell">
+            <span class="meta-label">Sources</span>
+            <span class="meta-value">Guolong Wang&rsquo;s recollections; patient letter, March 2011</span>
+          </div>
+          <div class="meta-cell">
+            <span class="meta-label">Period</span>
+            <span class="meta-value">2001&ndash;2011</span>
+          </div>
+          <div class="meta-cell">
+            <span class="meta-label">Location</span>
+            <span class="meta-value">Saipan</span>
+          </div>
+        </div>
+        <p class="story-intro-text">
+          Over more than two decades of practice in Saipan, Guolong Wang has encountered sciatic pain in many forms. The following accounts &mdash; drawn from his recollections and from a patient&rsquo;s written statement &mdash; trace a few of the cases that shaped his understanding of how differently sciatic pain can present, and how differently it can respond.
+        </p>
+
+        <section class="chron-section">
+          <div class="chron-header">
+            <span class="chron-date">Around 2001</span>
+            <span class="source-tag practitioner-recollection">
+              <span class="source-dot"></span>Practitioner recollection
+            </span>
+          </div>
+          <h3 class="chron-title">His Younger Brother</h3>
+          <div class="chron-body">
+            <p>
+              According to Guolong Wang, his younger brother &mdash; a martial artist &mdash; developed severe sciatic pain that made walking extremely difficult. This became an important early case in his practice, one that influenced how he thought about the different presentations of sciatic pain and the need for individualized treatment rather than a fixed protocol.
+            </p>
+            <p>
+              The experience with his brother&rsquo;s case helped shape a working principle he would carry into later practice: that two patients with pain in the same area may still require very different approaches.
+            </p>
+          </div>
+        </section>
+
+        <section class="chron-section">
+          <div class="chron-header">
+            <span class="chron-date">December 2005</span>
+            <span class="source-tag practitioner-recollection">
+              <span class="source-dot"></span>Practitioner recollection
+            </span>
+          </div>
+          <h3 class="chron-title">A Referral from a Colleague</h3>
+          <div class="chron-body">
+            <p>
+              A garment-factory worker in Saipan, suffering from severe sciatica, was introduced to Guolong Wang by a colleague after other treatment had not helped. Guolong Wang recalls recognizing the condition immediately and describing it, in his own assessment, as straightforward to treat with traditional Chinese medicine &mdash; though the treatment itself, including acupuncture, would involve some discomfort.
+            </p>
+          </div>
+          <figure class="chron-image">
+            <div class="img-frame">
+              <img src="/images/sciatica-group-photo.jpg" alt="Guolong Wang with the patient and friends" loading="lazy">
+            </div>
+            <figcaption>A photograph shared alongside the patient&rsquo;s testimonial. Identities of those pictured are withheld pending confirmed permission for public use.</figcaption>
+          </figure>
+        </section>
+
+        <section class="chron-section">
+          <div class="chron-header">
+            <span class="chron-date">2005&ndash;2011</span>
+            <span class="source-tag documented">
+              <span class="source-dot"></span>Patient statement &mdash; March 15, 2011
+            </span>
+          </div>
+          <h3 class="chron-title">A Patient&rsquo;s Written Account</h3>
+          <div class="chron-body">
+            <p>
+              In a letter dated March 15, 2011, a patient &mdash; a garment-factory mechanic in Saipan of Chinese-Korean background &mdash; described developing severe sciatica in 2005 that left him unable to work. He wrote that he first returned to China for treatment at an orthopedic hospital, where surgery was recommended; afraid of surgery, he came back to Saipan and sought further treatment at a Korean acupuncture clinic, which he described as ultimately ineffective. According to his letter, his condition worsened to the point that he could not get out of bed or eat unassisted, and he had decided to return to China, unable to continue working.
+            </p>
+            <p>
+              He wrote that a colleague introduced him to Guolong Wang, and that he began treatment on December 13, 2005. After six treatments, he described the result as a &ldquo;miracle,&rdquo; and reported that he had experienced no further pain or need for treatment in the six years since.
+            </p>
+          </div>
+          <blockquote class="story-quote">
+            <p>&ldquo;After six times treatment, with no medicine it was a &lsquo;miracle.&rsquo; For the past six years, I have no pain or treatment.&rdquo;</p>
+            <footer>&mdash; Patient statement, March 15, 2011</footer>
+          </blockquote>
+          <figure class="chron-image chron-image--letter">
+            <div class="img-frame">
+              <img src="/images/sciatica-patient-letter.jpg" alt="The patient's letter dated March 15, 2011" loading="lazy">
+            </div>
+            <figcaption>The patient&rsquo;s letter dated March 15, 2011. Personal contact information has been redacted.</figcaption>
+          </figure>
+        </section>
+
+        <div class="philosophy-block">
+          <span class="source-tag practitioner-recollection">
+            <span class="source-dot"></span>Guolong Wang&rsquo;s treatment philosophy
+          </span>
+          <p class="philosophy-statement">Pain in the same place does not necessarily come from the same pattern.</p>
+          <p class="philosophy-text">These experiences &mdash; across more than twenty years and patients from very different backgrounds &mdash; taught Guolong Wang that different patients may carry different histories, physical conditions, and responses to treatment. His approach therefore emphasizes assessment, observation, and adjusting treatment according to the individual, rather than applying the same protocol to everyone.</p>
+        </div>
+      </article>
+
       <!-- Upcoming -->
       <section class="upcoming stories-container reveal" id="upcoming" aria-label="Cases in preparation">
         <div class="upcoming-header">
@@ -838,14 +1019,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
         <div class="upcoming-grid">
-          <article class="upcoming-card">
-            <span class="upcoming-number">03</span>
-            <h3>Sciatica</h3>
-            <p>Additional case stories on sciatica are being prepared and will be added as documentation and permissions are confirmed.</p>
-            <span class="upcoming-status">
-              <span class="pulse"></span>In preparation
-            </span>
-          </article>
           <article class="upcoming-card">
             <span class="upcoming-number">04</span>
             <h3>Menstrual Pain / Dysmenorrhea</h3>
