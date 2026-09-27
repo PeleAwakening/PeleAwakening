@@ -5,6 +5,15 @@
 (function () {
   'use strict';
 
+  // ---- Suppress residual :hover dropdown on page load ----
+  // Clicking a nav-dropdown trigger navigates to a new page without the cursor
+  // moving, so the browser re-applies :hover at the same screen position and
+  // the dropdown appears "stuck open." Hold it closed until the mouse actually moves.
+  document.body.classList.add('nav-suppress-hover');
+  window.addEventListener('mousemove', () => {
+    document.body.classList.remove('nav-suppress-hover');
+  }, { once: true });
+
   // ---- Scroll Animations (Intersection Observer) ----
   const animatedEls = document.querySelectorAll('[data-animate]');
   const observer = new IntersectionObserver(
