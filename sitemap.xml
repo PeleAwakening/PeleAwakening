@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://peleawakening.com/</loc><lastmod>2026-07-19</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://peleawakening.com/reservation/</loc><lastmod>2026-09-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://peleawakening.com/about.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://peleawakening.com/about/ying-wang.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://peleawakening.com/contact.html</loc><lastmod>2026-07-19</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -34,6 +35,7 @@
   <url><loc>https://peleawakening.com/retreats/volcano-healing-journey.html</loc><lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
   <url><loc>https://peleawakening.com/zh/</loc><lastmod>2026-07-22</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://peleawakening.com/zh/reservation/</loc><lastmod>2026-09-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://peleawakening.com/zh/about.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://peleawakening.com/zh/about/ying-wang.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://peleawakening.com/zh/contact.html</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -67,6 +69,7 @@
   <url><loc>https://peleawakening.com/zh/retreats/volcano-healing-journey.html</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
   <url><loc>https://peleawakening.com/ja/</loc><lastmod>2026-07-22</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://peleawakening.com/ja/reservation/</loc><lastmod>2026-09-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://peleawakening.com/ja/about.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://peleawakening.com/ja/about/ying-wang.html</loc><lastmod>2026-07-23</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://peleawakening.com/ja/contact.html</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KTLXMW9C');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation — Pele Awakening</title>
+  <meta name="description" content="Reserve your Pele Awakening experience in Hawai&#699;i. Share your details, pick your preferred date, and secure your booking with a deposit paid through Stripe or PayPal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css"
+        integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="alternate" hreflang="en" href="https://peleawakening.com/reservation/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://peleawakening.com/zh/reservation/">
+  <link rel="alternate" hreflang="ja" href="https://peleawakening.com/ja/reservation/">
+  <link rel="alternate" hreflang="x-default" href="https://peleawakening.com/reservation/">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KTLXMW9C"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="/images/pele-logo.png" alt="" class="nav-logo-icon">
+        <span>Pele Awakening</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li class="nav-item has-dropdown">
+          <a href="/weekly-classes/">Weekly Classes</a>
+          <ul class="nav-dropdown">
+            <li><a href="/experiences/tai-chi.html">Tai Chi Yang Practice</a></li>
+            <li><a href="/experiences/tai-chi-chen.html">Tai Chi Chen Practice</a></li>
+            <li><a href="/experiences/kung-fu.html">Tai Chi and Kung Fu Fundamentals</a></li>
+            <li><a href="/experiences/master-jiang.html">Master Jiang Intensive</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/therapy/">Therapies</a>
+          <ul class="nav-dropdown">
+            <li><a href="/therapy/">Therapy Overview</a></li>
+            <li><a href="/therapy/stories/">Client Stories</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/experiences/">Signature Experiences</a>
+          <ul class="nav-dropdown">
+            <li><a href="/experiences/#visiting-masters">Visiting Masters &amp; Special Programs</a></li>
+            <li><a href="/experiences/#customized-experiences">Customized Hawai&#699;i Experiences</a></li>
+            <li><a href="/experiences/">View All Experiences</a></li>
+          </ul>
+        </li>
+        <li><a href="/reservation/">Reservation</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/contact.html" class="nav-cta">Contact</a></li>
+        <li class="nav-item has-dropdown nav-lang">
+          <a href="/" class="nav-lang-trigger" aria-label="Language"><svg class="nav-lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"></path></svg></a>
+          <ul class="nav-dropdown">
+            <li><a href="/zh/reservation/">中文</a></li>
+            <li><a href="/ja/reservation/">日本語</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-eyebrow" data-animate="fade-up">Reservation</div>
+      <h1 class="page-hero-title" data-animate="fade-up" data-delay="100">Reserve Your Experience</h1>
+      <p class="page-hero-dek" data-animate="fade-up" data-delay="200">Share a few details and pick your preferred date. A deposit secures your spot, and the balance is settled when you arrive.</p>
+    </div>
+  </section>
+
+  <section class="reservation-section">
+    <div class="container">
+
+      <div class="reservation-steps" data-animate="fade-up">
+        <div class="reservation-step is-active" id="stepIndicator1">
+          <span class="reservation-step-num">1</span><span>Your Details</span>
+        </div>
+        <div class="reservation-step-line"></div>
+        <div class="reservation-step" id="stepIndicator2">
+          <span class="reservation-step-num">2</span><span>Deposit</span>
+        </div>
+      </div>
+
+      <!-- ============ STEP 1 — Reservation details ============ -->
+      <form id="reservationForm" class="inquiry-form" data-animate="fade-up">
+        <div class="form-row">
+          <label class="form-label" for="r-name">Full Name <span class="req">*</span></label>
+          <input class="form-input" type="text" id="r-name" name="name" autocomplete="name" required>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div>
+            <label class="form-label" for="r-email">Email <span class="req">*</span></label>
+            <input class="form-input" type="email" id="r-email" name="email" autocomplete="email" required>
+          </div>
+          <div>
+            <label class="form-label" for="r-phone">Phone / Text Number <span class="req">*</span></label>
+            <input class="form-input" type="tel" id="r-phone" name="phone" autocomplete="tel" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="r-experience">Which experience? <span class="req">*</span></label>
+          <select class="form-select" id="r-experience" name="experience" required>
+            <option value="" disabled selected>Select an experience</option>
+            <option value="Tai Chi Yang Practice">Tai Chi Yang Practice</option>
+            <option value="Tai Chi Chen Practice">Tai Chi Chen Practice</option>
+            <option value="Tai Chi and Kung Fu Fundamentals">Tai Chi and Kung Fu Fundamentals</option>
+            <option value="Master Jiang Intensive">Master Jiang Intensive</option>
+            <option value="Therapy &amp; Pain Relief">Therapy &amp; Pain Relief</option>
+            <option value="Volcano Energy Journey">Volcano Energy Journey</option>
+            <option value="Ocean Discovery">Ocean Discovery</option>
+            <option value="Surf &amp; Balance">Surf &amp; Balance</option>
+            <option value="Local Farm Experience">Local Farm Experience</option>
+            <option value="Custom / Not sure yet">Custom / Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div>
+            <label class="form-label" for="r-date">Preferred Date <span class="req">*</span></label>
+            <input class="form-input" type="text" id="r-date" name="preferred_date" placeholder="Select a date" required readonly>
+          </div>
+          <div>
+            <label class="form-label" for="r-date-alt">Alternate Date</label>
+            <input class="form-input" type="text" id="r-date-alt" name="alternate_date" placeholder="Optional" readonly>
+            <span class="form-hint">Helps us confirm faster if your first choice is full.</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="r-guests">Number of Guests <span class="req">*</span></label>
+          <select class="form-select" id="r-guests" name="guests" required>
+            <option value="1" selected>1 guest</option>
+            <option value="2">2 guests</option>
+            <option value="3">3 guests</option>
+            <option value="4">4 guests</option>
+            <option value="5">5 guests</option>
+            <option value="6+">6 or more</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="r-notes">Anything we should know?</label>
+          <textarea class="form-textarea" id="r-notes" name="notes" placeholder="Injuries, experience level, dietary needs, accessibility, special occasions&hellip;"></textarea>
+        </div>
+
+        <input type="hidden" name="_subject" value="New Reservation &mdash; Pele Awakening Website">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="booking_reference" id="r-booking-ref">
+        <input type="text" name="_honey" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn btn-primary">Continue to Deposit &rarr;</button>
+        </div>
+        <p class="form-error" id="reservationError">Something went wrong &mdash; please try again, or text us directly at 808-520-7920.</p>
+      </form>
+
+      <!-- ============ STEP 2 — Deposit payment ============ -->
+      <div id="paymentStep" style="display:none;">
+
+        <div class="booking-ref">
+          <div class="booking-ref-label">Your Booking Reference</div>
+          <div class="booking-ref-code" id="bookingRefDisplay">&mdash;</div>
+        </div>
+
+        <div class="payment-config-warning" id="paymentConfigWarning" style="display:none;">
+          <strong>Setup required.</strong> The payment links are still placeholders. Open
+          <code>/reservation/index.html</code> and replace <code>stripePaymentLink</code> and
+          <code>paypalPaymentLink</code> in the <code>RESERVATION_CONFIG</code> block with the real
+          links from your Stripe and PayPal dashboards.
+        </div>
+
+        <div class="deposit-card">
+          <dl style="margin:0;">
+            <div class="deposit-row">
+              <dt>Experience</dt>
+              <dd id="summaryExperience">&mdash;</dd>
+            </div>
+            <div class="deposit-row">
+              <dt>Preferred date</dt>
+              <dd id="summaryDate">&mdash;</dd>
+            </div>
+            <div class="deposit-row">
+              <dt>Guests</dt>
+              <dd id="summaryGuests">&mdash;</dd>
+            </div>
+            <div class="deposit-row deposit-row--total">
+              <dt>Deposit due now</dt>
+              <dd id="summaryDeposit">&mdash;</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="payment-methods">
+          <a href="#" class="payment-btn payment-btn--stripe" id="stripeBtn" rel="noopener noreferrer" target="_blank">
+            Pay Deposit with Card &middot; Apple Pay &middot; Google Pay
+          </a>
+          <div class="payment-divider">or</div>
+          <a href="#" class="payment-btn payment-btn--paypal" id="paypalBtn" rel="noopener noreferrer" target="_blank">
+            Pay Deposit with PayPal
+          </a>
+        </div>
+
+        <p class="payment-secure-note">
+          <strong>Your payment is handled entirely by Stripe and PayPal.</strong><br>
+          Card details are entered on their secure, PCI-compliant checkout pages &mdash; they are never
+          sent to or stored on this website. Please quote your booking reference above if you contact us.
+        </p>
+
+        <div style="text-align:center;">
+          <button type="button" class="reservation-back" id="backToForm">&larr; Edit my details</button>
+        </div>
+      </div>
+
+      <!-- ============ Confirmation (after returning from payment) ============ -->
+      <div class="form-success" id="reservationSuccess" style="display:none;">
+        <h3>Mahalo! Your reservation request is in.</h3>
+        <p>We&rsquo;ve emailed you a copy. Our team will confirm your date within 24 hours.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-columns">
+        <div class="footer-about">
+          <div class="footer-brand"><img src="/images/pele-logo.png" alt="" class="footer-brand-icon"><span>Pele Awakening</span></div>
+          <p class="footer-brand-tagline">Heal &middot; Move &middot; Rise</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">Experiences</div>
+          <a href="/experiences/tai-chi.html">Tai Chi Yang Practice</a>
+          <a href="/experiences/tai-chi-chen.html">Tai Chi Chen Practice</a>
+          <a href="/experiences/kung-fu.html">Tai Chi and Kung Fu Fundamentals</a>
+          <a href="/experiences/master-jiang.html">Master Jiang Intensive</a>
+          <a href="/experiences/volcano-journey.html">Volcano Energy Journey</a>
+          <a href="/experiences/ocean-healing.html">Ocean Discovery</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">Therapies</div>
+          <a href="/therapy/">All Therapies</a>
+          <a href="/therapy/acupuncture.html">Acupuncture</a>
+          <a href="/therapy/tcm.html">TCM Consultation</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">Company</div>
+          <a href="/reservation/">Reservation</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/retreats/">Custom Retreats <span class="coming-soon-tag">Coming Soon</span></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pele Awakening. All rights reserved.</p>
+        <p>O&#699;ahu, Hawai&#699;i</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"
+          integrity="sha512-K/oyQtMXpxI4+K0W7H25UopjM8pzq0yrVdFdG21Fh5dBe91I40pDd9A4lzNlHPHBIP2cwZuoxaUSX0GJSObvGA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/script.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    /* ====================================================================
+       RESERVATION CONFIG — edit these four values, nothing else.
+
+       SECURITY NOTE: this repository is PUBLIC. Never put a Stripe secret
+       key (sk_...), a PayPal client secret, or any API credential in this
+       file. The two values below are public, shareable checkout URLs — the
+       payment amount is locked on Stripe's and PayPal's servers, so it
+       cannot be tampered with from the browser.
+
+       How to get them:
+         Stripe  Dashboard -> Payment Links -> create link -> copy URL
+                 https://buy.stripe.com/XXXXXXXXXXXX
+         PayPal  Dashboard -> Pay & Get Paid -> PayPal Buttons / Payment Links
+                 https://www.paypal.com/ncp/payment/XXXXXXXXXXXX
+
+       IMPORTANT: depositAmount below is only what the page DISPLAYS. It must
+       match the amount you configured inside the Stripe/PayPal links above.
+       ==================================================================== */
+    var RESERVATION_CONFIG = {
+      depositAmount:     100,
+      currency:          'USD',
+      stripePaymentLink: 'REPLACE_WITH_STRIPE_PAYMENT_LINK',
+      paypalPaymentLink: 'REPLACE_WITH_PAYPAL_PAYMENT_LINK'
+    };
+
+    var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/aloha@peleawakening.com';
+
+    // ---- Elements ----
+    var form        = document.getElementById('reservationForm');
+    var errorEl     = document.getElementById('reservationError');
+    var paymentStep = document.getElementById('paymentStep');
+    var successEl   = document.getElementById('reservationSuccess');
+    var stepsEl     = document.querySelector('.reservation-steps');
+    var step1       = document.getElementById('stepIndicator1');
+    var step2       = document.getElementById('stepIndicator2');
+    var refInput    = document.getElementById('r-booking-ref');
+    var refDisplay  = document.getElementById('bookingRefDisplay');
+    var stripeBtn   = document.getElementById('stripeBtn');
+    var paypalBtn   = document.getElementById('paypalBtn');
+
+    // flatpickr turns the real date input into type="hidden" and marks its
+    // visible altInput readonly. Both states are barred from HTML constraint
+    // validation, so the `required` attribute on the date field never fires.
+    // The date is validated explicitly in the submit handler instead.
+    var SUBMIT_ERROR_TEXT  = errorEl.textContent;
+    var DATE_REQUIRED_TEXT = 'Please choose a preferred date before continuing.';
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+    }
+
+    // ---- Date pickers ----
+    var today = new Date();
+    var dateOpts = {
+      minDate: today,
+      dateFormat: 'Y-m-d',
+      altInput: true,
+      altFormat: 'F j, Y',
+      disableMobile: true,
+      // To block dates that are already full, add them here, e.g.
+      // disable: ['2026-12-24', '2026-12-25']
+      disable: []
+    };
+    var pickerMain = flatpickr('#r-date', dateOpts);
+    var pickerAlt  = flatpickr('#r-date-alt', dateOpts);
+
+    // ---- Booking reference: PA-YYYYMMDD-XXXX ----
+    function generateBookingRef() {
+      var d = new Date();
+      var ymd = d.getFullYear() +
+                String(d.getMonth() + 1).padStart(2, '0') +
+                String(d.getDate()).padStart(2, '0');
+      var alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no look-alike chars
+      var bytes = new Uint32Array(4);
+      window.crypto.getRandomValues(bytes);
+      var suffix = '';
+      for (var i = 0; i < 4; i++) suffix += alphabet[bytes[i] % alphabet.length];
+      return 'PA-' + ymd + '-' + suffix;
+    }
+
+    function formatMoney(amount, currency) {
+      try {
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency', currency: currency, minimumFractionDigits: 0
+        }).format(amount);
+      } catch (e) {
+        return '$' + amount;
+      }
+    }
+
+    function isConfigured(url) {
+      return typeof url === 'string' && /^https:\/\//.test(url);
+    }
+
+    // ---- Build a payment URL carrying the booking reference ----
+    function buildPaymentUrl(baseUrl, bookingRef, email) {
+      var url = new URL(baseUrl);
+      // Stripe Payment Links read these; PayPal ignores unknown params harmlessly.
+      url.searchParams.set('client_reference_id', bookingRef);
+      if (email) url.searchParams.set('prefilled_email', email);
+      return url.toString();
+    }
+
+    function showPaymentStep(data, bookingRef) {
+      document.getElementById('summaryExperience').textContent = data.experience || '—';
+      document.getElementById('summaryDate').textContent =
+        document.getElementById('r-date').value || '—';
+      document.getElementById('summaryGuests').textContent = data.guests || '—';
+      document.getElementById('summaryDeposit').textContent =
+        formatMoney(RESERVATION_CONFIG.depositAmount, RESERVATION_CONFIG.currency);
+
+      refDisplay.textContent = bookingRef;
+
+      var stripeOk = isConfigured(RESERVATION_CONFIG.stripePaymentLink);
+      var paypalOk = isConfigured(RESERVATION_CONFIG.paypalPaymentLink);
+
+      if (stripeOk) {
+        stripeBtn.href = buildPaymentUrl(RESERVATION_CONFIG.stripePaymentLink, bookingRef, data.email);
+        stripeBtn.removeAttribute('aria-disabled');
+      } else {
+        stripeBtn.removeAttribute('href');
+        stripeBtn.setAttribute('aria-disabled', 'true');
+      }
+
+      if (paypalOk) {
+        paypalBtn.href = buildPaymentUrl(RESERVATION_CONFIG.paypalPaymentLink, bookingRef, data.email);
+        paypalBtn.removeAttribute('aria-disabled');
+      } else {
+        paypalBtn.removeAttribute('href');
+        paypalBtn.setAttribute('aria-disabled', 'true');
+      }
+
+      document.getElementById('paymentConfigWarning').style.display =
+        (stripeOk && paypalOk) ? 'none' : 'block';
+
+      form.style.display = 'none';
+      paymentStep.style.display = 'block';
+      step1.classList.remove('is-active');
+      step1.classList.add('is-done');
+      step2.classList.add('is-active');
+      stepsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // ---- Submit ----
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errorEl.style.display = 'none';
+
+      var dateEl = document.getElementById('r-date');
+      if (!dateEl.value) {
+        showError(DATE_REQUIRED_TEXT);
+        var visibleDateEl = dateEl.nextElementSibling;
+        if (visibleDateEl && typeof visibleDateEl.focus === 'function') visibleDateEl.focus();
+        return;
+      }
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      var bookingRef = generateBookingRef();
+      refInput.value = bookingRef;
+
+      var data = Object.fromEntries(new FormData(form));
+
+      fetch(FORMSUBMIT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed');
+          showPaymentStep(data, bookingRef);
+        })
+        .catch(function () {
+          showError(SUBMIT_ERROR_TEXT);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Continue to Deposit →';
+        });
+    });
+
+    // ---- Back to editing ----
+    document.getElementById('backToForm').addEventListener('click', function () {
+      paymentStep.style.display = 'none';
+      form.style.display = 'block';
+      step2.classList.remove('is-active');
+      step1.classList.remove('is-done');
+      step1.classList.add('is-active');
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Continue to Deposit →';
+      stepsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  })();
+  </script>
+</body>
+</html>

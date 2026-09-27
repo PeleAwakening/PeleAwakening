@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KTLXMW9C');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ご予約 — Pele Awakening</title>
+  <meta name="description" content="Pele Awakening のハワイ体験をご予約ください。ご連絡先とご希望日をご入力の上、Stripe または PayPal でデポジットをお支払いいただくと枠が確保されます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css"
+        integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="alternate" hreflang="en" href="https://peleawakening.com/reservation/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://peleawakening.com/zh/reservation/">
+  <link rel="alternate" hreflang="ja" href="https://peleawakening.com/ja/reservation/">
+  <link rel="alternate" hreflang="x-default" href="https://peleawakening.com/reservation/">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KTLXMW9C"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/ja/" class="nav-logo">
+        <img src="/images/pele-logo.png" alt="" class="nav-logo-icon">
+        <span>Pele Awakening</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="メニュー切り替え">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li class="nav-item has-dropdown">
+          <a href="/ja/weekly-classes/">週間クラス</a>
+          <ul class="nav-dropdown">
+            <li><a href="/ja/experiences/tai-chi.html">楊氏太極拳練習</a></li>
+            <li><a href="/ja/experiences/tai-chi-chen.html">陳氏太極拳練習</a></li>
+            <li><a href="/ja/experiences/kung-fu.html">太極拳とカンフーの基礎クラス</a></li>
+            <li><a href="/ja/experiences/master-jiang.html">ジャン師父集中プログラム</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/ja/therapy/">セラピー</a>
+          <ul class="nav-dropdown">
+            <li><a href="/ja/therapy/acupuncture.html">鍼灸</a></li>
+            <li><a href="/ja/therapy/cupping.html">吸い玉</a></li>
+            <li><a href="/ja/therapy/moxibustion.html">お灸</a></li>
+            <li><a href="/ja/therapy/taichi-massage.html">太極推拿</a></li>
+            <li><a href="/ja/therapy/tcm.html">中医相談</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/ja/experiences/">シグネチャー体験</a>
+          <ul class="nav-dropdown">
+            <li><a href="/ja/experiences/volcano-journey.html">火山エネルギーの旅</a></li>
+            <li><a href="/ja/experiences/surf-balance.html">サーフィン&amp;バランス</a></li>
+            <li><a href="/ja/experiences/ocean-healing.html">海の探検</a></li>
+            <li><a href="/ja/experiences/local-farm.html">ハワイ・ローカル&amp;ファーム体験</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/ja/retreats/">カスタムリトリート</a>
+          <ul class="nav-dropdown">
+            <li><a href="/ja/retreats/wellness.html">ウェルネスリトリート</a></li>
+            <li><a href="/ja/retreats/family.html">ファミリーリトリート</a></li>
+            <li><a href="/ja/retreats/adventure.html">アドベンチャーリトリート</a></li>
+            <li><a href="/ja/retreats/corporate.html">コーポレートリトリート</a></li>
+            <li><a href="/ja/retreats/volcano-healing-journey.html">火山の癒しの旅</a></li>
+          </ul>
+        </li>
+        <li><a href="/ja/reservation/">ご予約</a></li>
+        <li><a href="/ja/about.html">私たちについて</a></li>
+        <li><a href="/ja/contact.html" class="nav-cta">お問い合わせ</a></li>
+        <li class="nav-item has-dropdown nav-lang">
+          <a href="/ja/" class="nav-lang-trigger" aria-label="Language"><svg class="nav-lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"></path></svg></a>
+          <ul class="nav-dropdown">
+            <li><a href="/reservation/">EN</a></li>
+            <li><a href="/zh/reservation/">中文</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-eyebrow" data-animate="fade-up">ご予約</div>
+      <h1 class="page-hero-title" data-animate="fade-up" data-delay="100">体験を予約する</h1>
+      <p class="page-hero-dek" data-animate="fade-up" data-delay="200">ご連絡先とご希望日をご記入ください。デポジットのお支払いで枠が確保され、残額は現地でのお支払いとなります。</p>
+    </div>
+  </section>
+
+  <section class="reservation-section">
+    <div class="container">
+
+      <div class="reservation-steps" data-animate="fade-up">
+        <div class="reservation-step is-active" id="stepIndicator1">
+          <span class="reservation-step-num">1</span><span>詳細を入力</span>
+        </div>
+        <div class="reservation-step-line"></div>
+        <div class="reservation-step" id="stepIndicator2">
+          <span class="reservation-step-num">2</span><span>デポジットのお支払い</span>
+        </div>
+      </div>
+
+      <!-- ============ ステップ 1 — 予約内容 ============ -->
+      <form id="reservationForm" class="inquiry-form" data-animate="fade-up">
+        <div class="form-row">
+          <label class="form-label" for="r-name">お名前 <span class="req">*</span></label>
+          <input class="form-input" type="text" id="r-name" name="name" autocomplete="name" required>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div>
+            <label class="form-label" for="r-email">メールアドレス <span class="req">*</span></label>
+            <input class="form-input" type="email" id="r-email" name="email" autocomplete="email" required>
+          </div>
+          <div>
+            <label class="form-label" for="r-phone">電話番号 / SMS <span class="req">*</span></label>
+            <input class="form-input" type="tel" id="r-phone" name="phone" autocomplete="tel" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="r-experience">ご希望の体験 <span class="req">*</span></label>
+          <select class="form-select" id="r-experience" name="experience" required>
+            <option value="" disabled selected>体験をお選びください</option>
+            <option value="楊氏太極拳練習">楊氏太極拳練習</option>
+            <option value="陳氏太極拳練習">陳氏太極拳練習</option>
+            <option value="太極拳とカンフーの基礎クラス">太極拳とカンフーの基礎クラス</option>
+            <option value="ジャン師父集中プログラム">ジャン師父集中プログラム</option>
+            <option value="セラピー・痛みの緩和">セラピー・痛みの緩和</option>
+            <option value="火山エネルギーの旅">火山エネルギーの旅</option>
+            <option value="海の探検">海の探検</option>
+            <option value="サーフィン&バランス">サーフィン&amp;バランス</option>
+            <option value="ハワイ・ローカル&ファーム体験">ハワイ・ローカル&amp;ファーム体験</option>
+            <option value="カスタム / 未定">カスタム / 未定</option>
+          </select>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div>
+            <label class="form-label" for="r-date">ご希望日 <span class="req">*</span></label>
+            <input class="form-input" type="text" id="r-date" name="preferred_date" placeholder="日付を選択" required readonly>
+          </div>
+          <div>
+            <label class="form-label" for="r-date-alt">第二希望日</label>
+            <input class="form-input" type="text" id="r-date-alt" name="alternate_date" placeholder="任意" readonly>
+            <span class="form-hint">第一希望が満席の場合、第二希望があるとより早く確定できます。</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="r-guests">ご参加人数 <span class="req">*</span></label>
+          <select class="form-select" id="r-guests" name="guests" required>
+            <option value="1" selected>1 名</option>
+            <option value="2">2 名</option>
+            <option value="3">3 名</option>
+            <option value="4">4 名</option>
+            <option value="5">5 名</option>
+            <option value="6+">6 名以上</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="r-notes">その他お伝えいただきたいこと</label>
+          <textarea class="form-textarea" id="r-notes" name="notes" placeholder="けがの有無、経験レベル、食事のご要望、バリアフリーのご相談、記念日&hellip;"></textarea>
+        </div>
+
+        <input type="hidden" name="_subject" value="New Reservation &mdash; Pele Awakening Website (JA)">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="booking_reference" id="r-booking-ref">
+        <input type="text" name="_honey" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn btn-primary">次へ：デポジットのお支払い &rarr;</button>
+        </div>
+        <p class="form-error" id="reservationError">送信できませんでした &mdash; もう一度お試しいただくか、808-520-7920 までSMSをお送りください。</p>
+      </form>
+
+      <!-- ============ ステップ 2 — デポジットのお支払い ============ -->
+      <div id="paymentStep" style="display:none;">
+
+        <div class="booking-ref">
+          <div class="booking-ref-label">予約番号</div>
+          <div class="booking-ref-code" id="bookingRefDisplay">&mdash;</div>
+        </div>
+
+        <div class="payment-config-warning" id="paymentConfigWarning" style="display:none;">
+          <strong>お支払いリンクが未設定です。</strong><code>/ja/reservation/index.html</code> を開き、
+          <code>RESERVATION_CONFIG</code> 内の <code>stripePaymentLink</code> と
+          <code>paypalPaymentLink</code> を Stripe / PayPal の管理画面で発行した実際のリンクに置き換えてください。
+        </div>
+
+        <div class="deposit-card">
+          <dl style="margin:0;">
+            <div class="deposit-row">
+              <dt>ご予約内容</dt>
+              <dd id="summaryExperience">&mdash;</dd>
+            </div>
+            <div class="deposit-row">
+              <dt>ご希望日</dt>
+              <dd id="summaryDate">&mdash;</dd>
+            </div>
+            <div class="deposit-row">
+              <dt>ご参加人数</dt>
+              <dd id="summaryGuests">&mdash;</dd>
+            </div>
+            <div class="deposit-row deposit-row--total">
+              <dt>デポジット</dt>
+              <dd id="summaryDeposit">&mdash;</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="payment-methods">
+          <a href="#" class="payment-btn payment-btn--stripe" id="stripeBtn" rel="noopener noreferrer" target="_blank">
+            カード &middot; Apple Pay &middot; Google Pay で支払う
+          </a>
+          <div class="payment-divider">または</div>
+          <a href="#" class="payment-btn payment-btn--paypal" id="paypalBtn" rel="noopener noreferrer" target="_blank">
+            PayPal で支払う
+          </a>
+        </div>
+
+        <p class="payment-secure-note">
+          <strong>決済はすべて Stripe および PayPal が処理します。</strong><br>
+          カード情報は PCI 準拠の安全な決済ページでのみ入力され、当サイトに送信されることも保存されることも<strong>ありません</strong>。
+          お問い合わせの際は上記の予約番号をお知らせください。
+        </p>
+
+        <div style="text-align:center;">
+          <button type="button" class="reservation-back" id="backToForm">&larr; 入力内容を修正する</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-columns">
+        <div class="footer-about">
+          <div class="footer-brand"><img src="/images/pele-logo.png" alt="" class="footer-brand-icon"><span>Pele Awakening</span></div>
+          <p class="footer-brand-tagline">癒し &middot; 動き &middot; 再生</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">体験</div>
+          <a href="/ja/experiences/tai-chi.html">楊氏太極拳練習</a>
+          <a href="/ja/experiences/tai-chi-chen.html">陳氏太極拳練習</a>
+          <a href="/ja/experiences/kung-fu.html">太極拳とカンフーの基礎クラス</a>
+          <a href="/ja/experiences/master-jiang.html">ジャン師父集中プログラム</a>
+          <a href="/ja/experiences/volcano-journey.html">火山エネルギーの旅</a>
+          <a href="/ja/experiences/ocean-healing.html">海の探検</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">セラピー</div>
+          <a href="/ja/therapy/">全てのセラピー</a>
+          <a href="/ja/therapy/acupuncture.html">鍼灸</a>
+          <a href="/ja/therapy/tcm.html">中医相談</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">リトリート</div>
+          <a href="/ja/retreats/">カスタムリトリート</a>
+          <a href="/ja/retreats/wellness.html">ウェルネスリトリート</a>
+          <a href="/ja/retreats/volcano-healing-journey.html">火山の癒しの旅</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-heading">会社情報</div>
+          <a href="/ja/reservation/">ご予約</a>
+          <a href="/ja/about.html">私たちについて</a>
+          <a href="/ja/contact.html">お問い合わせ</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pele Awakening. 無断複写・転載を禁じます。</p>
+        <p>ハワイ州オアフ島</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"
+          integrity="sha512-K/oyQtMXpxI4+K0W7H25UopjM8pzq0yrVdFdG21Fh5dBe91I40pDd9A4lzNlHPHBIP2cwZuoxaUSX0GJSObvGA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/ja.js"
+          integrity="sha512-4CdoZ37O34LwkhHCiz/i61/B35dpEXfrWhq8wrLtTJZ3HWDPehOKcF5+6gf4UYU8y8diI1iNpVDSluEitnM9HQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/script.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    /* ====================================================================
+       RESERVATION CONFIG — edit the four values below only.
+
+       SECURITY: this repository is PUBLIC. Never place a Stripe secret key
+       (sk_...), a PayPal client secret, or any API credential in this file.
+       The two values below are PUBLIC hosted-checkout links — the charge
+       amount is locked on Stripe's / PayPal's servers and cannot be
+       tampered with from the browser.
+
+       Where to get them:
+         Stripe  Dashboard -> Payment Links -> create link -> copy URL
+                 https://buy.stripe.com/XXXXXXXXXXXX
+         PayPal  Dashboard -> Pay & Get Paid -> PayPal Buttons / Payment Links
+                 https://www.paypal.com/ncp/payment/XXXXXXXXXXXX
+
+       NOTE: depositAmount below is for DISPLAY only. It must match the
+       amount configured inside the Stripe / PayPal links.
+       ==================================================================== */
+    var RESERVATION_CONFIG = {
+      depositAmount:     100,
+      currency:          'USD',
+      stripePaymentLink: 'REPLACE_WITH_STRIPE_PAYMENT_LINK',
+      paypalPaymentLink: 'REPLACE_WITH_PAYPAL_PAYMENT_LINK'
+    };
+
+    var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/aloha@peleawakening.com';
+
+    var form        = document.getElementById('reservationForm');
+    var errorEl     = document.getElementById('reservationError');
+    var paymentStep = document.getElementById('paymentStep');
+    var stepsEl     = document.querySelector('.reservation-steps');
+    var step1       = document.getElementById('stepIndicator1');
+    var step2       = document.getElementById('stepIndicator2');
+    var refInput    = document.getElementById('r-booking-ref');
+    var refDisplay  = document.getElementById('bookingRefDisplay');
+    var stripeBtn   = document.getElementById('stripeBtn');
+    var paypalBtn   = document.getElementById('paypalBtn');
+
+    // flatpickr turns the real date input into type="hidden" and marks its
+    // visible altInput readonly. Both states are barred from HTML constraint
+    // validation, so the `required` attribute on the date field never fires.
+    // The date is validated explicitly in the submit handler instead.
+    var SUBMIT_ERROR_TEXT  = errorEl.textContent;
+    var DATE_REQUIRED_TEXT = '先にご希望日をお選びください。';
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+    }
+
+    if (window.flatpickr && flatpickr.l10ns && flatpickr.l10ns.ja) {
+      flatpickr.localize(flatpickr.l10ns.ja);
+    }
+
+    var dateOpts = {
+      minDate: new Date(),
+      dateFormat: 'Y-m-d',
+      altInput: true,
+      altFormat: 'Y年n月j日',
+      disableMobile: true,
+      // To block dates that are already fully booked, list them here, e.g.
+      // disable: ['2026-12-24', '2026-12-25']
+      disable: []
+    };
+    flatpickr('#r-date', dateOpts);
+    flatpickr('#r-date-alt', dateOpts);
+
+    function generateBookingRef() {
+      var d = new Date();
+      var ymd = d.getFullYear() +
+                String(d.getMonth() + 1).padStart(2, '0') +
+                String(d.getDate()).padStart(2, '0');
+      var alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      var bytes = new Uint32Array(4);
+      window.crypto.getRandomValues(bytes);
+      var suffix = '';
+      for (var i = 0; i < 4; i++) suffix += alphabet[bytes[i] % alphabet.length];
+      return 'PA-' + ymd + '-' + suffix;
+    }
+
+    function formatMoney(amount, currency) {
+      try {
+        return new Intl.NumberFormat('ja-JP', {
+          style: 'currency', currency: currency, minimumFractionDigits: 0
+        }).format(amount);
+      } catch (e) {
+        return '$' + amount;
+      }
+    }
+
+    function isConfigured(url) {
+      return typeof url === 'string' && /^https:\/\//.test(url);
+    }
+
+    function buildPaymentUrl(baseUrl, bookingRef, email) {
+      var url = new URL(baseUrl);
+      url.searchParams.set('client_reference_id', bookingRef);
+      if (email) url.searchParams.set('prefilled_email', email);
+      return url.toString();
+    }
+
+    function showPaymentStep(data, bookingRef) {
+      document.getElementById('summaryExperience').textContent = data.experience || '—';
+      document.getElementById('summaryDate').textContent =
+        document.getElementById('r-date').value || '—';
+      document.getElementById('summaryGuests').textContent = data.guests || '—';
+      document.getElementById('summaryDeposit').textContent =
+        formatMoney(RESERVATION_CONFIG.depositAmount, RESERVATION_CONFIG.currency);
+
+      refDisplay.textContent = bookingRef;
+
+      var stripeOk = isConfigured(RESERVATION_CONFIG.stripePaymentLink);
+      var paypalOk = isConfigured(RESERVATION_CONFIG.paypalPaymentLink);
+
+      if (stripeOk) {
+        stripeBtn.href = buildPaymentUrl(RESERVATION_CONFIG.stripePaymentLink, bookingRef, data.email);
+        stripeBtn.removeAttribute('aria-disabled');
+      } else {
+        stripeBtn.removeAttribute('href');
+        stripeBtn.setAttribute('aria-disabled', 'true');
+      }
+
+      if (paypalOk) {
+        paypalBtn.href = buildPaymentUrl(RESERVATION_CONFIG.paypalPaymentLink, bookingRef, data.email);
+        paypalBtn.removeAttribute('aria-disabled');
+      } else {
+        paypalBtn.removeAttribute('href');
+        paypalBtn.setAttribute('aria-disabled', 'true');
+      }
+
+      document.getElementById('paymentConfigWarning').style.display =
+        (stripeOk && paypalOk) ? 'none' : 'block';
+
+      form.style.display = 'none';
+      paymentStep.style.display = 'block';
+      step1.classList.remove('is-active');
+      step1.classList.add('is-done');
+      step2.classList.add('is-active');
+      stepsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errorEl.style.display = 'none';
+
+      var dateEl = document.getElementById('r-date');
+      if (!dateEl.value) {
+        showError(DATE_REQUIRED_TEXT);
+        var visibleDateEl = dateEl.nextElementSibling;
+        if (visibleDateEl && typeof visibleDateEl.focus === 'function') visibleDateEl.focus();
+        return;
+      }
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送信中...';
+
+      var bookingRef = generateBookingRef();
+      refInput.value = bookingRef;
+
+      var data = Object.fromEntries(new FormData(form));
+
+      fetch(FORMSUBMIT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed');
+          showPaymentStep(data, bookingRef);
+        })
+        .catch(function () {
+          showError(SUBMIT_ERROR_TEXT);
+          submitBtn.disabled = false;
+          submitBtn.textContent = '次へ：デポジットのお支払い →';
+        });
+    });
+
+    document.getElementById('backToForm').addEventListener('click', function () {
+      paymentStep.style.display = 'none';
+      form.style.display = 'block';
+      step2.classList.remove('is-active');
+      step1.classList.remove('is-done');
+      step1.classList.add('is-active');
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = false;
+      submitBtn.textContent = '次へ：デポジットのお支払い →';
+      stepsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  })();
+  </script>
+</body>
+</html>
