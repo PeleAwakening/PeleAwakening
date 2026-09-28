@@ -449,7 +449,7 @@ body:not(.nav-suppress-hover) .nav-item.has-dropdown:hover .nav-dropdown,
 .photo-loop {
   position: relative;
   width: 100%;
-  height: clamp(320px, 55vh, 560px);
+  height: clamp(400px, 70vh, 720px);
   overflow: hidden;
 }
 .photo-loop--tall {
