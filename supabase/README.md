@@ -102,7 +102,7 @@ Then:
 
 ## MVP scope
 
-- $10 per Tai Chi class: **Book & Pay Online** (Stripe) or **Reserve Now, Pay at Class**; **Free (Age 60+)** on Wednesday and Friday mornings.
+- $10 per morning Tai Chi class and $30 per evening class: **Book & Pay Online** (Stripe) or **Reserve Now, Pay at Class**; **Free (Age 60+)** on Wednesday and Friday mornings.
 - Weather cancellations are handled by an admin: cancel the session, then *Move* each booking (the payment carries over) or refund it.
 - Memberships/passes tables exist but are not exposed anywhere. `submit-inquiry` is deployed but the Contact page is unchanged and does not call it yet.
 

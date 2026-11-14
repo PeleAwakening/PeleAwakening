@@ -44,8 +44,9 @@ begin
     (v_evening, 1, '17:30', '19:00'),  -- Monday
     (v_evening, 3, '17:30', '19:00');  -- Wednesday
 
-  -- MVP pricing: $10 per Tai Chi class, online or at class. Free (Age 60+) is
-  -- attached to the Yang class, which meets Wednesday and Friday mornings only.
+  -- MVP pricing: $10 per morning class, $30 per evening class, online or at
+  -- class. Free (Age 60+) is attached to the Yang class, which meets
+  -- Wednesday and Friday mornings only.
   -- "online" options stay hidden until online payments are approved.
   insert into public.price_options (class_type_id, label, kind, amount_cents, eligibility_note, sort_order) values
     (v_yang,    'Book & Pay Online',          'online',    1000, 'Secure payment by Stripe', 1),
@@ -53,8 +54,8 @@ begin
     (v_yang,    'Free (Age 60+)',             'free',         0, 'Wednesday & Friday mornings, honor system', 3),
     (v_chen,    'Book & Pay Online',          'online',    1000, 'Secure payment by Stripe', 1),
     (v_chen,    'Reserve Now, Pay at Class',  'in_person', 1000, 'Cash or card at Magic Island', 2),
-    (v_evening, 'Book & Pay Online',          'online',    1000, 'Secure payment by Stripe', 1),
-    (v_evening, 'Reserve Now, Pay at Class',  'in_person', 1000, 'Cash or card at Magic Island', 2);
+    (v_evening, 'Book & Pay Online',          'online',    3000, 'Secure payment by Stripe', 1),
+    (v_evening, 'Reserve Now, Pay at Class',  'in_person', 3000, 'Cash or card at Magic Island', 2);
 
   -- Passes from the current pricing pages. Not part of the MVP: inactive and
   -- not shown in the admin interface, kept for a later membership feature.
