@@ -30,8 +30,8 @@ begin
   returning id into v_chen;
 
   insert into public.class_types (slug, name, description, detail_url, location_id, instructor_id, default_capacity, sort_order)
-  values ('tai-chi-kung-fu-evening', 'Tai Chi and Kung Fu Fundamentals',
-          'Evening training covering both Tai Chi and Kung Fu. All levels welcome.',
+  values ('tai-chi-fundamentals', 'Tai Chi Fundamentals & Technique',
+          'A small-group instructional class focused on Tai Chi fundamentals, detailed movement instruction, posture correction, body alignment, and technique refinement.',
           '/experiences/kung-fu.html', v_magic_island, v_wang, 20, 3)
   returning id into v_evening;
 
@@ -62,7 +62,7 @@ begin
   insert into public.membership_plans (class_type_id, name, kind, price_cents, class_count, duration_days) values
     (v_yang,    'Tai Chi Yang · Unlimited for 1 Year', 'annual',     15000, null, 365),
     (v_chen,    'Tai Chi Chen · Unlimited per Month',  'monthly',     5000, null,  30),
-    (v_evening, 'Evening Class · 8 Classes per Month', 'class_pack', 15000,    8,  30);
+    (v_evening, 'Tai Chi Fundamentals & Technique · 8 Classes per Month', 'class_pack', 15000, 8, 30);
 end $$;
 
 select public.generate_sessions();
