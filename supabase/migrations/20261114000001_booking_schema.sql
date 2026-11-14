@@ -384,6 +384,58 @@ begin
   return v_booking.id;
 end $$;
 
+-- Admin: move a confirmed booking to another session (e.g. weather
+-- cancellation). The original payment stays attached; nothing is charged.
+create or replace function public.admin_move_booking(p_booking_id uuid, p_new_session_id uuid)
+returns public.bookings language plpgsql security definer set search_path = '' as $$
+declare
+  v_booking public.bookings;
+  v_old     public.class_sessions;
+  v_new     public.class_sessions;
+  v_taken   integer;
+begin
+  if auth.role() = 'authenticated' and not public.is_admin() then
+    raise exception 'forbidden';
+  end if;
+
+  select * into v_booking from public.bookings where id = p_booking_id for update;
+  if not found then raise exception 'booking_not_found'; end if;
+  if v_booking.status <> 'confirmed' then raise exception 'booking_not_confirmed'; end if;
+  if v_booking.session_id = p_new_session_id then raise exception 'same_session'; end if;
+
+  select * into v_new from public.class_sessions where id = p_new_session_id for update;
+  if not found then raise exception 'session_not_found'; end if;
+  if v_new.status <> 'scheduled' then raise exception 'session_unavailable'; end if;
+  if v_new.starts_at <= now() then raise exception 'session_started'; end if;
+
+  if exists (select 1 from public.bookings
+              where session_id = v_new.id and customer_id = v_booking.customer_id
+                and status in ('pending', 'confirmed')) then
+    raise exception 'already_booked';
+  end if;
+
+  select coalesce(sum(party_size), 0) into v_taken from public.bookings
+   where session_id = v_new.id
+     and (status = 'confirmed' or (status = 'pending' and hold_expires_at > now()));
+  if v_taken + v_booking.party_size > v_new.capacity then
+    raise exception 'not_enough_spots' using detail = greatest(v_new.capacity - v_taken, 0)::text;
+  end if;
+
+  select * into v_old from public.class_sessions where id = v_booking.session_id;
+
+  update public.bookings
+     set session_id = v_new.id,
+         checked_in_at = null,
+         attended_count = null,
+         notes = concat_ws(E'\n', notes,
+           'Moved from ' || to_char(v_old.starts_at at time zone 'Pacific/Honolulu', 'Dy Mon DD HH12:MI AM')
+           || ' on ' || to_char(now() at time zone 'Pacific/Honolulu', 'Mon DD'))
+   where id = v_booking.id
+  returning * into v_booking;
+
+  return v_booking;
+end $$;
+
 -- Create upcoming sessions from the weekly rules (idempotent).
 -- p_rebuild first removes future rule-generated sessions that have no
 -- bookings and were not hand-edited, so rule changes take effect.
@@ -487,6 +539,11 @@ revoke execute on function public.admin_add_walkin(uuid, text, text, text, integ
 revoke execute on function public.generate_sessions(boolean) from public, anon;
 grant  execute on function public.admin_add_walkin(uuid, text, text, text, integer, uuid, integer) to authenticated;
 grant  execute on function public.generate_sessions(boolean) to authenticated, service_role;
+
+-- Called through the admin-move-booking Edge Function (which also emails the
+-- customer), so only the service role may execute it.
+revoke execute on function public.admin_move_booking(uuid, uuid) from public, anon, authenticated;
+grant  execute on function public.admin_move_booking(uuid, uuid) to service_role;
 
 revoke execute on function public.touch_updated_at() from public, anon, authenticated;
 grant  execute on function public.get_public_schedule(integer) to anon, authenticated;

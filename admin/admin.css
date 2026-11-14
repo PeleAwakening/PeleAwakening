@@ -116,3 +116,5 @@ body.admin { background: var(--color-bg); font-family: var(--font-ui); font-size
   max-width: calc(100% - 2rem);
 }
 .admin-toast.is-error { background: #a33; }
+.admin-move { display: inline-flex; gap: 0.3rem; align-items: center; margin: 0 0.3rem; }
+.admin-move select { width: auto; max-width: 16rem; }

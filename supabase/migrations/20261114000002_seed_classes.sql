@@ -44,17 +44,20 @@ begin
     (v_evening, 1, '17:30', '19:00'),  -- Monday
     (v_evening, 3, '17:30', '19:00');  -- Wednesday
 
-  -- Per-class prices. "online" options stay hidden until online payments are approved.
+  -- MVP pricing: $10 per Tai Chi class, online or at class. Free (Age 60+) is
+  -- attached to the Yang class, which meets Wednesday and Friday mornings only.
+  -- "online" options stay hidden until online payments are approved.
   insert into public.price_options (class_type_id, label, kind, amount_cents, eligibility_note, sort_order) values
-    (v_yang,    'Drop-in · Pay online',  'online',    1000, null, 1),
-    (v_yang,    'Drop-in · Pay at class', 'in_person', 1000, 'Cash or card at Magic Island', 2),
-    (v_yang,    'Free (Age 60+)',         'free',         0, 'Honor system, for ages 60 and over', 3),
-    (v_chen,    'Drop-in · Pay online',  'online',    1000, null, 1),
-    (v_chen,    'Drop-in · Pay at class', 'in_person', 1000, 'Cash or card at Magic Island', 2),
-    (v_evening, 'Drop-in · Pay online',  'online',    3000, null, 1),
-    (v_evening, 'Drop-in · Pay at class', 'in_person', 3000, 'Cash or card at Magic Island', 2);
+    (v_yang,    'Book & Pay Online',          'online',    1000, 'Secure payment by Stripe', 1),
+    (v_yang,    'Reserve Now, Pay at Class',  'in_person', 1000, 'Cash or card at Magic Island', 2),
+    (v_yang,    'Free (Age 60+)',             'free',         0, 'Wednesday & Friday mornings, honor system', 3),
+    (v_chen,    'Book & Pay Online',          'online',    1000, 'Secure payment by Stripe', 1),
+    (v_chen,    'Reserve Now, Pay at Class',  'in_person', 1000, 'Cash or card at Magic Island', 2),
+    (v_evening, 'Book & Pay Online',          'online',    1000, 'Secure payment by Stripe', 1),
+    (v_evening, 'Reserve Now, Pay at Class',  'in_person', 1000, 'Cash or card at Magic Island', 2);
 
-  -- Passes from the current pricing pages. Inactive until online memberships launch.
+  -- Passes from the current pricing pages. Not part of the MVP: inactive and
+  -- not shown in the admin interface, kept for a later membership feature.
   insert into public.membership_plans (class_type_id, name, kind, price_cents, class_count, duration_days) values
     (v_yang,    'Tai Chi Yang · Unlimited for 1 Year', 'annual',     15000, null, 365),
     (v_chen,    'Tai Chi Chen · Unlimited per Month',  'monthly',     5000, null,  30),

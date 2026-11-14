@@ -27,7 +27,11 @@ export async function manageUrl(bookingId: string): Promise<string> {
 }
 
 // Email failures are logged and never fail the booking itself.
-export async function sendConfirmationFor(db: SupabaseClient, bookingId: string): Promise<void> {
+export async function sendConfirmationFor(
+  db: SupabaseClient,
+  bookingId: string,
+  opts: { moved?: boolean } = {},
+): Promise<void> {
   try {
     const b = await loadBooking(db, bookingId);
     if (!b) return;
@@ -46,6 +50,7 @@ export async function sendConfirmationFor(db: SupabaseClient, bookingId: string)
       paymentMode: b.payment_mode,
       manageUrl: await manageUrl(bookingId),
       cancellationPolicy: settings?.cancellation_policy ?? "",
+      moved: opts.moved,
     });
   } catch (err) {
     console.error("confirmation email failed", bookingId, err);

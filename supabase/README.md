@@ -16,7 +16,7 @@ Browser (GitHub Pages)              Supabase                          Stripe
 /booking/manage ── manage-booking ─▶ Edge Function (signed link = access to one booking)
 /admin     ── supabase-js + login ─▶ Postgres with RLS (admins only)
            ── admin-refund ────────▶ Edge Function (checks admin) ──▶ Refund
-/contact   ── FormSubmit (unchanged) + submit-inquiry (copy to DB)
+           ── admin-move-booking ──▶ Edge Function (checks admin): weather moves
 ```
 
 ## Security model
@@ -66,7 +66,7 @@ supabase login
 supabase link --project-ref <project-ref>
 supabase db push                          # schema, seed classes, scheduled jobs
 supabase secrets set --env-file ./supabase/.env   # file is git-ignored
-supabase functions deploy create-booking manage-booking stripe-webhook admin-refund submit-inquiry
+supabase functions deploy create-booking manage-booking stripe-webhook admin-refund admin-move-booking submit-inquiry
 ```
 
 Then:
@@ -98,11 +98,17 @@ Then:
 - [ ] Manage link: cancel ≥ 24h before → cancelled (paid → refund requested); < 24h → refused.
 - [ ] Admin: refund from Payments tab; walk-in registration; check-in; capacity and price edits show on `/schedule`; CSV export.
 - [ ] Signed-in non-admin sees no data; anonymous `curl` to `/rest/v1/customers` returns nothing.
-- [ ] Contact form still emails aloha@ via FormSubmit, and a copy appears under Admin → Inquiries.
+- [ ] Weather: Admin → Bookings → *Cancel class (weather)* hides the session from `/schedule`; *Move* puts a paid customer in another class with no new charge and emails them.
+
+## MVP scope
+
+- $10 per Tai Chi class: **Book & Pay Online** (Stripe) or **Reserve Now, Pay at Class**; **Free (Age 60+)** on Wednesday and Friday mornings.
+- Weather cancellations are handled by an admin: cancel the session, then *Move* each booking (the payment carries over) or refund it.
+- Memberships/passes tables exist but are not exposed anywhere. `submit-inquiry` is deployed but the Contact page is unchanged and does not call it yet.
 
 ## Go-live (requires owner approval)
 
 1. Approve prices in Admin → Classes & Prices.
 2. Activate the Stripe account, create a **live** webhook endpoint, set live `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` and `ALLOW_LIVE_PAYMENTS=true`.
 3. `update public.settings set online_payments_enabled = true;`
-4. Remove FormSubmit only after the Supabase inquiry path has been verified in production.
+4. FormSubmit stays. Later: connect the Contact page to `submit-inquiry`, verify it, and only then retire FormSubmit.

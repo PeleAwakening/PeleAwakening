@@ -2,17 +2,14 @@
 // Requires a signed-in admin (Supabase Auth JWT + row in public.admins).
 import { isUuid, json, preflight, readJson } from "../_shared/http.ts";
 import { serviceClient, stripeClient } from "../_shared/clients.ts";
+import { requireAdmin } from "../_shared/admin.ts";
 
 Deno.serve(async (req) => {
   const pre = preflight(req);
   if (pre) return pre;
 
   const db = serviceClient();
-  const jwt = (req.headers.get("authorization") ?? "").replace(/^Bearer\s+/i, "");
-  const { data: auth } = await db.auth.getUser(jwt);
-  if (!auth?.user) return json(req, { error: "Not signed in." }, 401);
-  const { data: admin } = await db.from("admins").select("user_id").eq("user_id", auth.user.id).maybeSingle();
-  if (!admin) return json(req, { error: "Not authorized." }, 403);
+  if (!(await requireAdmin(req, db))) return json(req, { error: "Not authorized." }, 403);
 
   const body = await readJson(req);
   if (!body || !isUuid(body.payment_id)) return json(req, { error: "Invalid request." }, 400);

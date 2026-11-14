@@ -24,3 +24,6 @@ verify_jwt = false
 
 [functions.admin-refund]
 verify_jwt = false
+
+[functions.admin-move-booking]
+verify_jwt = false

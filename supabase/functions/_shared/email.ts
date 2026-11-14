@@ -49,6 +49,7 @@ export interface BookingEmailData {
   paymentMode: string;
   manageUrl: string;
   cancellationPolicy: string;
+  moved?: boolean;
 }
 
 const money = (cents: number) => `$${(cents / 100).toFixed(2).replace(/\.00$/, "")}`;
@@ -64,9 +65,11 @@ export async function sendBookingConfirmation(b: BookingEmailData): Promise<void
   if (b.customerEmail) {
     await sendEmail(
       b.customerEmail,
-      `You're booked: ${b.className}`,
+      b.moved ? `Your class has been moved: ${b.className}` : `You're booked: ${b.className}`,
       `<p>Aloha ${escapeHtml(b.customerName)},</p>
-       <p>Your spot is confirmed.</p>
+       <p>${b.moved
+        ? "Your booking has been moved to the class below. There is nothing more to pay."
+        : "Your spot is confirmed."}</p>
        <p><strong>${escapeHtml(b.className)}</strong><br>
           ${escapeHtml(when)}<br>
           ${escapeHtml(b.locationName ?? "")}${b.mapsUrl ? ` · <a href="${escapeHtml(b.mapsUrl)}">Google Maps</a>` : ""}<br>
@@ -79,7 +82,7 @@ export async function sendBookingConfirmation(b: BookingEmailData): Promise<void
   }
 
   const admin = Deno.env.get("ADMIN_NOTIFY_EMAIL");
-  if (admin) {
+  if (admin && !b.moved) {
     await sendEmail(
       admin,
       `New booking: ${b.className}, ${when}`,

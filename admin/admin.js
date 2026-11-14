@@ -263,6 +263,22 @@
     return { reload: load };
   }
 
+  // Calls an admin Edge Function with the signed-in admin's token.
+  function adminFn(name, body) {
+    return sb.auth.getSession().then(function (r) {
+      return fetch(cfg.supabaseUrl.replace(/\/$/, '') + '/functions/v1/' + name, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: cfg.supabaseAnonKey, Authorization: 'Bearer ' + r.data.session.access_token },
+        body: JSON.stringify(body)
+      });
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (data) {
+        if (!res.ok) throw new Error(data.error || 'Request failed');
+        return data;
+      });
+    });
+  }
+
   function section(title, hint) {
     content.appendChild(h('h2', { text: title }));
     if (hint) content.appendChild(h('p', { class: 'hint', text: hint }));
@@ -323,13 +339,28 @@
     function sessionEl(s) {
       var active = s.bookings.filter(function (b) { return b.status === 'confirmed' || b.status === 'pending'; });
       var booked = active.reduce(function (n, b) { return n + b.party_size; }, 0);
-      var details = h('details', { class: 'admin-session' + (s.status === 'cancelled' ? ' is-cancelled' : '') },
+      var cancelled = s.status === 'cancelled';
+      var details = h('details', { class: 'admin-session' + (cancelled ? ' is-cancelled' : ''), open: cancelled && active.length > 0 },
         h('summary', null,
           h('span', { class: 'admin-session-when', text: fmtDateTime(s.starts_at) + '–' + fmtTime(s.ends_at) }),
-          h('span', { class: 'admin-session-name', text: s.class_types.name + (s.status === 'cancelled' ? ' (cancelled)' : '') }),
+          h('span', { class: 'admin-session-name', text: s.class_types.name }),
+          cancelled ? h('span', { class: 'pill pill--bad', text: active.length ? 'Cancelled · ' + active.length + ' to move or refund' : 'Cancelled' }) : '',
           h('span', { class: 'admin-session-count' + (booked >= s.capacity ? ' is-full' : ''), text: booked + ' / ' + s.capacity + ' booked' })));
       var body = h('div', { class: 'admin-session-body' });
       details.appendChild(body);
+
+      // Rain switch: a cancelled session disappears from /schedule immediately.
+      body.appendChild(h('div', { class: 'admin-toolbar' },
+        cancelled
+          ? h('button', { type: 'button', class: 'admin-btn admin-btn--ghost admin-btn--sm', text: 'Re-open class', onclick: function () { setStatus('scheduled'); } })
+          : confirmButton('Cancel class (weather)', null, function () { return setStatus('cancelled'); }),
+        cancelled && active.length
+          ? h('span', { class: 'hint', text: 'Contact these customers, then use Move to put them in another class (no new payment), or refund them in Payments.' })
+          : ''));
+
+      function setStatus(status) {
+        return sb.from('class_sessions').update({ status: status, customized: true }).eq('id', s.id).then(after);
+      }
 
       var rows = s.bookings.slice().sort(function (a, b) { return a.created_at < b.created_at ? -1 : 1; }).map(function (b) {
         var c = b.customers || {};
@@ -347,7 +378,9 @@
           h('td', { text: (b.price_options && b.price_options.label) || b.source }),
           h('td', null, paymentPill(b)),
           h('td', null, statusPill(b.status)),
-          h('td', { class: 'actions' }, checkIn,
+          h('td', { class: 'actions' },
+            cancelled ? '' : checkIn,
+            b.status === 'confirmed' ? moveControl(b) : '',
             b.status === 'confirmed' || b.status === 'pending'
               ? confirmButton('Cancel', null, function () {
                   return sb.from('bookings').update({ status: 'cancelled', cancelled_at: new Date().toISOString() }).eq('id', b.id).then(after);
@@ -366,6 +399,45 @@
         toast('Updated');
         load();
       }
+
+      // "Move" → pick another upcoming class; the original payment carries over.
+      function moveControl(b) {
+        var wrap = h('span', { class: 'admin-move' });
+        var btn = h('button', { type: 'button', class: 'admin-btn admin-btn--sm' + (cancelled ? '' : ' admin-btn--ghost'), text: 'Move' });
+        wrap.appendChild(btn);
+        btn.addEventListener('click', function () {
+          btn.disabled = true;
+          upcomingSessions().then(function (list) {
+            var select = h('select', null, h('option', { value: '', text: 'Choose a class…' }), list
+              .filter(function (x) { return x.id !== s.id; })
+              .map(function (x) { return h('option', { value: x.id, text: fmtDateTime(x.starts_at) + ' · ' + x.class_types.name }); }));
+            var go = h('button', { type: 'button', class: 'admin-btn admin-btn--sm', text: 'Move & email' });
+            var close = h('button', { type: 'button', class: 'admin-btn admin-btn--sm admin-btn--ghost', text: '×', 'aria-label': 'Close' });
+            go.addEventListener('click', function () {
+              if (!select.value) return toast('Choose a class', true);
+              go.disabled = true;
+              adminFn('admin-move-booking', { booking_id: b.id, session_id: select.value }).then(function () {
+                toast('Booking moved; confirmation emailed');
+                load();
+              }).catch(function (err) { go.disabled = false; fail(err); });
+            });
+            close.addEventListener('click', function () { wrap.innerHTML = ''; wrap.appendChild(btn); btn.disabled = false; });
+            wrap.innerHTML = '';
+            append(wrap, [select, go, close]);
+          }).catch(function (err) { btn.disabled = false; fail(err); });
+        });
+        return wrap;
+      }
+    }
+
+    function upcomingSessions() {
+      return sb.from('class_sessions').select('id, starts_at, class_types(name)')
+        .eq('status', 'scheduled').gt('starts_at', new Date().toISOString())
+        .order('starts_at').limit(60)
+        .then(function (res) {
+          if (res.error) throw res.error;
+          return res.data;
+        });
     }
 
     function walkInForm(s) {
@@ -530,20 +602,6 @@
         { key: 'active', label: 'Active', type: 'bool' }
       ]
     });
-
-    crud(section('Passes & memberships', 'Stored for the upcoming membership feature; not sold online yet.'), {
-      table: 'membership_plans', order: [['name']], canAdd: true,
-      defaults: { active: false, kind: 'class_pack' },
-      columns: [
-        { key: 'name', label: 'Name', nullable: false },
-        { key: 'class_type_id', label: 'Class', type: 'select', nullable: true, options: opts(function () { return lookups.classes; }) },
-        { key: 'kind', label: 'Type', type: 'select', options: function () { return [['class_pack', 'Class pack'], ['monthly', 'Monthly'], ['annual', 'Annual']]; } },
-        { key: 'price_cents', label: 'Price $', type: 'money' },
-        { key: 'class_count', label: 'Classes', type: 'number' },
-        { key: 'duration_days', label: 'Valid days', type: 'number' },
-        { key: 'active', label: 'Active', type: 'bool' }
-      ]
-    });
   };
 
   // ---- Customers ----
@@ -594,19 +652,17 @@
 
   function exportCsv() {
     sb.from('customers')
-      .select('name, email, phone, preferred_contact, interests, notes, created_at, bookings(status, class_sessions(starts_at)), memberships(status, ends_on)')
+      .select('name, email, phone, preferred_contact, interests, notes, created_at, bookings(status, class_sessions(starts_at))')
       .order('created_at')
       .then(function (res) {
         if (res.error) return fail(res.error);
         var header = ['name', 'email', 'phone', 'preferred_contact', 'interests', 'notes', 'customer_since',
-          'confirmed_bookings', 'last_class', 'active_membership_until'];
+          'confirmed_bookings', 'last_class'];
         var lines = [header.join(',')].concat(res.data.map(function (c) {
           var confirmed = c.bookings.filter(function (b) { return b.status === 'confirmed'; });
           var last = confirmed.map(function (b) { return b.class_sessions && b.class_sessions.starts_at; }).sort().pop();
-          var membership = (c.memberships || []).find(function (m) { return m.status === 'active'; });
           return [c.name, c.email, c.phone, c.preferred_contact, (c.interests || []).join('; '), c.notes,
-            c.created_at && c.created_at.slice(0, 10), confirmed.length, last ? fmt(last, { year: 'numeric', month: '2-digit', day: '2-digit' }) : '',
-            membership ? membership.ends_on || 'open' : ''].map(csvCell).join(',');
+            c.created_at && c.created_at.slice(0, 10), confirmed.length, last ? fmt(last, { year: 'numeric', month: '2-digit', day: '2-digit' }) : ''].map(csvCell).join(',');
         }));
         var blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
         var a = h('a', { href: URL.createObjectURL(blob), download: 'pele-awakening-customers-' + hawaiiToday() + '.csv' });
@@ -661,18 +717,9 @@
     }
 
     function refund(p) {
-      return sb.auth.getSession().then(function (r) {
-        return fetch(cfg.supabaseUrl.replace(/\/$/, '') + '/functions/v1/admin-refund', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', apikey: cfg.supabaseAnonKey, Authorization: 'Bearer ' + r.data.session.access_token },
-          body: JSON.stringify({ payment_id: p.id })
-        });
-      }).then(function (res) {
-        return res.json().then(function (data) {
-          if (!res.ok) throw new Error(data.error || 'Refund failed');
-          toast('Refund issued');
-          load();
-        });
+      return adminFn('admin-refund', { payment_id: p.id }).then(function () {
+        toast('Refund issued');
+        load();
       }).catch(fail);
     }
 
