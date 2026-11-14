@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /booking/
 
 Sitemap: https://peleawakening.com/sitemap.xml

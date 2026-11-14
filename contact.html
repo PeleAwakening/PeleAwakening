@@ -61,7 +61,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </li>
         <li><a href="/experiences/master-jiang.html">Special Programs</a></li>
         <li><a href="/about.html">About</a></li>
-        <li><a href="/contact.html" class="nav-cta">Contact</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/schedule/" class="nav-cta">Book a Class</a></li>
         <li class="nav-item has-dropdown nav-lang">
           <a href="/contact.html" class="nav-lang-trigger" aria-label="Language"><svg class="nav-lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"></path></svg></a>
           <ul class="nav-dropdown">
@@ -145,6 +146,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
+  <script src="/js/pa-config.js"></script>
   <script>
     (function () {
       var form = document.getElementById('inquiryForm');
@@ -160,6 +162,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       radios.forEach(function (r) { r.addEventListener('change', syncRadioPills); });
       syncRadioPills();
 
+      // Transition: FormSubmit remains the primary channel (email to aloha@).
+      // A copy is also saved to the booking database; failures are ignored.
+      function saveCopy(payload) {
+        var cfg = window.PA_CONFIG || {};
+        if (!cfg.supabaseUrl || !cfg.supabaseAnonKey) return;
+        fetch(cfg.supabaseUrl.replace(/\/$/, '') + '/functions/v1/submit-inquiry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', apikey: cfg.supabaseAnonKey },
+          body: JSON.stringify(payload)
+        }).catch(function () {});
+      }
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         errorEl.style.display = 'none';
@@ -167,15 +181,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending...';
 
+        var payload = Object.fromEntries(new FormData(form));
         fetch('https://formsubmit.co/ajax/aloha@peleawakening.com', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form)))
+          body: JSON.stringify(payload)
         })
           .then(function (res) {
             if (!res.ok) throw new Error('Request failed');
             form.style.display = 'none';
             successEl.style.display = 'block';
+            saveCopy(payload);
           })
           .catch(function () {
             errorEl.style.display = 'block';

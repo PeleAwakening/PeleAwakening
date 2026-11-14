@@ -1,1 +1,10 @@
 .DS_Store
+
+# Secrets: never commit. Server secrets live in Supabase (supabase secrets set).
+.env
+.env.*
+*.env
+supabase/.env
+supabase/functions/.env
+supabase/.temp/
+supabase/.branches/

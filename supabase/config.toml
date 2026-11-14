@@ -1,0 +1,26 @@
+# Supabase CLI project config (`supabase start` / `supabase functions deploy`).
+project_id = "pele-awakening"
+
+[auth]
+site_url = "https://peleawakening.com"
+additional_redirect_urls = ["https://peleawakening.com/admin/", "http://localhost:8000/admin/"]
+# Admin accounts are invited from the Supabase dashboard; nobody can self-register.
+enable_signup = false
+
+# Public endpoints: they do their own validation (and the webhook verifies
+# Stripe's signature), so the gateway JWT check is off. admin-refund checks
+# the admin's JWT itself.
+[functions.create-booking]
+verify_jwt = false
+
+[functions.manage-booking]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.submit-inquiry]
+verify_jwt = false
+
+[functions.admin-refund]
+verify_jwt = false
