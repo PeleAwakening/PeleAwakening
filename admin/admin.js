@@ -507,7 +507,7 @@
   // ---- Schedule: weekly rules + individual sessions ----
   TABS.schedule = function () {
     var rulesBox = section('Weekly schedule', 'Recurring classes in Hawaii time. Leave capacity blank to use the class default. ' +
-      'After changing rules, use “Rebuild” so future sessions without bookings follow the new rules.');
+      'Capacity, location and instructor changes apply to upcoming sessions right away. After changing days or times, use “Rebuild” so future sessions without bookings follow the new rules.');
     content.insertBefore(h('div', { class: 'admin-toolbar' },
       h('button', { type: 'button', class: 'admin-btn', text: 'Generate upcoming sessions', onclick: function () { generate(false); } }),
       confirmButton('Rebuild future sessions from rules', 'admin-btn--ghost', function () { return generate(true); })), rulesBox);
@@ -577,7 +577,7 @@
   TABS.classes = function () {
     var refresh = function () { return loadLookups(); };
 
-    crud(section('Classes'), {
+    crud(section('Classes', 'Capacity, location and instructor changes apply to all upcoming sessions, except ones you edited individually.'), {
       table: 'class_types', order: [['sort_order']], canAdd: true, afterSave: refresh,
       defaults: { active: true, default_capacity: 20, sort_order: 10 },
       columns: [
