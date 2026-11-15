@@ -1,7 +1,7 @@
 // POST /functions/v1/stripe-webhook
 // The only place a paid booking becomes confirmed. Every request must carry a
 // valid Stripe signature; browser redirects never confirm anything.
-import Stripe from "npm:stripe@16.12.0";
+import Stripe from "npm:stripe@23.1.0";
 import { serviceClient, stripeClient, stripeCrypto } from "../_shared/clients.ts";
 import { sendConfirmationFor } from "../_shared/bookings.ts";
 

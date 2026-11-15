@@ -112,6 +112,7 @@ Deno.serve(async (req) => {
     const checkout = await stripe.checkout.sessions.create(
       {
         mode: "payment",
+        integration_identifier: "pa-class-booking-qzvkmtwr", // groups these sessions in the Dashboard
         customer_email: email,
         client_reference_id: booking.reference, // shown in the Stripe Dashboard
         line_items: [{

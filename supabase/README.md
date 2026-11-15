@@ -28,7 +28,7 @@ Browser (GitHub Pages)              Supabase                          Stripe
 | Customer data | Row Level Security is enabled on every table. Anonymous visitors have no table access at all; the public schedule comes from `get_public_schedule()`, which returns only class times, locations, prices and spots left. |
 | Admin access | `/admin` signs in with a Supabase Auth email link. Sign-ups are disabled; only users listed in `public.admins` can read or change data (enforced by RLS in the database, not by the page). |
 | Payments | Card details are entered on Stripe's own page; we store only Stripe ids and amounts. A paid booking is confirmed **only** by `stripe-webhook` after verifying Stripe's signature; the success redirect only displays status. Webhook events are de-duplicated in `stripe_events`. |
-| Live payments | Online payment options stay hidden until `settings.online_payments_enabled` is set (SQL only). Separately, the functions refuse any `sk_live_` key unless `ALLOW_LIVE_PAYMENTS=true`. |
+| Live payments | Online payment options stay hidden until `settings.online_payments_enabled` is set (SQL only). Separately, the functions refuse any `sk_live_`/`rk_live_` key unless `ALLOW_LIVE_PAYMENTS=true`. |
 | Overbooking / double booking | `reserve_spots()` locks the session row, counts confirmed + unexpired pending spots, and rejects bookings over capacity. A partial unique index allows one active booking per customer per session. Abandoned checkouts release their hold after ~35 minutes (or immediately when the customer cancels checkout). |
 | Duplicate customers | `customers.email_normalized` (lower-cased, trimmed) is unique. Public bookings never overwrite an existing customer's name or phone; they only fill blanks. |
 | Booking links | "Manage booking" links are HMAC-signed (`MANAGE_LINK_SECRET`) and grant access to that single booking. Pages carrying them have analytics removed and `no-referrer`, so the link doesn't leak to third parties. |
@@ -48,7 +48,7 @@ or money. (Note: GitHub Pages from a *private* repo requires a paid GitHub plan.
 
 | Name | Value |
 |---|---|
-| `STRIPE_SECRET_KEY` | `sk_test_…` (test mode) |
+| `STRIPE_SECRET_KEY` | A **restricted key** `rk_test_…` (see *Stripe* below). A full `sk_test_…` also works but isn't recommended. |
 | `STRIPE_WEBHOOK_SECRET` | `whsec_…` from the Stripe webhook endpoint |
 | `MANAGE_LINK_SECRET` | random, ≥ 32 chars (`openssl rand -base64 48`) |
 | `SITE_URL` | `https://peleawakening.com` |
@@ -59,6 +59,18 @@ or money. (Note: GitHub Pages from a *private* repo requires a paid GitHub plan.
 | `ALLOW_LIVE_PAYMENTS` | leave **unset** until live payments are approved |
 
 `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are provided to functions automatically.
+
+## Stripe
+
+- **Integration:** Stripe-hosted Checkout Sessions (`stripe-node` 23.1.0, API version `2026-10-28.endive`), created server-side with the amount from the database. No `payment_method_types` is passed, so payment methods are managed in the Dashboard (Settings → Payment methods). The website never loads Stripe.js, so the **publishable key isn't used** anywhere.
+- **Environment:** use a Stripe **sandbox** (Dashboard → account menu → *Sandboxes*) or test mode. Never live until go-live is approved.
+- **Restricted key:** Dashboard → Developers → API keys → *Create restricted key*, named `pele-awakening-supabase`, with only:
+  - Checkout Sessions: **Write**
+  - Refunds: **Write**
+  If a function logs a Stripe `403`, add the one permission it names. Paste the key only into Supabase secrets (`STRIPE_SECRET_KEY`), never into the repo or a chat.
+- **Webhook:** required. It is the only thing that confirms a paid booking (see *Setup* step 3). Signatures are verified and events de-duplicated.
+- **Testing locally:** `stripe login`, then `stripe trigger checkout.session.completed` sends test events, and test card `4242 4242 4242 4242` completes Checkout.
+- **Hawaii GET:** Stripe Tax is **not** enabled (`automatic_tax` is off). Hawaii's General Excise Tax applies to services; decide with your accountant whether class prices include GET before go-live. Turning on Stripe Tax requires an active Hawaii registration in Stripe first.
 
 ## Setup (test project)
 
