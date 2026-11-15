@@ -2465,7 +2465,7 @@ body.booking-modal-open { overflow: hidden; }
 /* ============================================
    RESERVATION — /reservation/ landing (Book Now)
    ============================================ */
-.reservation-section { padding: 1rem 0 6rem; }
+.reservation-section { padding: 0.5rem 0 6rem; }
 .reservation-section [hidden] { display: none !important; }
 .reservation-container { max-width: 1080px; }
 .reservation-card {
@@ -2473,7 +2473,7 @@ body.booking-modal-open { overflow: hidden; }
   flex-direction: column;
   background: var(--color-bg-card);
   border: 1px solid rgba(43, 36, 29, 0.08);
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(168, 98, 47, 0.06);
   transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
@@ -2483,13 +2483,12 @@ body.booking-modal-open { overflow: hidden; }
   border-color: rgba(168, 98, 47, 0.3);
   box-shadow: 0 14px 40px rgba(43, 36, 29, 0.1);
 }
-.reservation-card-media { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--color-bg-warm); }
+.reservation-card-media { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-bg-warm); }
 .reservation-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease-out); }
-.reservation-card:hover .reservation-card-media img { transform: scale(1.04); }
-.reservation-card-body { display: flex; flex-direction: column; align-items: flex-start; gap: 0.85rem; flex: 1; padding: 1.8rem 1.8rem 2rem; }
-.reservation-card h2 { font-family: var(--font-display); font-size: 1.85rem; font-weight: 600; line-height: 1.15; color: var(--color-ink); }
-.reservation-card p { font-family: var(--font-ui); font-size: 0.93rem; line-height: 1.65; color: var(--color-text-dim); }
-.reservation-card-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.reservation-card:hover .reservation-card-media img { transform: scale(1.03); }
+.reservation-card-body { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; flex: 1; padding: 1.4rem 1.5rem 1.6rem; }
+.reservation-card h2 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; line-height: 1.15; color: var(--color-ink); }
+.reservation-card p { font-family: var(--font-ui); font-size: 0.95rem; line-height: 1.6; color: var(--color-text-dim); }
 .reservation-badge {
   padding: 0.25rem 0.75rem;
   border-radius: 40px;
@@ -2499,46 +2498,21 @@ body.booking-modal-open { overflow: hidden; }
   background: var(--color-bg-warm);
   color: var(--color-text-dim);
 }
-.reservation-badge--live { background: rgba(95, 138, 134, 0.15); color: var(--color-ocean); }
-.reservation-btn { margin-top: auto; padding: 0.85rem 1.8rem; }
+/* Full-width pill buttons, as in the layout reference */
+.reservation-btn { align-self: stretch; justify-content: center; margin-top: auto; padding: 0.95rem 1.5rem; }
+.reservation-card-body > p { margin-bottom: 0.5rem; }
 
-/* Featured: Tai Chi */
-.reservation-card--featured { border-color: rgba(168, 98, 47, 0.35); margin-bottom: 1.5rem; }
-.reservation-card--featured h2 { font-size: 2.3rem; }
-.reservation-list { list-style: none; display: grid; gap: 0.45rem; margin: 0.2rem 0; }
-.reservation-list li {
-  position: relative;
-  padding-left: 1.3rem;
-  font: 500 0.95rem var(--font-ui);
-  color: var(--color-ink);
-}
-.reservation-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-accent);
-}
-.reservation-card .reservation-card-fine { font-size: 0.82rem; }
+/* Featured: Tai Chi, wide photo on top */
+.reservation-card--featured { margin-bottom: 1.5rem; border-color: rgba(168, 98, 47, 0.3); }
+.reservation-card--featured .reservation-card-media { aspect-ratio: 16 / 5; }
+.reservation-card--featured h2 { font-size: 2rem; }
 
 .reservation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
 
-@media (min-width: 861px) {
-  .reservation-card--featured { flex-direction: row; }
-  .reservation-card--featured .reservation-card-media { flex: 0 0 48%; aspect-ratio: auto; min-height: 100%; }
-  .reservation-card--featured .reservation-card-body { padding: 2.6rem 2.8rem; justify-content: center; }
-  .reservation-card--featured .reservation-btn { margin-top: 0.6rem; }
-}
-@media (max-width: 860px) {
+@media (max-width: 760px) {
   .reservation-grid { grid-template-columns: 1fr; }
-  .reservation-card--featured h2 { font-size: 2rem; }
-}
-@media (max-width: 560px) {
-  .reservation-card-body { padding: 1.5rem 1.4rem 1.7rem; }
-  .reservation-btn { width: 100%; justify-content: center; }
+  .reservation-card--featured .reservation-card-media { aspect-ratio: 16 / 9; }
+  .reservation-card-media { aspect-ratio: 16 / 10; }
 }
 
 .reservation-note {
