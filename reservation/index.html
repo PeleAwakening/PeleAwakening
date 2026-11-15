@@ -75,32 +75,59 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
       <div class="page-hero-eyebrow" data-animate="fade-up">Book Now</div>
       <h1 class="page-hero-title" data-animate="fade-up" data-delay="100">Reservation</h1>
-      <p class="page-hero-dek" data-animate="fade-up" data-delay="200">Choose what you&rsquo;d like to book. Tai Chi classes can be reserved online now; for therapy and Signature Experiences, tell us what you&rsquo;re looking for and we&rsquo;ll reach out.</p>
+      <p class="page-hero-dek" data-animate="fade-up" data-delay="200">Choose what you&rsquo;d like to book: reserve a Tai Chi class, or tell us about the therapy or experience you&rsquo;re looking for and we&rsquo;ll reach out.</p>
     </div>
   </section>
 
   <section class="reservation-section">
-    <div class="container">
-      <div class="reservation-grid">
-        <a class="reservation-card" href="/schedule/" data-animate="fade-up">
-          <span class="reservation-badge is-open">Book online</span>
+    <div class="container reservation-container">
+      <article class="reservation-card reservation-card--featured" data-animate="fade-up">
+        <a href="/schedule/" class="reservation-card-media" tabindex="-1" aria-hidden="true">
+          <img src="/images/pillar-weekly-classes.jpg" alt="" loading="lazy">
+        </a>
+        <div class="reservation-card-body">
+          <div class="reservation-card-badges">
+            <span class="reservation-badge reservation-badge--live" data-booking-live hidden>Book online</span>
+            <span class="reservation-badge" data-booking-soon>Online booking coming soon</span>
+          </div>
           <h2>Tai Chi Classes</h2>
-          <p>Yang, Chen, and Tai Chi Fundamentals &amp; Technique at Magic Island, O&#699;ahu. See open spots and reserve your place in a few steps.</p>
-          <span class="reservation-card-cta">See Schedule &amp; Book &rarr;</span>
-        </a>
-        <a class="reservation-card" href="/contact.html#inquiryForm" data-animate="fade-up" data-delay="100">
-          <span class="reservation-badge">Online booking coming soon</span>
-          <h2>Therapy &amp; Bodywork</h2>
-          <p>Acupuncture, cupping, Tai Chi massage and TCM care. Send us a request and we&rsquo;ll find a time that works for you.</p>
-          <span class="reservation-card-cta">Send a Request &rarr;</span>
-        </a>
-        <a class="reservation-card" href="/experiences/#interest-form" data-animate="fade-up" data-delay="200">
-          <span class="reservation-badge">By inquiry</span>
-          <h2>Signature Experiences</h2>
-          <p>Volcano, ocean, surf, farm and custom Hawai&#699;i experiences. Tell us what you&rsquo;re into and we&rsquo;ll curate around your dates.</p>
-          <span class="reservation-card-cta">Share Your Interests &rarr;</span>
-        </a>
+          <p>Practice outdoors at Magic Island, O&#699;ahu. See open spots and reserve your place in a few steps.</p>
+          <ul class="reservation-list">
+            <li>Tai Chi Yang Practice</li>
+            <li>Tai Chi Chen Practice</li>
+            <li>Tai Chi Fundamentals &amp; Technique</li>
+          </ul>
+          <p class="reservation-card-fine">Reserve and pay online, or reserve now and pay at class.</p>
+          <a href="/schedule/" class="btn btn-primary reservation-btn">See Schedule &amp; Book &rarr;</a>
+        </div>
+      </article>
+
+      <div class="reservation-grid">
+        <article class="reservation-card" data-animate="fade-up" data-delay="100">
+          <a href="/contact.html#inquiryForm" class="reservation-card-media" tabindex="-1" aria-hidden="true">
+            <img src="/images/pillar-therapies.jpg" alt="" loading="lazy">
+          </a>
+          <div class="reservation-card-body">
+            <div class="reservation-card-badges"><span class="reservation-badge">By request</span></div>
+            <h2>Therapy &amp; Bodywork</h2>
+            <p>Acupuncture, cupping, Tai Chi massage and TCM care. Send a request and we&rsquo;ll find a time that works for you.</p>
+            <a href="/contact.html#inquiryForm" class="btn btn-ghost reservation-btn">Send a Request &rarr;</a>
+          </div>
+        </article>
+
+        <article class="reservation-card" data-animate="fade-up" data-delay="200">
+          <a href="/experiences/#interest-form" class="reservation-card-media" tabindex="-1" aria-hidden="true">
+            <img src="/images/pillar-signature-experiences.jpg" alt="" loading="lazy">
+          </a>
+          <div class="reservation-card-body">
+            <div class="reservation-card-badges"><span class="reservation-badge">By inquiry</span></div>
+            <h2>Signature Experiences</h2>
+            <p>Volcano, ocean, surf, farm and custom Hawai&#699;i experiences. Tell us what you&rsquo;re into and we&rsquo;ll curate around your dates.</p>
+            <a href="/experiences/#interest-form" class="btn btn-ghost reservation-btn">Explore Experiences &rarr;</a>
+          </div>
+        </article>
       </div>
+
       <p class="reservation-note">Already booked? Use the link in your confirmation email to view or cancel your booking. Questions? <a href="/contact.html">Contact us</a>.</p>
     </div>
   </section>
@@ -142,5 +169,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
   <script src="/script.js"></script>
+  <script src="/js/pa-config.js"></script>
+  <script>
+    // "Coming soon" until the booking backend is configured in /js/pa-config.js.
+    (function () {
+      var c = window.PA_CONFIG || {};
+      var live = Boolean(c.supabaseUrl && c.supabaseAnonKey);
+      document.querySelectorAll('[data-booking-live]').forEach(function (el) { el.hidden = !live; });
+      document.querySelectorAll('[data-booking-soon]').forEach(function (el) { el.hidden = live; });
+    })();
+  </script>
 </body>
 </html>
