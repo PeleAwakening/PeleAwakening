@@ -110,7 +110,7 @@ Then:
 - [ ] Stripe test card `4242 4242 4242 4242` → redirected back, booking confirmed **by the webhook** (check `stripe_events`).
 - [ ] Leaving Stripe Checkout → spots released immediately.
 - [ ] Manage link: cancel ≥ 24h before → cancelled (paid → refund requested); < 24h → refused.
-- [ ] Admin: refund from Payments tab; walk-in registration; check-in; capacity and price edits show on `/schedule`; CSV export.
+- [ ] Admin: refund from Payments tab (a full refund cancels the booking and frees its spots; partial refunds keep it); walk-in registration; check-in; capacity and price edits show on `/schedule`; CSV export.
 - [ ] Signed-in non-admin sees no data; anonymous `curl` to `/rest/v1/customers` returns nothing.
 - [ ] Every booking shows a `PA-…` reference in the email, on the manage page, in Admin → Bookings (search finds it) and Payments, and on the Stripe payment.
 - [ ] Weather: Admin → Bookings → *Cancel class (weather)* hides the session from `/schedule`; *Move* puts a paid customer in another class with no new charge and emails them.

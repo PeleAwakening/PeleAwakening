@@ -61,13 +61,25 @@ Deno.serve(async (req) => {
       case "charge.refunded": {
         const charge = event.data.object as Stripe.Charge;
         if (typeof charge.payment_intent === "string") {
-          await db
+          const { data: payment, error: payErr } = await db
             .from("payments")
             .update({
               refunded_amount_cents: charge.amount_refunded,
               ...(charge.refunded ? { status: "refunded" } : {}),
             })
-            .eq("stripe_payment_intent_id", charge.payment_intent);
+            .eq("stripe_payment_intent_id", charge.payment_intent)
+            .select("booking_id")
+            .maybeSingle();
+          if (payErr) throw payErr;
+          // A fully refunded booking gives up its spots. Partial refunds keep it.
+          if (charge.refunded && payment?.booking_id) {
+            const { error: bookErr } = await db
+              .from("bookings")
+              .update({ status: "cancelled", cancelled_at: new Date().toISOString() })
+              .eq("id", payment.booking_id)
+              .in("status", ["pending", "confirmed"]);
+            if (bookErr) throw bookErr;
+          }
         }
         break;
       }
