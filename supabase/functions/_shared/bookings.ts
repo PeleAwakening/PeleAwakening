@@ -9,7 +9,7 @@ export type BookingDetails = any;
 export async function loadBooking(db: SupabaseClient, bookingId: string): Promise<BookingDetails | null> {
   const { data, error } = await db
     .from("bookings")
-    .select(`id, status, party_size, total_amount_cents, payment_mode, cancelled_at,
+    .select(`id, reference, status, party_size, total_amount_cents, payment_mode, cancelled_at,
       customers ( name, email ),
       price_options ( label ),
       payments ( id, provider, status, amount_cents, refund_requested_at, stripe_checkout_session_id ),
@@ -37,6 +37,7 @@ export async function sendConfirmationFor(
     if (!b) return;
     const { data: settings } = await db.from("settings").select("cancellation_policy").single();
     await sendBookingConfirmation({
+      reference: b.reference,
       customerName: b.customers?.name ?? "",
       customerEmail: b.customers?.email ?? null,
       className: b.class_sessions.class_types.name,

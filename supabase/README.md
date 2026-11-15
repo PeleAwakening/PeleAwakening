@@ -7,6 +7,7 @@ payments go through **Stripe Checkout** (hosted by Stripe).
 ```
 Browser (GitHub Pages)              Supabase                          Stripe
 ───────────────────────             ─────────────────────────         ──────────────
+/reservation  (static "Book Now" landing → /schedule, Contact, Experiences interest form)
 /schedule  ── get_public_schedule ─▶ Postgres function (no PII)
            ── create-booking ──────▶ Edge Function ── reserve_spots ─▶ (locks session row)
                                        └─ paid option ──────────────▶ Checkout Session
@@ -31,6 +32,7 @@ Browser (GitHub Pages)              Supabase                          Stripe
 | Overbooking / double booking | `reserve_spots()` locks the session row, counts confirmed + unexpired pending spots, and rejects bookings over capacity. A partial unique index allows one active booking per customer per session. Abandoned checkouts release their hold after ~35 minutes (or immediately when the customer cancels checkout). |
 | Duplicate customers | `customers.email_normalized` (lower-cased, trimmed) is unique. Public bookings never overwrite an existing customer's name or phone; they only fill blanks. |
 | Booking links | "Manage booking" links are HMAC-signed (`MANAGE_LINK_SECRET`) and grant access to that single booking. Pages carrying them have analytics removed and `no-referrer`, so the link doesn't leak to third parties. |
+| Booking references | Each booking gets a short reference like `PA-20261215-T74N` (Hawaii booking date + 4 random characters, no 0/O/1/I), unique in the database. It appears in confirmation emails, the manage page, the admin dashboard (with a search box) and Stripe (`client_reference_id`, metadata, payment description). The uuid `id` is still used for every technical operation, including the webhook. |
 | Hawaii time | Times are stored as `timestamptz`; weekly rules are interpreted in `Pacific/Honolulu` and everything is displayed in Hawaii time. |
 
 **The GitHub repository can stay public.** Nothing in it grants access to data
@@ -98,12 +100,14 @@ Then:
 - [ ] Manage link: cancel ≥ 24h before → cancelled (paid → refund requested); < 24h → refused.
 - [ ] Admin: refund from Payments tab; walk-in registration; check-in; capacity and price edits show on `/schedule`; CSV export.
 - [ ] Signed-in non-admin sees no data; anonymous `curl` to `/rest/v1/customers` returns nothing.
+- [ ] Every booking shows a `PA-…` reference in the email, on the manage page, in Admin → Bookings (search finds it) and Payments, and on the Stripe payment.
 - [ ] Weather: Admin → Bookings → *Cancel class (weather)* hides the session from `/schedule`; *Move* puts a paid customer in another class with no new charge and emails them.
 
 ## MVP scope
 
 - $10 per morning Tai Chi class and $30 per evening class: **Book & Pay Online** (Stripe) or **Reserve Now, Pay at Class**; **Free (Age 60+)** on Wednesday and Friday mornings.
 - Weather cancellations are handled by an admin: cancel the session, then *Move* each booking (the payment carries over) or refund it.
+- `/reservation/` is the single "Book Now" entry point: Tai Chi → `/schedule/`; Therapy & Bodywork → Contact form; Signature Experiences → the existing interest form. No therapy booking yet.
 - Memberships/passes tables exist but are not exposed anywhere. `submit-inquiry` is deployed but the Contact page is unchanged and does not call it yet.
 
 ## Go-live (requires owner approval)

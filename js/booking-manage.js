@@ -40,6 +40,7 @@
         '<div class="booking-receipt-status is-' + esc(b.status) + '">' + esc(STATUS_TEXT[b.status] || b.status) + '</div>' +
         (b.session_cancelled ? '<p class="booking-error">This class has been cancelled by Pele Awakening. We&rsquo;ll be in touch.</p>' : '') +
         '<h2>' + esc(b.class_name) + '</h2>' +
+        (b.reference ? '<p class="booking-muted">Booking reference: <strong class="booking-ref">' + esc(b.reference) + '</strong></p>' : '') +
         '<p>' + esc(B.dayLabel(b.starts_at)) + ' &middot; ' + esc(B.timeRange(b.starts_at, b.ends_at)) + ' (Hawai&#699;i time)</p>' +
         '<p>' + esc(b.location_name || '') + (b.location_address ? '<br><span class="booking-muted">' + esc(b.location_address) + '</span>' : '') + '</p>' +
         (b.maps_url ? '<p><a class="map-link" href="' + esc(B.safeUrl(b.maps_url)) + '" target="_blank" rel="noopener">Open in Google Maps &rarr;</a></p>' : '') +

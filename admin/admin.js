@@ -311,10 +311,37 @@
       h('option', { value: 'today', text: 'Today' }),
       h('option', { value: 'past', text: 'Past 14 days' }));
     var list = h('div');
+    var find = h('input', { type: 'search', class: 'form-input', placeholder: 'Find reference, e.g. PA-…', 'aria-label': 'Find booking by reference' });
+    var found = h('div');
     content.appendChild(h('div', { class: 'admin-toolbar' }, range,
-      h('button', { type: 'button', class: 'admin-btn admin-btn--ghost', text: 'Refresh', onclick: load })));
+      h('button', { type: 'button', class: 'admin-btn admin-btn--ghost', text: 'Refresh', onclick: load }), find));
+    content.appendChild(found);
     content.appendChild(list);
     range.addEventListener('change', load);
+    find.addEventListener('keydown', function (e) { if (e.key === 'Enter') findReference(); });
+
+    function findReference() {
+      var term = find.value.trim().toUpperCase().replace(/[^A-Z0-9-]/g, '');
+      found.innerHTML = '';
+      if (term.length < 4) return;
+      sb.from('bookings')
+        .select('reference, status, party_size, customers(name, email), class_sessions(starts_at, class_types(name))')
+        .ilike('reference', '%' + term + '%').order('created_at', { ascending: false }).limit(10)
+        .then(function (res) {
+          if (res.error) return fail(res.error);
+          if (!res.data.length) return found.appendChild(h('p', { class: 'hint', text: 'No booking matches ' + term + '.' }));
+          found.appendChild(h('div', { class: 'admin-table-wrap admin-found' }, h('table', { class: 'admin-table' },
+            h('tbody', null, res.data.map(function (b) {
+              var c = b.customers || {}, s = b.class_sessions;
+              return h('tr', null,
+                h('td', null, h('code', { text: b.reference })),
+                h('td', { text: c.name || '' }),
+                h('td', { text: s ? fmtDateTime(s.starts_at) + ' · ' + s.class_types.name : '' }),
+                h('td', { text: String(b.party_size) }),
+                h('td', null, statusPill(b.status)));
+            })))));
+        });
+    }
 
     function load() {
       var now = new Date();
@@ -324,7 +351,7 @@
       list.textContent = 'Loading…';
       sb.from('class_sessions')
         .select('id, starts_at, ends_at, capacity, status, note, class_type_id, class_types(name), ' +
-          'bookings(id, party_size, status, payment_mode, source, checked_in_at, attended_count, total_amount_cents, created_at, ' +
+          'bookings(id, reference, party_size, status, payment_mode, source, checked_in_at, attended_count, total_amount_cents, created_at, ' +
           'customers(name, email, phone, preferred_contact), price_options(label), payments(status, provider, kind, amount_cents))')
         .gte('starts_at', from.toISOString()).lte('starts_at', to.toISOString())
         .order('starts_at', { ascending: range.value !== 'past' })
@@ -372,6 +399,7 @@
               sb.from('bookings').update({ checked_in_at: new Date().toISOString(), attended_count: b.party_size }).eq('id', b.id).then(after);
             } });
         return h('tr', { class: b.status === 'confirmed' || b.status === 'pending' ? null : 'is-muted' },
+          h('td', null, h('code', { text: b.reference })),
           h('td', { text: c.name || '' }),
           h('td', null, c.email ? h('a', { href: 'mailto:' + c.email, text: c.email }) : '', c.phone ? h('div', { text: c.phone }) : ''),
           h('td', { text: String(b.party_size) }),
@@ -388,8 +416,8 @@
               : ''));
       });
       body.appendChild(h('div', { class: 'admin-table-wrap' }, h('table', { class: 'admin-table' },
-        h('thead', null, h('tr', null, ['Name', 'Contact', 'People', 'Option', 'Payment', 'Status', ''].map(function (t) { return h('th', { text: t }); }))),
-        h('tbody', null, rows.length ? rows : h('tr', null, h('td', { colspan: '7', text: 'No bookings yet.' }))))));
+        h('thead', null, h('tr', null, ['Ref', 'Name', 'Contact', 'People', 'Option', 'Payment', 'Status', ''].map(function (t) { return h('th', { text: t }); }))),
+        h('tbody', null, rows.length ? rows : h('tr', null, h('td', { colspan: '8', text: 'No bookings yet.' }))))));
 
       if (s.status === 'scheduled') body.appendChild(walkInForm(s));
       return details;
@@ -687,7 +715,7 @@
 
     function load() {
       var q = sb.from('payments')
-        .select('*, bookings(party_size, status, customers(name, email), class_sessions(starts_at, class_types(name)))')
+        .select('*, bookings(reference, party_size, status, customers(name, email), class_sessions(starts_at, class_types(name)))')
         .order('created_at', { ascending: false }).limit(300);
       if (filter.value === 'refund') q = q.not('refund_requested_at', 'is', null).eq('status', 'paid');
       if (filter.value === 'paid' || filter.value === 'pending') q = q.eq('status', filter.value);
@@ -695,7 +723,7 @@
         if (res.error) return fail(res.error);
         box.innerHTML = '';
         box.appendChild(h('table', { class: 'admin-table' },
-          h('thead', null, h('tr', null, ['Date', 'Customer', 'Class', 'Type', 'Amount', 'Status', ''].map(function (t) { return h('th', { text: t }); }))),
+          h('thead', null, h('tr', null, ['Date', 'Ref', 'Customer', 'Class', 'Type', 'Amount', 'Status', ''].map(function (t) { return h('th', { text: t }); }))),
           h('tbody', null, res.data.map(row))));
       });
     }
@@ -707,6 +735,7 @@
       var refundable = p.provider === 'stripe' && p.status === 'paid' && p.amount_cents > p.refunded_amount_cents;
       return h('tr', null,
         h('td', { text: fmtDateTime(p.created_at) }),
+        h('td', null, b.reference ? h('code', { text: b.reference }) : ''),
         h('td', null, c.name || '—', c.email ? h('div', { class: 'hint', text: c.email }) : ''),
         h('td', { text: s ? s.class_types.name + ', ' + fmtDateTime(s.starts_at) : '' }),
         h('td', { text: p.provider + ' · ' + p.kind }),

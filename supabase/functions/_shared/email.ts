@@ -36,6 +36,7 @@ export async function sendEmail(to: string, subject: string, html: string): Prom
 }
 
 export interface BookingEmailData {
+  reference: string;
   customerName: string;
   customerEmail: string | null;
   className: string;
@@ -65,7 +66,9 @@ export async function sendBookingConfirmation(b: BookingEmailData): Promise<void
   if (b.customerEmail) {
     await sendEmail(
       b.customerEmail,
-      b.moved ? `Your class has been moved: ${b.className}` : `You're booked: ${b.className}`,
+      b.moved
+        ? `Your class has been moved: ${b.className} (${b.reference})`
+        : `You're booked: ${b.className} (${b.reference})`,
       `<p>Aloha ${escapeHtml(b.customerName)},</p>
        <p>${b.moved
         ? "Your booking has been moved to the class below. There is nothing more to pay."
@@ -75,6 +78,7 @@ export async function sendBookingConfirmation(b: BookingEmailData): Promise<void
           ${escapeHtml(b.locationName ?? "")}${b.mapsUrl ? ` · <a href="${escapeHtml(b.mapsUrl)}">Google Maps</a>` : ""}<br>
           Participants: ${b.partySize}<br>
           ${payment}</p>
+       <p>Booking reference: <strong>${escapeHtml(b.reference)}</strong></p>
        <p><a href="${escapeHtml(b.manageUrl)}">View or cancel your booking</a></p>
        <p style="color:#6f6252;font-size:13px">${escapeHtml(b.cancellationPolicy)}</p>
        <p>Mahalo,<br>Pele Awakening</p>`,
@@ -85,8 +89,8 @@ export async function sendBookingConfirmation(b: BookingEmailData): Promise<void
   if (admin && !b.moved) {
     await sendEmail(
       admin,
-      `New booking: ${b.className}, ${when}`,
-      `<p>${escapeHtml(b.customerName)} booked ${b.partySize} spot(s).</p>
+      `New booking ${b.reference}: ${b.className}, ${when}`,
+      `<p>${escapeHtml(b.customerName)} booked ${b.partySize} spot(s). Reference: ${escapeHtml(b.reference)}</p>
        <p>${escapeHtml(b.className)}<br>${escapeHtml(when)}<br>${payment}</p>`,
     );
   }

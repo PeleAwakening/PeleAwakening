@@ -26,6 +26,7 @@ Deno.serve(async (req) => {
   const stripePayment = (b.payments ?? []).find((p: { provider: string }) => p.provider === "stripe");
 
   const summary = () => ({
+    reference: b.reference,
     status: b.status,
     class_name: b.class_sessions.class_types.name,
     starts_at: b.class_sessions.starts_at,

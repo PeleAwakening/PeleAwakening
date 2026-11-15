@@ -267,7 +267,8 @@
       document.getElementById('bookingDoneText').innerHTML =
         '<strong>' + esc(state.session.class_name) + '</strong><br>' +
         esc(B.dayLabel(state.session.starts_at)) + ' &middot; ' + esc(B.timeRange(state.session.starts_at, state.session.ends_at)) + '<br>' +
-        partySize() + ' participant' + (partySize() === 1 ? '' : 's') + ' &middot; ' + esc(o.label);
+        partySize() + ' participant' + (partySize() === 1 ? '' : 's') + ' &middot; ' + esc(o.label) +
+        (res.reference ? '<br>Booking reference: <strong class="booking-ref">' + esc(res.reference) + '</strong>' : '');
       document.getElementById('bookingManageLink').href = res.manage_url;
       form.hidden = true;
       doneEl.hidden = false;

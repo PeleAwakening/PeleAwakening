@@ -100,7 +100,7 @@ Deno.serve(async (req) => {
 
   if (!online) {
     await sendConfirmationFor(db, booking.id);
-    return json(req, { status: "confirmed", manage_url: await manageUrl(booking.id) });
+    return json(req, { status: "confirmed", reference: booking.reference, manage_url: await manageUrl(booking.id) });
   }
 
   // Paid booking: spots are held as "pending" until the Stripe webhook confirms payment.
@@ -113,7 +113,7 @@ Deno.serve(async (req) => {
       {
         mode: "payment",
         customer_email: email,
-        client_reference_id: booking.id,
+        client_reference_id: booking.reference, // shown in the Stripe Dashboard
         line_items: [{
           quantity: partySize,
           price_data: {
@@ -121,12 +121,15 @@ Deno.serve(async (req) => {
             unit_amount: option.amount_cents,
             product_data: {
               name: className,
-              description: `${formatClassTime(session.starts_at, session.ends_at)} · ${option.label}`,
+              description: `${formatClassTime(session.starts_at, session.ends_at)} · ${option.label} · Ref ${booking.reference}`,
             },
           },
         }],
-        metadata: { booking_id: booking.id },
-        payment_intent_data: { metadata: { booking_id: booking.id } },
+        metadata: { booking_id: booking.id, booking_reference: booking.reference },
+        payment_intent_data: {
+          description: `${className} · ${booking.reference}`,
+          metadata: { booking_id: booking.id, booking_reference: booking.reference },
+        },
         // Stripe minimum is 30 minutes; the DB hold lasts slightly longer.
         expires_at: Math.floor(Date.now() / 1000) + 30 * 60 + 30,
         success_url: `${siteUrl()}/booking/success/?t=${encodeURIComponent(token)}`,

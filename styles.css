@@ -2461,3 +2461,63 @@ body.booking-modal-open { overflow: hidden; }
 @media (min-width: 1181px) and (max-width: 1340px) {
   .nav-links > li:has(> a[href$="contact.html"]:not(.nav-cta)) { display: none; }
 }
+
+/* ============================================
+   RESERVATION — /reservation/ landing (Book Now)
+   ============================================ */
+.reservation-section { padding: 1rem 0 6rem; }
+.reservation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.2rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.reservation-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.8rem 1.6rem;
+  background: var(--color-bg-card);
+  border: 1px solid rgba(43, 36, 29, 0.08);
+  border-radius: 10px;
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.reservation-card:hover, .reservation-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(168, 98, 47, 0.35);
+  box-shadow: 0 10px 28px rgba(43, 36, 29, 0.08);
+}
+.reservation-card h2 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; line-height: 1.2; }
+.reservation-card p { font-family: var(--font-ui); font-size: 0.92rem; color: var(--color-text-dim); flex: 1; }
+.reservation-badge {
+  align-self: flex-start;
+  padding: 0.2rem 0.7rem;
+  border-radius: 40px;
+  font: 500 0.72rem var(--font-ui);
+  letter-spacing: 0.04em;
+  background: var(--color-bg-warm);
+  color: var(--color-text-dim);
+}
+.reservation-badge.is-open { background: rgba(95, 138, 134, 0.15); color: var(--color-ocean); }
+.reservation-card-cta { font: 500 0.88rem var(--font-ui); color: var(--color-accent); }
+.reservation-note {
+  max-width: 640px;
+  margin: 2.5rem auto 0;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  color: var(--color-text-dim);
+}
+.reservation-note a { color: var(--color-accent); text-decoration: underline; }
+.booking-back {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font: 500 0.85rem var(--font-ui);
+  color: var(--color-accent);
+  text-decoration: none;
+}
+.booking-back:hover { text-decoration: underline; }
+.booking-ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.04em; color: var(--color-ink); }
