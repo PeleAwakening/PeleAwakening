@@ -113,6 +113,10 @@ Deno.serve(async (req) => {
       {
         mode: "payment",
         integration_identifier: "pa-class-booking-qzvkmtwr", // groups these sessions in the Dashboard
+        // Instant methods only: a spot is held for ~30 minutes, so delayed settlement
+        // (ACH, bank debits) could confirm after the spot was released. Card includes
+        // Apple Pay and Google Pay.
+        allowed_payment_method_types: ["card", "link"],
         customer_email: email,
         client_reference_id: booking.reference, // shown in the Stripe Dashboard
         line_items: [{

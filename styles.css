@@ -2381,6 +2381,7 @@ html.booking-modal-open, body.booking-modal-open { overflow: hidden; } /* html t
 .booking-done { text-align: center; font-family: var(--font-ui); }
 .booking-done p { margin: 0.8rem 0; }
 .booking-done .closing-cta-row { margin-top: 1.6rem; }
+.booking-done .closing-cta-row .btn { max-width: 100%; white-space: normal; justify-content: center; text-align: center; }
 
 /* ---- Receipt / manage pages ---- */
 .booking-receipt { max-width: 560px; margin: 0 auto; scroll-margin-top: 7rem; }
@@ -2545,3 +2546,10 @@ html.booking-modal-open, body.booking-modal-open { overflow: hidden; } /* html t
 .booking-back:hover { text-decoration: underline; }
 .booking-ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.04em; color: var(--color-ink); white-space: nowrap; }
 .booking-form .form-input[aria-invalid="true"] { border-color: #a33; }
+
+/* Smallest phones: the footer brand gets its own row and the link columns may
+   not grow past half the width, so the page never scrolls sideways. */
+@media (max-width: 380px) {
+  .footer-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-about { grid-column: 1 / -1; }
+}

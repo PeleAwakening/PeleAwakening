@@ -289,6 +289,7 @@
       document.getElementById('bookingManageLink').href = res.manage_url;
       form.hidden = true;
       doneEl.hidden = false;
+      modal.querySelector('.booking-modal-panel').scrollTop = 0;
       load();
     }).catch(function (err) {
       submitBtn.disabled = false;

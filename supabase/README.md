@@ -124,7 +124,7 @@ Then:
 
 ## Go-live (requires owner approval)
 
-0. Testing used `SITE_URL=http://localhost:8000` so Stripe returns to the local preview. Set it back: `supabase secrets set SITE_URL=https://peleawakening.com`, and remove `http://localhost:8000` from `ALLOWED_ORIGINS`. Delete test bookings and customers.
+0. Testing used `SITE_URL=http://localhost:8000`, then the Wi-Fi preview `http://192.168.4.50:8000` (phone testing), so Stripe and email links return to the local preview. Set it back: `supabase secrets set SITE_URL=https://peleawakening.com ALLOWED_ORIGINS=https://peleawakening.com`. Delete test bookings and customers.
 1. Approve prices in Admin → Classes & Prices.
 2. Activate the Stripe account, create a **live** webhook endpoint, set live `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` and `ALLOW_LIVE_PAYMENTS=true`.
 3. `update public.settings set online_payments_enabled = true;`
