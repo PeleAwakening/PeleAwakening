@@ -2232,6 +2232,7 @@ body:not(.nav-suppress-hover) .nav-item.has-dropdown:hover .nav-dropdown,
   color: var(--color-text-dim);
   cursor: pointer;
   transition: all 0.3s var(--ease-out);
+  min-height: 44px;
 }
 .booking-chip.is-active {
   border-color: var(--color-accent);
@@ -2265,7 +2266,7 @@ body:not(.nav-suppress-hover) .nav-item.has-dropdown:hover .nav-dropdown,
 .session-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; line-height: 1.25; }
 .session-name a:hover { color: var(--color-accent); }
 .session-meta, .session-note { font-family: var(--font-ui); font-size: 0.85rem; color: var(--color-text-dim); }
-.session-meta a { color: var(--color-accent); }
+.session-meta a { color: var(--color-accent); padding: 0.6rem 0.3rem; margin: -0.6rem -0.3rem; } /* bigger tap area, same layout */
 .session-note { color: var(--color-accent-deep); margin-top: 0.2rem; }
 .session-action { text-align: right; display: grid; gap: 0.35rem; justify-items: end; }
 .session-spots { font-family: var(--font-ui); font-size: 0.8rem; color: var(--color-ocean); }
@@ -2297,7 +2298,7 @@ body:not(.nav-suppress-hover) .nav-item.has-dropdown:hover .nav-dropdown,
 .booking-info-card p { margin-bottom: 0.8rem; }
 
 /* ---- Booking modal ---- */
-body.booking-modal-open { overflow: hidden; }
+html.booking-modal-open, body.booking-modal-open { overflow: hidden; } /* html too, for iOS Safari */
 .booking-modal { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1rem; }
 .booking-modal-backdrop { position: absolute; inset: 0; background: rgba(43, 36, 29, 0.55); }
 .booking-modal-panel {
@@ -2312,11 +2313,17 @@ body.booking-modal-open { overflow: hidden; }
   border-radius: 12px;
   padding: 2.2rem;
   box-shadow: 0 20px 60px rgba(43, 36, 29, 0.3);
+  overscroll-behavior: contain;
 }
 .booking-modal-close {
   position: absolute;
-  top: 0.8rem;
-  right: 1rem;
+  top: 0.4rem;
+  right: 0.5rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   background: none;
   font-size: 1.8rem;
@@ -2376,7 +2383,7 @@ body.booking-modal-open { overflow: hidden; }
 .booking-done .closing-cta-row { margin-top: 1.6rem; }
 
 /* ---- Receipt / manage pages ---- */
-.booking-receipt { max-width: 560px; margin: 0 auto; }
+.booking-receipt { max-width: 560px; margin: 0 auto; scroll-margin-top: 7rem; }
 .booking-receipt-note { text-align: center; font-family: var(--font-ui); color: var(--color-ink); margin-bottom: 1.2rem; }
 .booking-receipt-card {
   background: var(--color-bg-card);
@@ -2402,7 +2409,9 @@ body.booking-modal-open { overflow: hidden; }
 .booking-receipt-status.is-confirmed { background: rgba(95, 138, 134, 0.15); color: var(--color-ocean); }
 .booking-receipt-status.is-cancelled, .booking-receipt-status.is-expired { background: rgba(170, 51, 51, 0.08); color: #a33; }
 .booking-cancel { margin: 1.4rem 0 0.6rem; }
-.booking-cancel-confirm p { margin-bottom: 0.8rem; }
+.booking-cancel-confirm:not([hidden]) { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.booking-cancel-confirm p { flex-basis: 100%; margin-bottom: 0; }
+.booking-info .map-link, .booking-receipt .map-link { display: inline-block; padding: 0.7rem 0; }
 
 /* ---- Sticky "Book a Class" bar (mobile) ---- */
 .book-bar { display: none; }
@@ -2448,6 +2457,7 @@ body.booking-modal-open { overflow: hidden; }
     padding: 1.8rem 1.3rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
   }
   .booking-form .form-row--split { grid-template-columns: 1fr; }
+  .booking-receipt-card { padding: 1.5rem 1.3rem; }
 }
 
 /* Nav carries both Contact and Book a Class: tighten spacing on mid-width desktops */
@@ -2526,10 +2536,12 @@ body.booking-modal-open { overflow: hidden; }
 .reservation-note a { color: var(--color-accent); text-decoration: underline; }
 .booking-back {
   display: inline-block;
-  margin-bottom: 1rem;
+  padding: 0.7rem 0;
+  margin: -0.7rem 0 0.3rem;
   font: 500 0.85rem var(--font-ui);
   color: var(--color-accent);
   text-decoration: none;
 }
 .booking-back:hover { text-decoration: underline; }
-.booking-ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.04em; color: var(--color-ink); }
+.booking-ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.04em; color: var(--color-ink); white-space: nowrap; }
+.booking-form .form-input[aria-invalid="true"] { border-color: #a33; }

@@ -165,6 +165,7 @@
     partyHint.textContent = s.spots_left + ' spot' + (s.spots_left === 1 ? '' : 's') + ' left';
     formPolicyEl.textContent = state.settings.cancellation_policy || '';
     errorEl.hidden = true;
+    form.querySelectorAll('[aria-invalid]').forEach(function (el) { el.removeAttribute('aria-invalid'); });
     form.hidden = false;
     doneEl.hidden = true;
     submitBtn.disabled = false;
@@ -172,6 +173,7 @@
     updateTotal();
 
     modal.hidden = false;
+    document.documentElement.classList.add('booking-modal-open');
     document.body.classList.add('booking-modal-open');
     var firstOption = optionsEl.querySelector('input');
     if (firstOption) firstOption.focus();
@@ -179,6 +181,7 @@
 
   function closeModal() {
     modal.hidden = true;
+    document.documentElement.classList.remove('booking-modal-open');
     document.body.classList.remove('booking-modal-open');
     if (state.lastFocus) state.lastFocus.focus();
   }
@@ -232,10 +235,22 @@
     });
   });
 
-  function showError(msg) {
+  function showError(msg, field) {
     errorEl.textContent = msg;
     errorEl.hidden = false;
+    if (field) {
+      field.setAttribute('aria-invalid', 'true');
+      field.setAttribute('aria-describedby', 'bookingError');
+      field.focus();
+    }
   }
+
+  form.addEventListener('input', function (e) {
+    if (e.target.hasAttribute('aria-invalid')) {
+      e.target.removeAttribute('aria-invalid');
+      e.target.removeAttribute('aria-describedby');
+    }
+  });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -243,8 +258,10 @@
     var data = new FormData(form);
     var o = selectedOption();
     if (!o) return showError('Please choose a booking option.');
-    if (!String(data.get('name')).trim()) return showError('Please enter your name.');
-    if (!form.querySelector('#b-email').checkValidity() || !String(data.get('email')).trim()) return showError('Please enter a valid email.');
+    var nameInput = form.querySelector('#b-name');
+    var emailInput = form.querySelector('#b-email');
+    if (!String(data.get('name')).trim()) return showError('Please enter your name.', nameInput);
+    if (!emailInput.checkValidity() || !String(data.get('email')).trim()) return showError('Please enter a valid email.', emailInput);
 
     var label = submitBtn.textContent;
     submitBtn.disabled = true;

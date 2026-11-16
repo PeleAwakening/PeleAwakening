@@ -65,7 +65,10 @@
       document.getElementById('cancelYes').addEventListener('click', function (e) {
         e.target.disabled = true;
         B.fn('manage-booking', { token: token, action: 'cancel' })
-          .then(function (res) { render(res, 'Your booking has been cancelled.'); })
+          .then(function (res) {
+            render(res, 'Your booking has been cancelled.');
+            root.scrollIntoView({ block: 'start' }); // the note is above the fold on phones
+          })
           .catch(function (err) {
             var el = document.getElementById('manageError');
             el.textContent = err.message;
