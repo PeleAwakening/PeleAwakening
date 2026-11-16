@@ -18,7 +18,7 @@ export const escapeHtml = (s: unknown) =>
 export async function sendEmail(to: string, subject: string, html: string): Promise<void> {
   const apiKey = Deno.env.get("RESEND_API_KEY");
   if (!apiKey) {
-    console.log(`[email skipped: RESEND_API_KEY not set] to=${to} subject=${subject}`);
+    console.log(`[email skipped: RESEND_API_KEY not set] subject=${subject}`);
     return;
   }
   const res = await fetch("https://api.resend.com/emails", {
@@ -32,7 +32,9 @@ export async function sendEmail(to: string, subject: string, html: string): Prom
       html,
     }),
   });
-  if (!res.ok) console.error("Resend error", res.status, await res.text());
+  // Log the Resend id (not the address) so a send can be traced in the Resend dashboard.
+  if (res.ok) console.log(`[email sent] id=${(await res.json()).id} subject=${subject}`);
+  else console.error("Resend error", res.status, await res.text());
 }
 
 export interface BookingEmailData {
