@@ -3,8 +3,8 @@
 // customer's only credential, and it only grants access to that one booking.
 import { json, preflight, readJson } from "../_shared/http.ts";
 import { serviceClient, stripeClient } from "../_shared/clients.ts";
-import { loadBooking } from "../_shared/bookings.ts";
-import { escapeHtml, formatClassTime, sendEmail } from "../_shared/email.ts";
+import { loadBooking, toEmailData } from "../_shared/bookings.ts";
+import { sendCancellationNotice } from "../_shared/email.ts";
 import { verifyManageToken } from "../_shared/manage-token.ts";
 
 Deno.serve(async (req) => {
@@ -85,15 +85,10 @@ Deno.serve(async (req) => {
       stripePayment.refund_requested_at = new Date().toISOString();
     }
 
-    const admin = Deno.env.get("ADMIN_NOTIFY_EMAIL");
-    if (admin) {
-      await sendEmail(
-        admin,
-        `Booking cancelled${paid ? " (refund requested)" : ""}: ${b.class_sessions.class_types.name}`,
-        `<p>${escapeHtml(b.customers?.name)} cancelled ${b.party_size} spot(s) for
-         ${escapeHtml(b.class_sessions.class_types.name)}, ${escapeHtml(formatClassTime(b.class_sessions.starts_at))}.</p>
-         ${paid ? "<p>A refund was requested. Issue it from the admin dashboard → Payments.</p>" : ""}`,
-      );
+    try {
+      await sendCancellationNotice(toEmailData(b), { refundRequested: paid });
+    } catch (err) {
+      console.error("cancellation email failed", bookingId, err);
     }
     return json(req, summary());
   }
