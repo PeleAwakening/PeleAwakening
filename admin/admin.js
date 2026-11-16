@@ -41,6 +41,15 @@
     else el.appendChild(typeof child === 'string' || typeof child === 'number' ? document.createTextNode(String(child)) : child);
   }
 
+  // Customer email as a mailto link (opens the default mail app). Anything that
+  // is not a plain address, e.g. old imported inquiries, stays as text.
+  function mailLink(email, cls) {
+    if (!email) return '';
+    return /^[^\s@?&#:\/]+@[^\s@?&#:\/]+\.[^\s@?&#:\/]+$/.test(email)
+      ? h('a', { href: 'mailto:' + email, class: cls, text: email })
+      : h('span', { class: cls, text: email });
+  }
+
   var toastTimer;
   function toast(msg, isError) {
     var t = document.getElementById('toast');
@@ -215,7 +224,8 @@
       spec.columns.forEach(function (col) {
         var el = field(col, row);
         if (col.type !== 'readonly') inputs[col.key] = el;
-        tr.appendChild(h('td', null, isNew && col.type === 'readonly' ? '' : el));
+        tr.appendChild(h('td', null, isNew && col.type === 'readonly' ? '' : el,
+          col.type === 'email' && !isNew ? mailLink(row[col.key], 'admin-mailto') : ''));
       });
 
       function values() {
@@ -401,7 +411,7 @@
         return h('tr', { class: b.status === 'confirmed' || b.status === 'pending' ? null : 'is-muted' },
           h('td', null, h('code', { text: b.reference })),
           h('td', { text: c.name || '' }),
-          h('td', null, c.email ? h('a', { href: 'mailto:' + c.email, text: c.email }) : '', c.phone ? h('div', { text: c.phone }) : ''),
+          h('td', null, mailLink(c.email), c.phone ? h('div', { text: c.phone }) : ''),
           h('td', { text: String(b.party_size) }),
           h('td', { text: (b.price_options && b.price_options.label) || b.source }),
           h('td', null, paymentPill(b)),
@@ -736,7 +746,7 @@
       return h('tr', null,
         h('td', { text: fmtDateTime(p.created_at) }),
         h('td', null, b.reference ? h('code', { text: b.reference }) : ''),
-        h('td', null, c.name || '—', c.email ? h('div', { class: 'hint', text: c.email }) : ''),
+        h('td', null, c.name || '—', c.email ? h('div', { class: 'hint' }, mailLink(c.email)) : ''),
         h('td', { text: s ? s.class_types.name + ', ' + fmtDateTime(s.starts_at) : '' }),
         h('td', { text: p.provider + ' · ' + p.kind }),
         h('td', { text: money(p.amount_cents) + (p.refunded_amount_cents ? ' (refunded ' + money(p.refunded_amount_cents) + ')' : '') }),
@@ -786,7 +796,7 @@
           return h('tr', null,
             h('td', { text: fmtDateTime(i.received_at) }),
             h('td', { text: i.name || '' }),
-            h('td', null, i.email || '', i.phone ? h('div', { text: i.phone }) : '', i.contact_method ? h('div', { class: 'hint', text: 'prefers ' + i.contact_method }) : ''),
+            h('td', null, mailLink(i.email), i.phone ? h('div', { text: i.phone }) : '', i.contact_method ? h('div', { class: 'hint', text: 'prefers ' + i.contact_method }) : ''),
             h('td', { text: i.interest || '' }),
             h('td', { text: i.message || '' }),
             h('td', { text: i.source }));
