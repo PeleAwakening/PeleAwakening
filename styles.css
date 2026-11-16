@@ -2374,6 +2374,12 @@ html.booking-modal-open, body.booking-modal-open { overflow: hidden; } /* html t
 .party-input { width: 4.5rem; text-align: center; }
 .party-hint { font-family: var(--font-ui); font-size: 0.8rem; color: var(--color-text-dim); margin-left: 0.4rem; }
 .booking-total { font-family: var(--font-ui); font-size: 1rem; color: var(--color-ink); text-align: center; margin-top: 0.5rem; }
+.booking-total-save { display: block; font-size: 0.85rem; color: var(--color-accent); margin-top: 0.2rem; }
+.booking-option-save {
+  display: inline-block; margin-left: 0.45rem; padding: 0.05rem 0.5rem; border-radius: 999px;
+  background: rgba(168, 98, 47, 0.12); color: var(--color-accent); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.02em; vertical-align: 0.1em; white-space: nowrap;
+}
 .booking-policy { text-align: center; margin-top: 0.6rem; }
 .booking-error { color: #a33; font-family: var(--font-ui); font-size: 0.88rem; text-align: center; margin-top: 1rem; }
 .booking-submit { width: 100%; justify-content: center; }

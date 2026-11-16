@@ -150,11 +150,13 @@
     metaEl.innerHTML = esc(B.dayLabel(s.starts_at)) + ' &middot; ' + esc(B.timeRange(s.starts_at, s.ends_at)) + ' (Hawai&#699;i time)<br>' +
       esc(s.location_name || '') + (s.instructor ? ' &middot; with ' + esc(s.instructor) : '');
 
+    var saving = onlineSaving(s.price_options);
     optionsEl.innerHTML = s.price_options.map(function (o, i) {
       var price = o.kind === 'free' ? 'Free' : B.money(o.amount_cents);
+      var tag = o.kind === 'online' && saving ? '<span class="booking-option-save">Save ' + B.money(saving) + '/person</span>' : '';
       return '<label class="booking-option">' +
         '<input type="radio" name="price_option_id" value="' + esc(o.id) + '"' + (i === 0 ? ' checked' : '') + '>' +
-        '<span class="booking-option-text"><span class="booking-option-label">' + esc(o.label) + '</span>' +
+        '<span class="booking-option-text"><span class="booking-option-label">' + esc(o.label) + tag + '</span>' +
         (o.note ? '<span class="booking-option-note">' + esc(o.note) + '</span>' : '') + '</span>' +
         '<span class="booking-option-price">' + price + (o.kind !== 'free' ? '<small>/person</small>' : '') + '</span>' +
       '</label>';
@@ -198,6 +200,13 @@
     return checked && state.session.price_options.find(function (o) { return o.id === checked.value; });
   }
 
+  // Per-person amount saved by paying online instead of at class (0 if none).
+  function onlineSaving(options) {
+    var online = options.find(function (o) { return o.kind === 'online'; });
+    var atClass = options.find(function (o) { return o.kind === 'in_person'; });
+    return online && atClass ? Math.max(atClass.amount_cents - online.amount_cents, 0) : 0;
+  }
+
   function partySize() {
     var n = parseInt(partyInput.value, 10);
     return isNaN(n) ? 1 : Math.min(Math.max(n, 1), maxParty());
@@ -213,7 +222,11 @@
       submitBtn.textContent = 'Reserve';
     } else {
       var total = B.money(o.amount_cents * n);
-      totalEl.innerHTML = people + ' &middot; Total <strong>' + total + '</strong>' + (o.kind === 'in_person' ? ' &middot; pay at class' : '');
+      var saved = onlineSaving(state.session.price_options) * n;
+      totalEl.innerHTML = people + ' &middot; Total <strong>' + total + '</strong>' + (o.kind === 'in_person' ? ' &middot; pay at class' : '') +
+        (saved ? '<span class="booking-total-save">' + (o.kind === 'online'
+          ? 'You save ' + B.money(saved) + ' by paying online'
+          : 'Pay online instead and save ' + B.money(saved)) + '</span>' : '');
       submitBtn.textContent = o.kind === 'online' ? 'Continue to Payment' : 'Reserve';
     }
   }

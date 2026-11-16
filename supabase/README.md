@@ -117,7 +117,7 @@ Then:
 
 ## MVP scope
 
-- $10 per morning Tai Chi class and $30 per evening class: **Book & Pay Online** (Stripe) or **Reserve Now, Pay at Class**; **Free (Age 60+)** on Wednesday and Friday mornings.
+- Morning Tai Chi: $10 online or $15 at class. Evening Tai Chi: $25 online or $30 at class. The booking form shows the $5 per person saved by paying online; **Free (Age 60+)** on Wednesday and Friday mornings.
 - Weather cancellations are handled by an admin: cancel the session, then *Move* each booking (the payment carries over) or refund it.
 - `/reservation/` is the single "Book Now" entry point: Tai Chi → `/schedule/`; Therapy & Bodywork → Contact form; Signature Experiences → the existing interest form. No therapy booking yet.
 - Memberships/passes tables exist but are not exposed anywhere. `submit-inquiry` is deployed but the Contact page is unchanged and does not call it yet.
