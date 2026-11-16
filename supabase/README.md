@@ -70,7 +70,7 @@ or money. (Note: GitHub Pages from a *private* repo requires a paid GitHub plan.
   If a function logs a Stripe `403`, add the one permission it names. Paste the key only into Supabase secrets (`STRIPE_SECRET_KEY`), never into the repo or a chat.
 - **Webhook:** required. It is the only thing that confirms a paid booking (see *Setup* step 3). Signatures are verified and events de-duplicated.
 - **Testing locally:** `stripe login`, then `stripe trigger checkout.session.completed` sends test events, and test card `4242 4242 4242 4242` completes Checkout.
-- **Hawaii GET:** Stripe Tax is **not** enabled (`automatic_tax` is off). Hawaii's General Excise Tax applies to services; decide with your accountant whether class prices include GET before go-live. Turning on Stripe Tax requires an active Hawaii registration in Stripe first.
+- **Hawaii GET: UNRESOLVED.** Advertised prices are treated as tax-inclusive for now and no tax is added at checkout (`automatic_tax` is off), pending CPA confirmation. Hawaii's General Excise Tax applies to services; this is not a compliance determination. Turning on Stripe Tax later requires an active Hawaii registration in Stripe first.
 
 ## Setup (test project)
 
