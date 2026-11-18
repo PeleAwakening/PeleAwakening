@@ -2,7 +2,7 @@
 // The only place a paid booking becomes confirmed. Every request must carry a
 // valid Stripe signature; browser redirects never confirm anything.
 import Stripe from "npm:stripe@23.1.0";
-import { serviceClient, stripeClient, stripeCrypto } from "../_shared/clients.ts";
+import { serviceClient, stripeCrypto } from "../_shared/clients.ts";
 import { sendConfirmationFor } from "../_shared/bookings.ts";
 
 const reply = (status: number, body: Record<string, unknown>) =>
@@ -17,7 +17,10 @@ Deno.serve(async (req) => {
 
   let event: Stripe.Event;
   try {
-    event = await stripeClient().webhooks.constructEventAsync(await req.text(), signature, secret, undefined, stripeCrypto);
+    // Verification needs only the signing secret, not the API key, so events
+    // (e.g. refunds made in the Stripe Dashboard) sync even while
+    // ALLOW_LIVE_PAYMENTS is off.
+    event = await Stripe.webhooks.constructEventAsync(await req.text(), signature, secret, undefined, stripeCrypto);
   } catch (err) {
     console.error("signature verification failed", err);
     return reply(400, { error: "invalid_signature" });
